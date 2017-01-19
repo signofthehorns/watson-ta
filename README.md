@@ -16,3 +16,7 @@
 
 ![Image of Tyler](https://github.com/signofthehorns/watson-ta/blob/master/lol.png)
 ![Dab](https://github.com/signofthehorns/watson-ta/blob/master/dab.png)
+
+PowerPoint...
+
+He hates when people hide in a corner and just read the slides. Pictures + screenshots + mock ups
