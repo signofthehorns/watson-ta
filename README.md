@@ -1,4 +1,6 @@
-# Discription of Watson-TA
+# Watson-TA
+[![Build Status](https://travis-ci.org/signofthehorns/watson-ta.svg?branch=master)](https://travis-ci.org/signofthehorns/watson-ta)
+
 - Team: **Sign of the Horns (aka |..|,)**
 - Members:
   - Dalton Flanagon
@@ -13,10 +15,5 @@
   > Extensions:
   > - add 24/7 office hour TA so students can ask questions if they don't understand the suggested answers.
 
-
 ![Image of Tyler](https://github.com/signofthehorns/watson-ta/blob/master/lol.png)
 ![Dab](https://github.com/signofthehorns/watson-ta/blob/master/dab.png)
-
-PowerPoint...
-
-He hates when people hide in a corner and just read the slides. Pictures + screenshots + mock ups
