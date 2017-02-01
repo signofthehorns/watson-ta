@@ -1,6 +1,20 @@
 # Watson-TA
 [![Build Status](https://travis-ci.org/signofthehorns/watson-ta.svg?branch=master)](https://travis-ci.org/signofthehorns/watson-ta)
 
+# Setup:
+You need to install django + bootstrap if you haven’t already
+```BASH
+pip install django
+pip install django-bootstrap3
+```
+And then start the django webserver
+```BASH
+cd ~/www/watson_ta
+python manage.py rumserver
+```
+And then view the example page @localhost:8000/pdfupload/
+
+# Info
 - Team: **Sign of the Horns (aka |..|,)**
 - Members:
   - Dalton Flanagon
