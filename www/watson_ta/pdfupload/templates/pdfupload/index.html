@@ -9,6 +9,8 @@
 {% bootstrap_messages %}
 
 <title>PDF</title>
+<script src="https://fb.me/react-15.0.0.js"></script>
+<script src="https://fb.me/react-dom-15.0.0.js"></script>
 <body>
     <div class="container">
 
@@ -29,4 +31,18 @@
       <h3>React Component</h3>
       <p>Under construction...🚧</p>
 <iframe src="//giphy.com/embed/tAeB6dptxnoli" width="480" height="445" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/construction-tAeB6dptxnoli">via GIPHY</a></p>
+    <script type="text/babel">
+      var Greeting = React.createClass({
+        render: function() {
+          return (
+            <p>Hello, Universe</p>
+          )
+        }
+      });
+
+      ReactDOM.render(
+        <Greeting/>,
+        document.getElementById('greeting-div')
+      );
+    </script>
 </body>
