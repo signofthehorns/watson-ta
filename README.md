@@ -13,6 +13,8 @@ cd ~/www/watson_ta
 python manage.py rumserver
 ```
 And then view the example page @localhost:8000/pdfupload/
+should look like
+![Hello World](https://github.com/signofthehorns/watson-ta/blob/master/firstpage.png)
 
 # Info
 - Team: **Sign of the Horns (aka |..|,)**
