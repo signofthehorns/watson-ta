@@ -1,12 +1,14 @@
 appdirs==1.4.0
 Django==1.10.5
+django-bootstrap3==8.1.0
+django-webpack-loader==0.4.1
 packaging==16.8
 py==1.4.32
+PyExecJS==1.4.0
 pyparsing==2.1.10
+PyReact==0.1.1
 pysolr==3.6.0
 pytest==3.0.6
 requests==2.13.0
 six==1.10.0
 watson-developer-cloud==0.23.0
-django-bootstrap3==8.1.0
-PyReact==0.1.1
