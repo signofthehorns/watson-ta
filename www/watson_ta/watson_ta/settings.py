@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +125,20 @@ STATIC_URL = '/static/'
 PIPELINE_COMPILERS = (
   'react.utils.pipeline.JSXCompiler',
 )
+
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'assets')
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
 

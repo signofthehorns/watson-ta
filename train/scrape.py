@@ -96,6 +96,8 @@ URL = 'https://ocw.mit.edu/courses/?utm_source=ocw-megamenu&utm_medium=link&utm_
 resp = urllib2.urlopen(URL)
 soup = BeautifulSoup(resp, 'lxml')
 
+https://ocw.mit.edu/courses/biology/7-016-introductory-biology-fall-201
+
 # get the classes for mit open course ware
 with open('out.txt','w') as f:
   for i,link in enumerate(soup.find_all('a', href=True)):
@@ -120,3 +122,5 @@ with open('out.txt','w') as f:
         continue
       except urllib2.URLError, e:
         continue
+
+#1556
