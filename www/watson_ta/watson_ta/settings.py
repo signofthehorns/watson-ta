@@ -125,9 +125,10 @@ STATIC_URL = '/static/'
 PIPELINE_COMPILERS = (
   'react.utils.pipeline.JSXCompiler',
 )
-
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'assets')
+  os.path.join(BASE_DIR, 'assets'),
+  os.path.join(BASE_DIR, "static"),
+  '/Users/billvarcho/Documents/Sp17/Capstone/watson-ta/www/watson_ta/pdfupload/static/',
 ]
 
 STATICFILES_FINDERS = [

@@ -5,8 +5,8 @@ import { WithContext as ReactTags } from 'react-tag-input';
 const App = React.createClass({
     getInitialState() {
         return {
-            tags: [ {id: 1, text: "Apples"} ],
-            suggestions: ["Banana", "Mango", "Pear", "Apricot"]
+            tags: [ {id: 1, text: "Physics"} ],
+            suggestions: ["Mathematics", "Computer Science", "Electrical Engineering"]
         }
     },
     handleDelete(i) {
