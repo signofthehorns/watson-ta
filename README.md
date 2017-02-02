@@ -2,24 +2,27 @@
 [![Build Status](https://travis-ci.org/signofthehorns/watson-ta.svg?branch=master)](https://travis-ci.org/signofthehorns/watson-ta)
 
 # Setup:
-You need to install django + bootstrap if you haven’t already
+Activate the virtual environment and install the dependencies:
 ```BASH
-pip install django
-pip install django-bootstrap3
-```
-And then start the django webserver
-```BASH
+source bin/activate
 cd ~/www/watson_ta
-python manage.py rumserver
+pip install -r requirements.txt
+npm install
 ```
-And then view the example page @localhost:8000/pdfupload/
-should look like
+
+Then, start the django webserver:
+```BASH
+python manage.py runserver
+```
+And then view the example page at localhost:8000/pdfupload/
+
+It should look like...
 ![Hello World](https://github.com/signofthehorns/watson-ta/blob/master/firstpage.png)
 
 # Info
 - Team: **Sign of the Horns (aka |..|,)**
 - Members:
-  - Dalton Flanagon
+  - Dalton Flanagan
   - Liv Stanley
   - Bill Varcho
   - Tyler Zeller
