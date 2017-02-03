@@ -5,13 +5,14 @@
 Activate the virtual environment and install the dependencies:
 ```BASH
 source bin/activate
-cd ~/www/watson_ta
+
 pip install -r requirements.txt
 npm install
 ```
 
 Then, start the django webserver:
 ```BASH
+cd ~/www/
 python manage.py runserver
 ```
 And then view the example page at localhost:8000/pdfupload/
