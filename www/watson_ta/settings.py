@@ -128,7 +128,6 @@ PIPELINE_COMPILERS = (
 STATICFILES_DIRS = [
   os.path.join(BASE_DIR, 'assets'),
   os.path.join(BASE_DIR, "static"),
-  '/Users/billvarcho/Documents/Sp17/Capstone/watson-ta/www/pdfupload/static/',
 ]
 
 STATICFILES_FINDERS = [
