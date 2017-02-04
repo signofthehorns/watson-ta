@@ -13,6 +13,7 @@ class Classified(object):
     self.tag,self.conf = class_['class_name'],class_['confidence']
 
 def classify_questions(qs):
+  print >>sys.stderr, qs
   natural_language_classifier = NaturalLanguageClassifierV1(
     username=os.environ['watson_username'],
     password=os.environ['watson_password'])
@@ -30,10 +31,12 @@ def classify(request,sentence):
   res = classify_questions([sentence])
   return JsonResponse({'tag': res[0].tag})
 
-# Working on doing async requests...
 def index(request):
   template = loader.get_template('pdfupload/index.html')
-  test_questions = []
+  test_questions = [
+    'Can cancer be cured?',
+    'I am a human.',
+  ]
   results = classify_questions(test_questions)
   context = {
     'classifications' : results  

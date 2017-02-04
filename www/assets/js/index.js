@@ -17,7 +17,32 @@ import { Form } from 'react-bootstrap';
 var QuestionBox = React.createClass({
   getInitialState: function () {
     return {
-      data: []
+      data: [
+        {"id":"0","task":"Name three types of dogs."},
+        {"id":"1","task":"What is a television?"},
+        {"id":"2","task":"List the different themes present in Homers The Iliad."},
+        {"id":"3","task":"How can we eliminate disease from the human genome?"},
+        {"id":"4","task":"2+2=fish"},
+        {"id":"5","task":"Donald Trump is a humble person."},
+        {"id":"6","task":"Shapes have 4 90 degree angles."},
+        {"id":"7","task":"A triangle by definition has 3 or more sides."},
+        {"id":"8","task":"The internal temperature of the suns core is greater than 1 trillion degrees celsius"},
+        {"id":"9","task":"Humans are descended from chimpanzees."},
+        {"id":"10","task":"Small dogs live longer than older dogs."},
+        {"id":"11","task":"Karen can tell if it is currently raining."},
+        {"id":"12","task":"Excel can tell the difference between numbers and letters."},
+        {"id":"13","task":"Bobo the gorilla can list the letters of the alphabet."},
+        {"id":"14","task":"ackon Pollock revolutionized art with photo-realistic painting"},
+        {"id":"15","task":"The assembly line made cars widely available and affordable."},
+        {"id":"16","task":"George Washington said \"Can I cut down this tree?\""},
+        {"id":"17","task":"The girls asked \"What is a television?\""},
+        {"id":"18","task":"Describe how the assembly line made cars widely available and affordable."},
+        {"id":"19","task":"Which of the following are related to space? a. saucers b. Mars c. dirt"},
+        {"id":"20","task":"Select the most correct sentence. A) Lizards are primates. B) Science is subjective. C) Science rules."},
+        {"id":"21","task":"How many people live in SF California? 1) 2000 2) 20000 3) 200000 4) 2000000 5) 20000000"},
+        {"id":"22","task":"Which type of grass is most commonly found in Ohio? 1 Blue grass 2 alfalfa 3 green grass."},
+        {"id":"23","task":"What is the solution to 0=x-1? 1. x=1 2. x=2 3. x=3"},
+      ]
     };
   },
   generateId: function () {
@@ -27,53 +52,37 @@ var QuestionBox = React.createClass({
   handleSubmit: function (task) {
     var data = this.state.data;
     var id = this.generateId().toString();
-    var complete = 'false';
-    data = data.concat([{id, task, complete}]);
+    data = data.concat([{id, task}]);
     this.setState({data});
-  },
-  handleToggleComplete: function (nodeId) {
-    var data = this.state.data;
-    for (var i in data) {
-      if (data[i].id == nodeId) {
-        data[i].complete = data[i].complete === 'true' ? 'false' : 'true';
-        break;
-      }
-    }
-    this.setState({data});
-    return;
   },
   render: function() {
     return (
       <div>
         <QuestionForm onTaskSubmit={this.handleSubmit} />
-        <QuestionList data={this.state.data} toggleComplete={this.handleToggleComplete} />
+        <QuestionList data={this.state.data} />
       </div>
     );
   }
 });
 
 var QuestionList = React.createClass({
-  toggleComplete: function (nodeId) {
-    this.props.toggleComplete(nodeId);
-    return;
-  },
   render: function() {
     var listNodes = this.props.data.map(function (listItem) {
       return (
-        <QuestionItem key={listItem.id} nodeId={listItem.id} task={listItem.task} complete={listItem.complete} toggleComplete={this.toggleComplete} />
+        <QuestionItem key={listItem.id} nodeId={listItem.id} task={listItem.task}/>
       );
     },this);
     return (
-      <ul className="list-group">
+      <dl className="dl-horizontal">
         {listNodes}
-      </ul>
+      </dl>
     );
   }
 });
 
 var QuestionItem = React.createClass({
   componentDidMount: function() {
-    axios.get('http://localhost:8080/pdfupload/classify/'+this.props.text+'/')
+    axios.get('http://localhost:8080/pdfupload/classify/'+this.props.task+'/')
       .then(res => {
         this.setState({ 
           loading : false,
@@ -87,28 +96,17 @@ var QuestionItem = React.createClass({
       loading: true
     };
   },
-
-  toggleComplete: function (e) {
-    e.preventDefault();
-    this.props.toggleComplete(this.props.nodeId);
-    return;
-  },
   updateClass: function () {
     
   },
   render: function() {
-    var classes = 'list-group-item clearfix';
-    if (this.props.complete === 'true') {
-      classes = classes + ' list-group-item-success';
-    }
-   var spinner = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <code>{this.state.tag}</code>;
+    // var classes = 'list-group-item clearfix';
+    var spinner = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <code>{this.state.tag}</code>;
     return (
-      <li className={classes}>
-        {this.props.task}
-        <div className="pull-right" role="group">
-          { spinner }
-        </div>
-      </li>
+      <div>
+        <dt><code>{ spinner }</code></dt>
+        <dd>{this.props.task}</dd>
+      </div>
     );
   }
 });
@@ -147,6 +145,24 @@ ReactDOM.render(
   <QuestionBox />,
     document.getElementById('react-comp')
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

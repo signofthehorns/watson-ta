@@ -24,11 +24,11 @@
         <p class="lead">This is where the user will upload PDFs to be analyzed by Watson. (maybe, just a place holder for now)</p>
       </div>
       <h3>Natural Language Classifier</h3>
-      <p>Here are some sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
+      <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
       <dl class="dl-horizontal">
       	{% for c in classifications %}
-          <dt><code>{{ c.tag }}</code></dt>
-          <dd>{{ c.question }}</dd>
+            <dt><code>{{ c.tag }}</code></dt>
+            <dd>{{ c.question }}</dd>
         {% endfor %}
       </dl>
       <h3>React Component</h3>
