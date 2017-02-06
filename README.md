@@ -15,10 +15,16 @@ Then, start the django webserver:
 cd ~/www/
 python manage.py runserver
 ```
-And then view the example page at localhost:8000/pdfupload/
+And then view the example page at localhost:8080/pdfupload/
 
 It should look like...
 ![Hello World](https://github.com/signofthehorns/watson-ta/blob/master/firstpage.png)
+
+Remember to set shell vars
+```BASH
+export watson_username
+export watson_password
+```
 
 # Info
 - Team: **Sign of the Horns (aka |..|,)**
