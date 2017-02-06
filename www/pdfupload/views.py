@@ -42,3 +42,58 @@ def index(request):
     'classifications' : results  
   }
   return HttpResponse(template.render(context,request))
+
+
+# ------------------------------------------------------------------------
+#  Handle PDF Upload and return the text from the document
+# ------------------------------------------------------------------------
+# for file upload
+from django import forms
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from cStringIO import StringIO
+
+def convert_pdf_to_txt(fp):
+  rsrcmgr = PDFResourceManager()
+  retstr = StringIO()
+  codec = 'utf-8'
+  laparams = LAParams()
+  device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+  interpreter = PDFPageInterpreter(rsrcmgr, device)
+  password = ""
+  maxpages = 0
+  caching = True
+  pagenos=set()
+  for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+      interpreter.process_page(page)
+  text = retstr.getvalue()
+  fp.close()
+  device.close()
+  retstr.close()
+  return text
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
+
+def handle_uploaded_file(f):
+  return convert_pdf_to_txt(f)
+
+# LOL, using this decorator because of laziness right
+# now. in the future we will want to securely send 
+# files
+@csrf_exempt
+def upload_file(request):
+  if request.method == 'POST':
+    form = UploadFileForm(request.POST, request.FILES)
+    if form.is_valid():
+      text = handle_uploaded_file(request.FILES['file'])
+      return JsonResponse({
+        'success': True,
+        'text': text
+      })
+  return JsonResponse({'success': False})

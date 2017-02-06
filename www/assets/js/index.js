@@ -2,17 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
-
-import { ListGroup } from 'react-bootstrap';
-import { ListGroupItem } from 'react-bootstrap';
-import { FormControl } from 'react-bootstrap';
-import { FormGroup } from 'react-bootstrap';
-import { ControlLabel } from 'react-bootstrap';
-import { HelpBlock } from 'react-bootstrap';
-import { InputGroup } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
-
+import { Well } from 'react-bootstrap';
+var Dropzone = require('react-dropzone');
 
 var QuestionBox = React.createClass({
   getInitialState: function () {
@@ -34,14 +28,6 @@ var QuestionBox = React.createClass({
         {"id":"13","task":"Bobo the gorilla can list the letters of the alphabet."},
         {"id":"14","task":"ackon Pollock revolutionized art with photo-realistic painting"},
         {"id":"15","task":"The assembly line made cars widely available and affordable."},
-        {"id":"16","task":"George Washington said \"Can I cut down this tree?\""},
-        {"id":"17","task":"The girls asked \"What is a television?\""},
-        {"id":"18","task":"Describe how the assembly line made cars widely available and affordable."},
-        {"id":"19","task":"Which of the following are related to space? a. saucers b. Mars c. dirt"},
-        {"id":"20","task":"Select the most correct sentence. A) Lizards are primates. B) Science is subjective. C) Science rules."},
-        {"id":"21","task":"How many people live in SF California? 1) 2000 2) 20000 3) 200000 4) 2000000 5) 20000000"},
-        {"id":"22","task":"Which type of grass is most commonly found in Ohio? 1 Blue grass 2 alfalfa 3 green grass."},
-        {"id":"23","task":"What is the solution to 0=x-1? 1. x=1 2. x=2 3. x=3"},
       ]
     };
   },
@@ -147,22 +133,94 @@ ReactDOM.render(
 );
 
 
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
+// TODO: split up demo module below
+import { ProgressBar } from 'react-bootstrap';
+var PDFUploadDemo = React.createClass({
+  getInitialState: function () {
+      return {
+        files: [],
+        progresses: [],
+        finished: false,
+        doc_text: ''
+      };
+  },
 
+  onDrop: function (acceptedFiles) {
+    this.setState({
+      files: acceptedFiles
+    });
 
+    var data = new FormData();
+    data.append('file', acceptedFiles[0]);
 
+    var config = {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: function(progressEvent) {
+        var percentCompleted = Math.round( 
+          (progressEvent.loaded * 100) / progressEvent.total );
+        this.setState({
+          progress: percentCompleted
+        });
+      }.bind(this)
+    };
 
+    // upload the file to the server 
+    axios.post('/pdfupload/upload/', data, config)
+      .then(function (res) {
+        this.setState({
+          finished: res.data.success,
+          doc_text: res.data.text
+        })
+      }.bind(this))
+      .catch(function (err) {
+        // update state for error.
+      }.bind(this));
+  },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  render: function () {
+    var header = <div>
+      <h3>Document Upload Component</h3>
+      <p>Starter React component for uploading a document and processing on the backend.</p>
+      </div>;
+    if (this.state.finished) {
+      return (
+        <div>
+          { header }
+          
+          <Well>
+            <code>{this.state.files[0].name}</code>
+            <br/>
+            { this.state.doc_text }
+          </Well>
+          <img className="upload_img" src={this.state.files[0].preview} />
+        </div>
+      )
+    }
+    return (
+      <div>
+        { header }
+        { this.state.files.length > 0 
+          ? <div>
+              <h4>Analyzing {this.state.files.length} files...</h4>
+              <div>{
+                <div>
+                  <p>{this.state.files[0].name}</p>
+                  <ProgressBar active now={this.state.progress} bsStyle="success"/>
+                  <img className="upload_img" src={this.state.files[0].preview} />
+                </div>}
+              </div>
+            </div> 
+          : <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop}>
+              <Alert bsStyle="warning">
+                Drag a <strong>PDF</strong> here to extract the text from it.
+              </Alert>
+            </Dropzone>
+        }
+      </div>
+    );
+  }
+});
+ReactDOM.render(<PDFUploadDemo />, document.getElementById('react-pdf'));
