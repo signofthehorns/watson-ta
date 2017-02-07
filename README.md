@@ -1,33 +1,54 @@
 # Watson-TA
 [![Build Status](https://travis-ci.org/signofthehorns/watson-ta.svg?branch=master)](https://travis-ci.org/signofthehorns/watson-ta)
 
-# Setup:
-Activate the virtual environment and install the dependencies:
-```BASH
-source bin/activate
+<!-- TOC depthFrom:2 -->
 
-pip install -r requirements.txt
-npm install
-```
+- [What is Watson TA](#what-is-watson-ta)
+- [Setup](#setup)
+- [The Team](#the-team)
 
-Then, start the django webserver:
-```BASH
-cd ~/www/
-python manage.py runserver
-```
-And then view the example page at localhost:8080/pdfupload/
-(I currently hardcoded the port as 8080).
+<!-- /TOC -->
 
-It should look like...
-![Hello World](https://github.com/signofthehorns/watson-ta/blob/master/firstpage.png)
+## What is Watson TA
 
-Remember to set shell vars
-```BASH
-export watson_username
-export watson_password
-```
+We plan on making the Watson TA. It will be a web app where students can upload a school assignment (homework, quiz, test, etc.) and Watson will tell the student if his/her answer is correct or not, give its own top 2 or 3 answers, and allow the student to drag and drop his/her favorite answer if the student wishes to take one of the suggested ones.
 
-# Info
+Extensions:
+- Add 24/7 office hour TA so students can ask questions if they don't understand the suggested answers.
+
+## Setup
+
+1. Clone this repository
+2. Set ENV variables for:
+  ```BASH
+  # For the Watson natural-language-classifier NLC
+  export watson_username
+  export watson_password
+  ```
+3. Navagate into the `.../watson-ta/` directory
+3. Make sure the following is installed:
+  - Python 2
+  - pip
+  - npm
+4. Setup the virtual python environment:
+  ```BASH
+  source bin/activate
+  pip install -r requirements.txt
+  ```
+5. Setup the npm environment:
+  ```BASH
+  npm install
+  ```
+6. Run the app with:
+  ```BASH
+  python www/manage.py runserver
+  ```
+7. Open the app at `localhost:8000/pdfupload/` the following should appear:
+
+  ![PDF Upload Page](images/pdfupload.png)
+
+## The Team
+
 - Team: **Sign of the Horns (aka |..|,)**
 - Members:
   - Dalton Flanagan
@@ -35,12 +56,6 @@ export watson_password
   - Bill Varcho
   - Tyler Zeller
   - David Soller
-  
-- Project:
-  > We plan on making the Watson TA. It will be a web app where students can upload a school assignment (homework, quiz, test, etc.) and Watson will tell the student if his/her answer is correct or not, give its own top 2 or 3 answers, and allow the student to drag and drop his/her favorite answer if the student wishes to take one of the suggested ones.
-  >
-  > Extensions:
-  > - add 24/7 office hour TA so students can ask questions if they don't understand the suggested answers.
 
-![Image of Tyler](https://github.com/signofthehorns/watson-ta/blob/master/lol.png)
-![Dab](https://github.com/signofthehorns/watson-ta/blob/master/dab.png)
+![Tyler...](images/bitmoji-lol.png)
+![The Dab](images/bitmoji-dab.png)
