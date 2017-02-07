@@ -68,7 +68,7 @@ var QuestionList = React.createClass({
 
 var QuestionItem = React.createClass({
   componentDidMount: function() {
-    axios.get('http://localhost:8080/pdfupload/classify/'+this.props.task+'/')
+    axios.get('http://localhost:8000/pdfupload/classify/'+this.props.task+'/')
       .then(res => {
         this.setState({ 
           loading : false,
