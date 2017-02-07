@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^pdfupload/', include('pdfupload.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('pdfupload.urls')),
 ]

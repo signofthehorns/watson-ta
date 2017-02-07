@@ -48,7 +48,7 @@ Extensions:
   python www/manage.py runserver
   ```
   
-7. Open the app at `localhost:8000/pdfupload/` the following should appear:
+7. Open the app at `localhost:8000/` the following should appear:
 
   ![PDF Upload Page](images/pdfupload.png)
 
