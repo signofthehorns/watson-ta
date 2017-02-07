@@ -25,24 +25,29 @@ Extensions:
   export watson_username
   export watson_password
   ```
+  
 3. Navagate into the `.../watson-ta/` directory
 3. Make sure the following is installed:
   - Python 2
   - pip
   - npm
+  
 4. Setup the virtual python environment:
   ```BASH
   source bin/activate
   pip install -r requirements.txt
   ```
+  
 5. Setup the npm environment:
   ```BASH
   npm install
   ```
+  
 6. Run the app with:
   ```BASH
   python www/manage.py runserver
   ```
+  
 7. Open the app at `localhost:8000/pdfupload/` the following should appear:
 
   ![PDF Upload Page](images/pdfupload.png)
