@@ -10,6 +10,7 @@ pyparsing==2.1.10
 PyReact==0.1.1
 pysolr==3.6.0
 pytest==3.0.6
+pytest-django==3.1.2
 requests==2.13.0
 six==1.10.0
 watson-developer-cloud==0.23.0
