@@ -3,6 +3,7 @@ Django==1.10.5
 django-bootstrap3==8.1.0
 django-webpack-loader==0.4.1
 packaging==16.8
+pdfminer==20140328
 py==1.4.32
 PyExecJS==1.4.0
 pyparsing==2.1.10

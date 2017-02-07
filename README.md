@@ -16,6 +16,7 @@ cd ~/www/
 python manage.py runserver
 ```
 And then view the example page at localhost:8080/pdfupload/
+(I currently hardcoded the port as 8080).
 
 It should look like...
 ![Hello World](https://github.com/signofthehorns/watson-ta/blob/master/firstpage.png)
