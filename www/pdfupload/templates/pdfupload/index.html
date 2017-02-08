@@ -13,6 +13,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 
+
+
 <style>
 .upload_img{
    width: 160px;
@@ -29,6 +31,35 @@ img{
 ul {
   list-style-type: none;
 }
+
+.entity-positive {
+  background-color: #c2ffc0;
+  border-radius: 3px;
+  border: 1px solid #67db64;
+  margin: 2px;
+  padding: 2px;
+}
+
+.entity-neutral {
+  background-color: #fff3c0;
+  border-radius: 3px;
+  border: 1px solid #f6e07b;
+  margin: 2px;
+  padding: 2px;
+}
+
+.entity-negative {
+  background-color: #ffc3c0;
+  border-radius: 3px;
+  border: 1px solid #f6827b;
+  margin: 2px;
+  padding: 2px;
+}
+
+.nlc-spaced {
+  margin-top: 10px; 
+}
+
 </style>
 
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -73,11 +104,53 @@ ul {
 
       <h3>Natural Language Classifier</h3>
       <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
-      <ul class="dl-horizontal">
+      <ol class="dl-horizontal nlc-spaced">
       	{% for c in classifications %}
-            <li><code>{{ c.tag }}</code>{{ c.question }}</li>
+            <li><a class="glyphicon" data-toggle="collapse" href="#collapse{{ forloop.counter }}">&#x2b;</a></span><code>{{ c.tag }}</code>
+              {% for w in c.words %}
+                {% if w.tag %}
+                  <span class={{ w.tag }}>{{ w.fragment }}</span>
+                {% else %}
+                  {{ w.fragment }}
+                {% endif %}
+              {% endfor %}
+            </li>
+            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+              <ul class="list-group">
+                {% if c.keywords|length > 0 %}
+                <li>
+                  <a class="glyphicon" data-toggle="collapse" href="#collapsekeyword{{ forloop.counter }}">&#x2b;</a><kbd>Keywords</kbd>
+                  <div id="collapsekeyword{{ forloop.counter }}" class="panel-collapse collapse">
+                  {% for kw in c.keywords %}
+                    <strong>{{ kw.text }}</strong>
+                    {% for item in kw.items %}
+                    <ul>
+                      <li>{{ item.0 }}, {{ item.1 }}</li>
+                    </ul>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+                </li>
+                {% endif %}
+                {% if c.concepts|length > 0 %}
+                <li>
+                  <a class="glyphicon" data-toggle="collapse" href="#collapseconcepts{{ forloop.counter }}">&#x2b;</a><kbd>Concepts</kbd>
+                  <div id="collapseconcepts{{ forloop.counter }}" class="panel-collapse collapse">
+                  {% for concept in c.concepts %}
+                    <strong>{{ concept.text }}</strong>
+                    {% for item in concept.items %}
+                    <ul>
+                      <li>{{ item.0 }}, {{ item.1 }}</li>
+                    </ul>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
         {% endfor %}
-      </ul>
+      </ol>
       <h3>React Component</h3>
       <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences.</p>
       <div id="react-comp">
