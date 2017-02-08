@@ -6,6 +6,8 @@ import { Alert } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Well } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 var Dropzone = require('react-dropzone');
 
 var QuestionBox = React.createClass({
@@ -59,9 +61,9 @@ var QuestionList = React.createClass({
       );
     },this);
     return (
-      <dl className="dl-horizontal">
+      <ul className="dl-horizontal">
         {listNodes}
-      </dl>
+      </ul>
     );
   }
 });
@@ -90,8 +92,7 @@ var QuestionItem = React.createClass({
     var spinner = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <code>{this.state.tag}</code>;
     return (
       <div>
-        <dt><code>{ spinner }</code></dt>
-        <dd>{this.props.task}</dd>
+        <li><code>{ spinner }</code>{this.props.task}</li>
       </div>
     );
   }
@@ -144,7 +145,7 @@ var PDFUploadDemo = React.createClass({
         files: [],
         progresses: [],
         finished: false,
-        doc_text: ''
+        questions: []
       };
   },
 
@@ -170,9 +171,10 @@ var PDFUploadDemo = React.createClass({
     // upload the file to the server 
     axios.post('/pdfupload/upload/', data, config)
       .then(function (res) {
+        console.log(res.data);
         this.setState({
           finished: res.data.success,
-          doc_text: res.data.text
+          questions: res.data.text
         })
       }.bind(this))
       .catch(function (err) {
@@ -189,12 +191,13 @@ var PDFUploadDemo = React.createClass({
       return (
         <div>
           { header }
-          
-          <Well>
-            <code>{this.state.files[0].name}</code>
-            <br/>
-            { this.state.doc_text }
-          </Well>
+          <h4>{this.state.files[0].name}</h4>
+          <p>The following questions were extracted from the pdf</p>
+          <ListGroup>
+          { this.state.questions.map(function(object, i){
+              return <ListGroupItem><code>{object.tag}</code>{object.text}</ListGroupItem>;
+          })}
+          </ListGroup>
           <img className="upload_img" src={this.state.files[0].preview} />
         </div>
       )

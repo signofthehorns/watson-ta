@@ -14,20 +14,27 @@
 
 
 <style>
-.upload_img{
-   width: 160px;
-   height:200px;
-   border:solid 1px black;
-}
-
-img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
 ul {
   list-style-type: none;
+}
+
+.imageContainer {
+  background-image: url('http://i.huffpost.com/gen/2159432/images/o-EMPTY-CLASSROOM-facebook.jpg');
+}
+
+.classroom img {
+  margin-top:-25px;
+  object-fit: cover;
+  width:100%;
+  height:300px;
+}
+
+.white {
+  color: #eee;
+}
+
+mark:hover {
+  background-color: #fdefa6;
 }
 </style>
 
@@ -41,22 +48,21 @@ ul {
 <script src="https://fb.me/react-15.0.0.js"></script>
 <script src="https://fb.me/react-dom-15.0.0.js"></script>
 <body>
-
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed-top">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">💡 watson-ta</a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8000/home/">home <span class="sr-only">(current)</span></a>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">nlc</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">pdf upload</a>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8000/pdfupload/">pdf upload</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:8000/team/">the team</a>
@@ -64,29 +70,17 @@ ul {
         </ul>
       </div>
     </nav>
-
+    <br>
+    <div class="classroom"><img src="http://i.huffpost.com/gen/2159432/images/o-EMPTY-CLASSROOM-facebook.jpg" /></div>
     <br>
     <div class="container">
       <div class="page-header">
-        <h1>PDF Uploader</h1>
+        <h1 class=""><mark>Welcome to Watson-TA!</mark></h1>
       </div>
-
-      <h3>Natural Language Classifier</h3>
-      <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
-      <ul class="dl-horizontal">
-      	{% for c in classifications %}
-            <li><code>{{ c.tag }}</code>{{ c.question }}</li>
-        {% endfor %}
-      </ul>
-      <h3>React Component</h3>
-      <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences.</p>
-      <div id="react-comp">
-        {% render_bundle 'main' %}
-      </div>
-
-      <div id="react-pdf">
-        {% render_bundle 'main' %}
-    </div>
+      <br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+      <h3>What Makes Watson-TA Unique</h3>
+      <p>dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
     <br>
     <br>
   </div>

@@ -12,8 +12,13 @@ class Classified(object):
     self.question = question_
     self.tag,self.conf = class_['class_name'],class_['confidence']
 
+  def get_map_repr(self):
+    return {
+      'tag': self.tag,
+      'text': self.question
+    }
+
 def classify_questions(qs):
-  print >>sys.stderr, qs
   natural_language_classifier = NaturalLanguageClassifierV1(
     username=os.environ['watson_username'],
     password=os.environ['watson_password'])
@@ -57,6 +62,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
+import re
 
 def convert_pdf_to_txt(fp):
   rsrcmgr = PDFResourceManager()
@@ -80,8 +86,28 @@ def convert_pdf_to_txt(fp):
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
+def extract_questions(text):
+  text = text.replace('\t',' ')
+  pattern = '[0-9]+(\)|\.)(?:(?![0-9]+(\)|\.)).)*'
+  m = re.finditer(pattern, text)
+  res = [match.group(0) for match in m]
+
+  obj_res = []
+  for r in res:
+    rmap = {
+      'class_name': 'TF',
+      'confidence': 0.0
+    }
+    # todo get classified result
+    obj_res.append(Classified(r,rmap).get_map_repr()) 
+  # order questions and classify
+  return obj_res
+
 def handle_uploaded_file(f):
-  return convert_pdf_to_txt(f)
+  text = convert_pdf_to_txt(f)
+  questions = extract_questions(text)
+  # print(questions)
+  return questions
 
 # LOL, using this decorator because of laziness right
 # now. in the future we will want to securely send 
@@ -97,3 +123,45 @@ def upload_file(request):
         'text': text
       })
   return JsonResponse({'success': False})
+
+
+# -----------------------------------------------------------------------------
+# Home page for watson ta
+def home(request):
+  template = loader.get_template('pdfupload/home.html')
+  context = {
+  }
+  return HttpResponse(template.render(context,request))
+
+
+
+# -----------------------------------------------------------------------------
+# Team page
+import github3
+
+def get_team_data():
+  gh = github3.login(os.environ['github_username'],os.environ['github_password'])
+  repo = gh.repository('signofthehorns','watson-ta')
+  team_members = []
+  for u in repo.contributors():
+    user = gh.user(u)
+    data = {
+      'name': user.name,
+      'avatar_url': user.avatar_url,
+      'location': user.bio,
+      'username': u
+    }
+    team_members.append(data)
+  return team_members
+
+# Team Info Page
+def team(request):
+  template = loader.get_template('pdfupload/team.html')
+  team_data = get_team_data()
+  context = {
+    'data': team_data
+  }
+  return HttpResponse(template.render(context,request))
+
+
+
