@@ -24,6 +24,10 @@ class Classified(object):
     }
 
   def set_fragmented_text(self, text, indices, tags):
+    if len(indices) == 0:
+      return
+    # sort tags in order for easier processing
+    indices,tags = zip(*sorted(zip(indices, tags)))
     self.words = []
     current_index = 0
     for i,p in enumerate(indices):
@@ -36,11 +40,10 @@ class Classified(object):
     if current_index < len(text):
       self.words.append({'fragment': text[current_index:], 'tag': None})
 
-  # TODO: sometimes word highlighting is weird
   def set_entities(self):
     # TODO if question is more than one sentence split into
     # individual calls
-    alchemy_language = AlchemyLanguageV1(api_key='8ac0205cd138c4771a6f30b222aeecc0ce5a3bfe')
+    alchemy_language = AlchemyLanguageV1(api_key=os.environ['watson_alchemy_key'])
     query = alchemy_language.combined(
         text=self.question,
         extract='keywords,concepts',
@@ -76,10 +79,6 @@ def classify_questions(qs):
   return result
 
 def alchemify(request,sentence):
-  # print >>sys.stderr, sentence
-  # words = [{'fragment': 'please explain why ', 'tag': None}, {'fragment': 'Jimmy Fallon', 'tag': u'entity-negative'}, {'fragment': 'always seems to be ', 'tag': None}, {'fragment': 'fake laughing', 'tag': u'entity-negative'}]
-  # kw = [{u'relevance': u'0.981656', u'text': u'Jimmy Fallon', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}, {u'relevance': u'0.947069', u'text': u'fake laughing', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}]
-  # concepts = [{u'website': u'http://www.myspace.com/jimmyfallon', u'yago': u'http://yago-knowledge.org/resource/Jimmy_Fallon', u'text': u'Jimmy Fallon', u'dbpedia': u'http://dbpedia.org/resource/Jimmy_Fallon', u'freebase': u'http://rdf.freebase.com/ns/m.01n5309', u'relevance': u'0.91136'}]
   cs = Classified(sentence)
   cs.set_entities()
   return JsonResponse(
@@ -102,19 +101,6 @@ def index(request):
     'what is your favorite flavor of ice cream',
   ]
   results = classify_questions(test_questions)
-  # for r in results:
-  #   r.set_entities()
-
-  # words = [{'fragment': 'please explain why ', 'tag': None}, {'fragment': 'Jimmy Fallon', 'tag': u'entity-negative'}, {'fragment': 'always seems to be ', 'tag': None}, {'fragment': 'fake laughing', 'tag': u'entity-negative'}]
-  # kw = [{u'relevance': u'0.981656', u'text': u'Jimmy Fallon', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}, {u'relevance': u'0.947069', u'text': u'fake laughing', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}]
-  # concepts = [{u'website': u'http://www.myspace.com/jimmyfallon', u'yago': u'http://yago-knowledge.org/resource/Jimmy_Fallon', u'text': u'Jimmy Fallon', u'dbpedia': u'http://dbpedia.org/resource/Jimmy_Fallon', u'freebase': u'http://rdf.freebase.com/ns/m.01n5309', u'relevance': u'0.91136'}]
-
-  # second = results[1]
-  # second.words = words
-  # second.keywords = kw
-  # second.concepts = concepts
-  # results[1] = second
-
   context = {
     'classifications' : results,
   }
@@ -212,18 +198,18 @@ def home(request):
 import github3
 
 def get_team_data():
-  gh = github3.login(os.environ['github_username'],os.environ['github_password'])
-  repo = gh.repository('signofthehorns','watson-ta')
+  # gh = github3.login(os.environ['github_username'],os.environ['github_password'])
+  # repo = gh.repository('signofthehorns','watson-ta')
   team_members = []
-  for u in repo.contributors():
-    user = gh.user(u)
-    data = {
-      'name': user.name,
-      'avatar_url': user.avatar_url,
-      'location': user.bio,
-      'username': u
-    }
-    team_members.append(data)
+  # for u in repo.contributors():
+  #   user = gh.user(u)
+  #   data = {
+  #     'name': user.name,
+  #     'avatar_url': user.avatar_url,
+  #     'location': user.bio,
+  #     'username': u
+  #   }
+  #   team_members.append(data)
   return team_members
 
 # Team Info Page
