@@ -9,17 +9,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-.upload_img{
-   width: 160px;
-   height:200px;
-   border:solid 1px black;
-}
-
-img{
+  .upload_img {
+    width: 160px;
+    height: 200px;
+    border: solid 1px black;
+  }
+  
+  img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-}
+  }
 </style>
 
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -31,43 +31,59 @@ img{
 <title>PDF</title>
 <script src="https://fb.me/react-15.0.0.js"></script>
 <script src="https://fb.me/react-dom-15.0.0.js"></script>
+
 <body>
-   
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-              <p>🤘</p>
-              <a class="navbar-brand" href="#">Watson TA</a>
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <br>
-     <div class="container">
-      <div class="page-header">
-        <h1>PDF Uploader</h1>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <p>🤘</p>
+          <a class="navbar-brand" href="#">Watson TA</a>
+        </a>
       </div>
+    </div>
+  </nav>
 
+  <br>
+  <div class="container">
+    <div class="page-header">
+      <h1>PDF Uploader</h1>
+    </div>
+
+    <section>
       <h3>Natural Language Classifier</h3>
-      <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
+      <p>Our <strong>NLC</strong> classifies the type of question:</p>
       <dl class="dl-horizontal">
-      	{% for c in classifications %}
-            <dt><code>{{ c.tag }}</code></dt>
-            <dd>{{ c.question }}</dd>
+        <dt><code>SA</code></dt>
+        <dd>Short Answer</dd>
+
+        <dt><code>TF</code></dt>
+        <dd>True/False</dd>
+
+        <dt><code>MC</code></dt>
+        <dd>Multiple Choice</dd>
+      </dl>
+      <p>Some examples of our <strong>NLC</strong> classification are:</p>
+      <dl class="dl-horizontal">
+        {% for c in classifications %}
+        <dt><code>{{ c.tag }}</code></dt>
+        <dd>{{ c.question }}</dd>
         {% endfor %}
       </dl>
+    </section>
+    <section>
       <h3>React Component</h3>
-      <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences.</p>
+      <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating
+        sentences.</p>
       <div id="react-comp">
         {% render_bundle 'main' %}
       </div>
 
       <div id="react-pdf">
         {% render_bundle 'main' %}
-    </div>
-    <br>
-    <br>
+      </div>
+      <br>
+      <br>
+    </section>
   </div>
 </body>
