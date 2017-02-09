@@ -2,18 +2,14 @@
 {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
-<!-- {% bootstrap_css %} -->
 {% bootstrap_javascript %}
 {% load static %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="newest stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-
-
 
 <style>
 .upload_img{
@@ -58,6 +54,27 @@ ul {
 
 .nlc-spaced {
   margin-top: 10px; 
+}
+
+.alchemy {
+  color: #fff;
+  background-color: #7330cf;
+  padding: 2px;
+  border-radius: 2px;
+  margin: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+.alchemy-done {
+  color: #fff;
+  background-color: #67db64;
+  padding: 2px;
+  border-radius: 2px;
+  margin: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 </style>
@@ -105,6 +122,20 @@ ul {
       <h3>Natural Language Classifier</h3>
       <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
       <ol class="dl-horizontal nlc-spaced">
+        {% for c in classifications %}
+            <li></span><code>{{ c.tag }}</code>
+              {% for w in c.words %}
+                {% if w.tag %}
+                  <span class={{ w.tag }}>{{ w.fragment }}</span>
+                {% else %}
+                  {{ w.fragment }}
+                {% endif %}
+              {% endfor %}
+            </li>
+        {% endfor %}
+      </ol>
+      <!-- keeping for refrence, when i need to insert django template vars again (bill) -->
+      <!-- <ol class="dl-horizontal nlc-spaced">
       	{% for c in classifications %}
             <li><a class="glyphicon" data-toggle="collapse" href="#collapse{{ forloop.counter }}">&#x2b;</a></span><code>{{ c.tag }}</code>
               {% for w in c.words %}
@@ -114,6 +145,7 @@ ul {
                   {{ w.fragment }}
                 {% endif %}
               {% endfor %}
+              <span class="alchemy" data-toggle="tooltip" data-placement="top" title="alchemify"><i class="fa fa-flask"></i></span>
             </li>
             <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
               <ul class="list-group">
@@ -150,17 +182,21 @@ ul {
               </ul>
             </div>
         {% endfor %}
-      </ol>
+      </ol> -->
       <h3>React Component</h3>
-      <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences.</p>
+      <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences. <strong>New!</strong> Now we can now use alchemy backend to extract information from text.</p>
       <div id="react-comp">
         {% render_bundle 'main' %}
       </div>
-
       <div id="react-pdf">
         {% render_bundle 'main' %}
     </div>
     <br>
     <br>
   </div>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
 </body>

@@ -14,10 +14,7 @@ var QuestionBox = React.createClass({
   getInitialState: function () {
     return {
       data: [
-        {"id":"0","task":"Name three types of dogs."},
-        {"id":"1","task":"What is a television?"},
-        {"id":"2","task":"List the different themes present in Homers The Iliad."},
-        {"id":"3","task":"How can we eliminate disease from the human genome?"},
+        {"id":"0","task":"explain why Jimmy Fallon always seems to be fake laughing."},
         {"id":"4","task":"2+2=fish"},
         {"id":"5","task":"Donald Trump is a humble person."},
         {"id":"6","task":"Shapes have 4 90 degree angles."},
@@ -30,6 +27,8 @@ var QuestionBox = React.createClass({
         {"id":"13","task":"Bobo the gorilla can list the letters of the alphabet."},
         {"id":"14","task":"ackon Pollock revolutionized art with photo-realistic painting"},
         {"id":"15","task":"The assembly line made cars widely available and affordable."},
+        {"id":"1","task":"What is a television?"},
+        {"id":"3","task":"How can we eliminate disease from the human genome?"},
       ]
     };
   },
@@ -61,9 +60,9 @@ var QuestionList = React.createClass({
       );
     },this);
     return (
-      <ul className="dl-horizontal">
+      <ol className="dl-horizontal">
         {listNodes}
-      </ul>
+      </ol>
     );
   }
 });
@@ -73,7 +72,7 @@ var QuestionItem = React.createClass({
     axios.get('http://localhost:8000/pdfupload/classify/'+this.props.task+'/')
       .then(res => {
         this.setState({ 
-          loading : false,
+          tag_loading : false,
           tag : res.data.tag
         });
       });
@@ -81,19 +80,134 @@ var QuestionItem = React.createClass({
 
   getInitialState: function () {
     return {
-      loading: true
+      tag_loading: true,
+      ent_loading : false,
+      has_ent_data: false,
+      concepts: [],
+      keywords: [],
+      words: [],
     };
   },
   updateClass: function () {
     
   },
+
+  alchemify: function (e) {
+
+    this.setState({ 
+      ent_loading : true
+    });
+
+    axios.get('http://localhost:8000/pdfupload/alchemify/'+this.props.task+'/')
+      .then(res => {
+        this.setState({ 
+          ent_loading : false,
+          has_ent_data: true,
+          concepts: res.data.concepts,
+          keywords: res.data.keywords,
+          words: res.data.words,
+        });
+      });
+    return;
+  },
+
   render: function() {
     // var classes = 'list-group-item clearfix';
-    var spinner = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <code>{this.state.tag}</code>;
+    var spinner = this.state.tag_loading ? <i className="fa fa-refresh fa-spin" /> : <code>{this.state.tag}</code>;
+    
+    // default text if not alchemified
+    var text = this.props.task;
+
+    var collapsekey = this.props.nodeId.toString();
+    var data_expander = this.state.has_ent_data ?
+      <a className="glyphicon" data-toggle="collapse" href={"#collapse"+collapsekey}>&#x2b;</a>
+      : <span/>
+
+    var alchemy = this.state.ent_loading ? <i className="fa fa-refresh fa-spin" /> : <i className="fa fa-flask"/>;
+    var alchemy = !this.state.tag_loading ? 
+      <span className="alchemy" data-toggle="tooltip" data-placement="top" title="alchemify" onClick={this.alchemify}>{alchemy}</span> : <span/>;
+
+
+    var ent_data = <span/>;
+
+    // handle the state if entity data is present
+    if (this.state.has_ent_data) {
+      alchemy = <i className="fa fa-check-circle alchemy-done"/>;
+
+
+      // TODO(bill): extract logic below into separate functions
+      // display text with highlighted entities
+      var sentence = []
+      this.state.words.forEach(function(w) {
+        if (w.tag) {
+          sentence.push(<span className={ w.tag }>{ w.fragment }</span>);
+        } else {
+          sentence.push(<span>{ w.fragment }</span>);
+        }
+      });
+      text = sentence;
+
+      // handle keywords
+      // should do length check      
+      var keywords = [];
+      this.state.keywords.forEach(function(kw) {
+        var objkeys = [];
+        Object.keys(kw).forEach(function(key,index) {
+          objkeys.push(
+            <ul>
+              <li>{ key }: { kw[key].toString() }</li>
+            </ul>);
+        });
+
+        keywords.push(<div><strong>{kw.text}</strong>{objkeys}</div>);
+      });
+      var keyword_format = 
+        <li>
+          <a className="glyphicon" data-toggle="collapse" href={"#collapsekeyword"+collapsekey}>&#x2b;</a><kbd>Keywords</kbd>
+          <div id={"collapsekeyword"+collapsekey} className="panel-collapse collapse">
+            { keywords }
+          </div>
+        </li>;
+
+
+      // concepts
+      // should do length check      
+      var concepts = [];
+      this.state.concepts.forEach(function(conc) {
+        var objkeys = [];
+        Object.keys(conc).forEach(function(key,index) {
+          objkeys.push(
+            <ul>
+              <li>{ key }: { conc[key].toString() }</li>
+            </ul>);
+        });
+        concepts.push(<div><strong>{conc.text}</strong>{objkeys}</div>);
+      });
+      var concept_format = 
+        <li>
+          <a className="glyphicon" data-toggle="collapse" href={"#collapseconcepts"+collapsekey}>&#x2b;</a><kbd>Concepts</kbd>
+          <div id={"collapseconcepts"+collapsekey} className="panel-collapse collapse">
+            { concepts }
+          </div>
+        </li>;
+
+      var content = <ul className="list-group">{ keyword_format }{ concept_format }</ul>
+      var collapsable = 
+        <div id={"collapse"+collapsekey} className="panel-collapse collapse">
+          { content }
+        </div>;
+      ent_data = collapsable;
+    }
+
+
     return (
-      <div>
-        <li><code>{ spinner }</code>{this.props.task}</li>
-      </div>
+      <li>
+        { data_expander }
+        <code>{ spinner }</code>
+        { text }
+        { alchemy }
+        { ent_data }
+      </li>
     );
   }
 });
@@ -171,7 +285,6 @@ var PDFUploadDemo = React.createClass({
     // upload the file to the server 
     axios.post('/pdfupload/upload/', data, config)
       .then(function (res) {
-        console.log(res.data);
         this.setState({
           finished: res.data.success,
           questions: res.data.text

@@ -8199,7 +8199,7 @@ var QuestionBox = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
 
   getInitialState: function () {
     return {
-      data: [{ "id": "0", "task": "Name three types of dogs." }, { "id": "1", "task": "What is a television?" }, { "id": "2", "task": "List the different themes present in Homers The Iliad." }, { "id": "3", "task": "How can we eliminate disease from the human genome?" }, { "id": "4", "task": "2+2=fish" }, { "id": "5", "task": "Donald Trump is a humble person." }, { "id": "6", "task": "Shapes have 4 90 degree angles." }, { "id": "7", "task": "A triangle by definition has 3 or more sides." }, { "id": "8", "task": "The internal temperature of the suns core is greater than 1 trillion degrees celsius" }, { "id": "9", "task": "Humans are descended from chimpanzees." }, { "id": "10", "task": "Small dogs live longer than older dogs." }, { "id": "11", "task": "Karen can tell if it is currently raining." }, { "id": "12", "task": "Excel can tell the difference between numbers and letters." }, { "id": "13", "task": "Bobo the gorilla can list the letters of the alphabet." }, { "id": "14", "task": "ackon Pollock revolutionized art with photo-realistic painting" }, { "id": "15", "task": "The assembly line made cars widely available and affordable." }]
+      data: [{ "id": "0", "task": "explain why Jimmy Fallon always seems to be fake laughing." }, { "id": "4", "task": "2+2=fish" }, { "id": "5", "task": "Donald Trump is a humble person." }, { "id": "6", "task": "Shapes have 4 90 degree angles." }, { "id": "7", "task": "A triangle by definition has 3 or more sides." }, { "id": "8", "task": "The internal temperature of the suns core is greater than 1 trillion degrees celsius" }, { "id": "9", "task": "Humans are descended from chimpanzees." }, { "id": "10", "task": "Small dogs live longer than older dogs." }, { "id": "11", "task": "Karen can tell if it is currently raining." }, { "id": "12", "task": "Excel can tell the difference between numbers and letters." }, { "id": "13", "task": "Bobo the gorilla can list the letters of the alphabet." }, { "id": "14", "task": "ackon Pollock revolutionized art with photo-realistic painting" }, { "id": "15", "task": "The assembly line made cars widely available and affordable." }, { "id": "1", "task": "What is a television?" }, { "id": "3", "task": "How can we eliminate disease from the human genome?" }]
     };
   },
   generateId: function () {
@@ -8230,7 +8230,7 @@ var QuestionList = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(QuestionItem, { key: listItem.id, nodeId: listItem.id, task: listItem.task });
     }, this);
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'ul',
+      'ol',
       { className: 'dl-horizontal' },
       listNodes
     );
@@ -8243,7 +8243,7 @@ var QuestionItem = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
   componentDidMount: function () {
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:8000/pdfupload/classify/' + this.props.task + '/').then(res => {
       this.setState({
-        loading: false,
+        tag_loading: false,
         tag: res.data.tag
       });
     });
@@ -8251,30 +8251,210 @@ var QuestionItem = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
 
   getInitialState: function () {
     return {
-      loading: true
+      tag_loading: true,
+      ent_loading: false,
+      has_ent_data: false,
+      concepts: [],
+      keywords: [],
+      words: []
     };
   },
   updateClass: function () {},
+
+  alchemify: function (e) {
+
+    this.setState({
+      ent_loading: true
+    });
+
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:8000/pdfupload/alchemify/' + this.props.task + '/').then(res => {
+      this.setState({
+        ent_loading: false,
+        has_ent_data: true,
+        concepts: res.data.concepts,
+        keywords: res.data.keywords,
+        words: res.data.words
+      });
+    });
+    return;
+  },
+
   render: function () {
     // var classes = 'list-group-item clearfix';
-    var spinner = this.state.loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-refresh fa-spin' }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    var spinner = this.state.tag_loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-refresh fa-spin' }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'code',
       null,
       this.state.tag
     );
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
-      null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+
+    // default text if not alchemified
+    var text = this.props.task;
+
+    var collapsekey = this.props.nodeId.toString();
+    var data_expander = this.state.has_ent_data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'a',
+      { className: 'glyphicon', 'data-toggle': 'collapse', href: "#collapse" + collapsekey },
+      '+'
+    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', null);
+
+    var alchemy = this.state.ent_loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-refresh fa-spin' }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-flask' });
+    var alchemy = !this.state.tag_loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'span',
+      { className: 'alchemy', 'data-toggle': 'tooltip', 'data-placement': 'top', title: 'alchemify', onClick: this.alchemify },
+      alchemy
+    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', null);
+
+    var ent_data = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', null);
+
+    // handle the state if entity data is present
+    if (this.state.has_ent_data) {
+      alchemy = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-check-circle alchemy-done' });
+
+      // TODO(bill): extract logic below into separate functions
+      // display text with highlighted entities
+      var sentence = [];
+      this.state.words.forEach(function (w) {
+        if (w.tag) {
+          sentence.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'span',
+            { className: w.tag },
+            w.fragment
+          ));
+        } else {
+          sentence.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'span',
+            null,
+            w.fragment
+          ));
+        }
+      });
+      text = sentence;
+
+      // handle keywords
+      // should do length check      
+      var keywords = [];
+      this.state.keywords.forEach(function (kw) {
+        var objkeys = [];
+        Object.keys(kw).forEach(function (key, index) {
+          objkeys.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'ul',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              key,
+              ': ',
+              kw[key].toString()
+            )
+          ));
+        });
+
+        keywords.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'strong',
+            null,
+            kw.text
+          ),
+          objkeys
+        ));
+      });
+      var keyword_format = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'li',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'code',
-          null,
-          spinner
+          'a',
+          { className: 'glyphicon', 'data-toggle': 'collapse', href: "#collapsekeyword" + collapsekey },
+          '+'
         ),
-        this.props.task
-      )
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'kbd',
+          null,
+          'Keywords'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { id: "collapsekeyword" + collapsekey, className: 'panel-collapse collapse' },
+          keywords
+        )
+      );
+
+      // concepts
+      // should do length check      
+      var concepts = [];
+      this.state.concepts.forEach(function (conc) {
+        var objkeys = [];
+        Object.keys(conc).forEach(function (key, index) {
+          objkeys.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'ul',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              key,
+              ': ',
+              conc[key].toString()
+            )
+          ));
+        });
+        concepts.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'strong',
+            null,
+            conc.text
+          ),
+          objkeys
+        ));
+      });
+      var concept_format = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'li',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { className: 'glyphicon', 'data-toggle': 'collapse', href: "#collapseconcepts" + collapsekey },
+          '+'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'kbd',
+          null,
+          'Concepts'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { id: "collapseconcepts" + collapsekey, className: 'panel-collapse collapse' },
+          concepts
+        )
+      );
+
+      var content = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'ul',
+        { className: 'list-group' },
+        keyword_format,
+        concept_format
+      );
+      var collapsable = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { id: "collapse" + collapsekey, className: 'panel-collapse collapse' },
+        content
+      );
+      ent_data = collapsable;
+    }
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'li',
+      null,
+      data_expander,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'code',
+        null,
+        spinner
+      ),
+      text,
+      alchemy,
+      ent_data
     );
   }
 });
@@ -8362,7 +8542,6 @@ var PDFUploadDemo = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
 
     // upload the file to the server 
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post('/pdfupload/upload/', data, config).then(function (res) {
-      console.log(res.data);
       this.setState({
         finished: res.data.success,
         questions: res.data.text

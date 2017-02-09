@@ -9,9 +9,13 @@ import os,sys
 import json
 
 class Classified(object):
-  def __init__(self, question_, class_):
+  def __init__(self, question_, class_=None):
     self.question = question_
-    self.tag,self.conf = class_['class_name'],class_['confidence']
+    if class_ is not None:
+      self.tag,self.conf = class_['class_name'],class_['confidence']
+    self.words = [
+      {'fragment':self.question, 'tag': None}
+    ]
 
   def get_map_repr(self):
     return {
@@ -29,17 +33,20 @@ class Classified(object):
       self.words.append({'fragment': before, 'tag': None})
       self.words.append({'fragment': kw, 'tag': tags[i]},)
       current_index = end+1
+    if current_index < len(text):
+      self.words.append({'fragment': text[current_index:], 'tag': None})
 
+  # TODO: sometimes word highlighting is weird
   def set_entities(self):
     # TODO if question is more than one sentence split into
     # individual calls
-    alchemy_language = AlchemyLanguageV1(api_key='b331d651e0a7f0ff63ab98e39ff9173fb8c52d95')
+    alchemy_language = AlchemyLanguageV1(api_key='8ac0205cd138c4771a6f30b222aeecc0ce5a3bfe')
     query = alchemy_language.combined(
         text=self.question,
-        extract='entities,keywords,concepts',
+        extract='keywords,concepts',
         sentiment=1,
         max_items=15)
-    self.entities = query['entities']
+    # self.entities = query['entities']
     self.keywords = query['keywords']
     self.concepts = query['concepts']
 
@@ -68,6 +75,21 @@ def classify_questions(qs):
       result.append(Classified(q,qclass))
   return result
 
+def alchemify(request,sentence):
+  # print >>sys.stderr, sentence
+  # words = [{'fragment': 'please explain why ', 'tag': None}, {'fragment': 'Jimmy Fallon', 'tag': u'entity-negative'}, {'fragment': 'always seems to be ', 'tag': None}, {'fragment': 'fake laughing', 'tag': u'entity-negative'}]
+  # kw = [{u'relevance': u'0.981656', u'text': u'Jimmy Fallon', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}, {u'relevance': u'0.947069', u'text': u'fake laughing', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}]
+  # concepts = [{u'website': u'http://www.myspace.com/jimmyfallon', u'yago': u'http://yago-knowledge.org/resource/Jimmy_Fallon', u'text': u'Jimmy Fallon', u'dbpedia': u'http://dbpedia.org/resource/Jimmy_Fallon', u'freebase': u'http://rdf.freebase.com/ns/m.01n5309', u'relevance': u'0.91136'}]
+  cs = Classified(sentence)
+  cs.set_entities()
+  return JsonResponse(
+      {
+        'words' : cs.words,
+        'keywords' : cs.keywords,
+        'concepts' : cs.concepts,
+      }
+    )
+
 def classify(request,sentence):
   res = classify_questions([sentence])
   return JsonResponse({'tag': res[0].tag})
@@ -78,12 +100,20 @@ def index(request):
     'what is the water cycle',
     'please explain why Jimmy Fallon always seems to be fake laughing',
     'what is your favorite flavor of ice cream',
-    'please explain, in detail, why everyone loves puppies',
-    'is barack obama chilling hard now that he is no longer president',
   ]
   results = classify_questions(test_questions)
-  for r in results:
-    r.set_entities()
+  # for r in results:
+  #   r.set_entities()
+
+  # words = [{'fragment': 'please explain why ', 'tag': None}, {'fragment': 'Jimmy Fallon', 'tag': u'entity-negative'}, {'fragment': 'always seems to be ', 'tag': None}, {'fragment': 'fake laughing', 'tag': u'entity-negative'}]
+  # kw = [{u'relevance': u'0.981656', u'text': u'Jimmy Fallon', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}, {u'relevance': u'0.947069', u'text': u'fake laughing', u'sentiment': {u'score': u'-0.785856', u'type': u'negative'}}]
+  # concepts = [{u'website': u'http://www.myspace.com/jimmyfallon', u'yago': u'http://yago-knowledge.org/resource/Jimmy_Fallon', u'text': u'Jimmy Fallon', u'dbpedia': u'http://dbpedia.org/resource/Jimmy_Fallon', u'freebase': u'http://rdf.freebase.com/ns/m.01n5309', u'relevance': u'0.91136'}]
+
+  # second = results[1]
+  # second.words = words
+  # second.keywords = kw
+  # second.concepts = concepts
+  # results[1] = second
 
   context = {
     'classifications' : results,
