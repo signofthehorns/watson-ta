@@ -164,7 +164,6 @@ def extract_questions(text):
 def handle_uploaded_file(f):
   text = convert_pdf_to_txt(f)
   questions = extract_questions(text)
-  # print(questions)
   return questions
 
 # LOL, using this decorator because of laziness right

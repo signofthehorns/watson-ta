@@ -69,7 +69,7 @@ var QuestionList = React.createClass({
 
 var QuestionItem = React.createClass({
   componentDidMount: function() {
-    axios.get('http://localhost:8000/pdfupload/classify/'+this.props.task+'/')
+    axios.get('http://localhost:8000/pdfupload/classify/'+encodeURIComponent(this.props.task)+'/')
       .then(res => {
         this.setState({ 
           tag_loading : false,
@@ -93,12 +93,10 @@ var QuestionItem = React.createClass({
   },
 
   alchemify: function (e) {
-
     this.setState({ 
       ent_loading : true
     });
-
-    axios.get('http://localhost:8000/pdfupload/alchemify/'+this.props.task+'/')
+    axios.get('http://localhost:8000/pdfupload/alchemify/'+encodeURIComponent(this.props.task)+'/')
       .then(res => {
         this.setState({ 
           ent_loading : false,
@@ -295,7 +293,6 @@ var PDFUploadDemo = React.createClass({
   },
 
   render: function () {
-    console.log(this.state);
     var header = <div>
       <h3>Document Upload Component</h3>
       <p>Starter React component for uploading a document and processing on the backend.</p>
@@ -304,15 +301,20 @@ var PDFUploadDemo = React.createClass({
       return (
         <div>
           { header }
-          <h4>{this.state.files[0].name}</h4>
-          <p>The following questions were extracted from the pdf</p>
+          <div class="row">
+            <div class="col-sm-4">
+              <img className="upload_img" src={this.state.files[0].preview} />
+            </div>
+            <div class="col-sm-8">
+              <h4>{this.state.files[0].name}</h4>
+              <p>The following questions were extracted from the pdf</p>
+            </div>
+          </div>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              return <QuestionItem key={i} nodeId={i} task={object.text}/>;
-              // <ListGroupItem><code>{object.tag}</code>{object.text}</ListGroupItem>;
+              return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
           })}
           </ListGroup>
-          <img className="upload_img" src={this.state.files[0].preview} />
         </div>
       )
     }
