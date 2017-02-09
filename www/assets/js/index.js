@@ -134,7 +134,6 @@ var QuestionItem = React.createClass({
     if (this.state.has_ent_data) {
       alchemy = <i className="fa fa-check-circle alchemy-done"/>;
 
-
       // TODO(bill): extract logic below into separate functions
       // display text with highlighted entities
       var sentence = []
@@ -296,6 +295,7 @@ var PDFUploadDemo = React.createClass({
   },
 
   render: function () {
+    console.log(this.state);
     var header = <div>
       <h3>Document Upload Component</h3>
       <p>Starter React component for uploading a document and processing on the backend.</p>
@@ -308,7 +308,8 @@ var PDFUploadDemo = React.createClass({
           <p>The following questions were extracted from the pdf</p>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              return <ListGroupItem><code>{object.tag}</code>{object.text}</ListGroupItem>;
+              return <QuestionItem key={i} nodeId={i} task={object.text}/>;
+              // <ListGroupItem><code>{object.tag}</code>{object.text}</ListGroupItem>;
           })}
           </ListGroup>
           <img className="upload_img" src={this.state.files[0].preview} />
