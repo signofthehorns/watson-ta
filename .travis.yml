@@ -1,7 +1,10 @@
 language: python
 python:
-  - "2.7"
-install: 
-  - "pip install -r requirements.txt"
-  - "npm install -g npm@2"
+- '2.7'
+install:
+- pip install -r requirements.txt
+- npm install -g npm@2
 script: pytest
+notifications:
+  slack:
+    secure: MIS61zLsZR+HFVL1xCs/K4QoN7QkiI8IxPwIBwCNRSh4EnpUksBnTsGnBCbJmRfpriheqPWehtxjBIrpLGqpNJ0/Je8dFhYG7t5fbQH5NLzScgrslHPScIhrfG0AeRzLpf10Ud2Bz/8zqD1CBC4uvxMGqDbBYvRf/bsuQYVe3M4aXkW8Q7q1IFEjELA8SxNyS1TkNR6xKXavPxaJaZ5OJkETu5uicTzfj9UJuJcqehrvU33f7ATfk+XKw2RtMJQ7nJ883Js5slBoFDyIry4CrvjkS7e2cbwWyhEK6pIqBfDSMvuMEGkVXYyt002s/KJSd4b8sV/+nMyvGkvJgfc48LS8BgNyDiCI99SZtLQ0MLvkEteCGJXOOfgAhZxK2RrspF6A5NXLz5tzdqgndDELdPb/vJ5LACNhZNuexbWjGySSfzIZKbb1G0BoDVtqtnyNeVlgJiqatVJaLaJ/t4GRt7rcJdaTTGk3I0UgObzskYt21ygrrCvjRCKQiLe9YxszSTsJ+A56FvVBaJnrZplY/BlNGoo+F5wwck63Do+C2SOveboDg5tBgbVdFpf244GpOgSCd/2ikLlEF70j0p5fLGT5yWZe9zcgQazO9Ow06cow5ldgHmxLuV+zEJfpEAHd04caGCkc1r2bnWUh+rAMfCRHQKVuB+bUPyAXDNixgCU=
