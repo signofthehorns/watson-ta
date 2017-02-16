@@ -5,6 +5,7 @@
 
 - [What is Watson TA](#what-is-watson-ta)
 - [Setup](#setup)
+- [Watson TA Docker](#watson-ta-docker)
 - [The Team](#the-team)
 
 <!-- /TOC -->
@@ -17,6 +18,8 @@ Extensions:
 - Add 24/7 office hour TA so students can ask questions if they don't understand the suggested answers.
 
 ## Setup
+
+For local builds follow the instructions bellow. However, a docker file is also included with instructions in the [Watson TA Docker](#watson-ta-docker) section. 
 
 1. Clone this repository
 2. Set ENV variables for:
@@ -51,6 +54,32 @@ Extensions:
 7. Open the app at `localhost:8000/` the following should appear:
 
   ![PDF Upload Page](images/pdfupload.png)
+
+## Watson TA Docker
+
+Build and run steps:
+
+1. Navigate to the `.../watson-ta/` directory with the Dockerfile
+2. Run `docker build -t watson-ta .`
+3. Run the watson-ta container:
+
+```BASH
+# Mounting the watson-ta local repo & keys to enable active development
+# Map the docker port `0.0.0.0:8000` to `127.0.0.1:8000`
+# Enter an interactive terminal session of bash on the container
+docker run -it --rm -v path/to/watson-ta:/app/ -v path/to/.keys.sh:/.keys.sh -p 127.0.0.1:8000:8000 watson-ta /bin/bash
+```
+
+4. Load the keys within the table `source .keys.sh`
+5. Run the server:
+
+```BASH
+cd app/
+python www/manage.py runserver 0.0.0.0:8000
+```
+
+6. Navigate to `localhost:8000` in a browser to interact with Watson TA
+7. Develop away with hot reload!
 
 ## The Team
 
