@@ -301,15 +301,21 @@ var PDFUploadDemo = React.createClass({
       return (
         <div>
           { header }
-          <div class="row">
-            <div class="col-sm-4">
-              <img className="upload_img" src={this.state.files[0].preview} />
-            </div>
-            <div class="col-sm-8">
-              <h4>{this.state.files[0].name}</h4>
-              <p>The following questions were extracted from the pdf</p>
-            </div>
-          </div>
+          <ul class="media-list">
+            <li class="media bottomborder">
+              <div class="media-left">
+                <a href="#">
+                  <img className="shrink d-flex mr-3 media-object upload_img" src={this.state.files[0].preview} />
+                </a>
+              </div>
+              <div class="media-body">
+                <h4>{this.state.files[0].name}</h4>
+                <p>The following questions were extracted from the pdf</p>
+              </div>
+            </li>
+          </ul>
+
+
           <ListGroup>
           { this.state.questions.map(function(object, i){
               return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;

@@ -68,11 +68,11 @@ def classify_questions(qs):
   natural_language_classifier = NaturalLanguageClassifierV1(
     username=os.environ['watson_username'],
     password=os.environ['watson_password'])
-  status = natural_language_classifier.status('f5bbbcx175-nlc-1012')
+  status = natural_language_classifier.status('f5bbbbx174-nlc-3547')
   result = []
   if status['status'] == 'Available':
     for q in qs:
-      classes = natural_language_classifier.classify('f5bbbcx175-nlc-1012', q)
+      classes = natural_language_classifier.classify('f5bbbbx174-nlc-3547', q)
       j = json.loads(json.dumps(classes))
       qclass = j['classes'][0]
       result.append(Classified(q,qclass))

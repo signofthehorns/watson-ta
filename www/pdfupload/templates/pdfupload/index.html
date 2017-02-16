@@ -77,6 +77,21 @@ ul {
   padding-right: 5px;
 }
 
+ul {
+  list-style-type: none;
+}
+
+img.shrink{
+  width: 80px;
+  height: 100px;
+}
+
+li.bottomborder{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  margin-top: 3px;
+}
+
 </style>
 
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -186,6 +201,7 @@ ul {
         {% endfor %}
       </ol> -->
       <h3>React Component</h3>
+
       <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences. <strong>New!</strong> Now we can now use alchemy backend to extract information from text.</p>
       <div id="react-comp">
         {% render_bundle 'main' %}
