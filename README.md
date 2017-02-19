@@ -70,12 +70,16 @@ Build and run steps:
 docker run -it --rm -v path/to/watson-ta:/app/ -v path/to/.keys.sh:/.keys.sh -p 127.0.0.1:8000:8000 watson-ta /bin/bash
 ```
 
-4. Load the keys within the table `source .keys.sh`
-5. Run the server:
+4. Load the keys within the container `source .keys.sh`
+5. Build the JavaScript assets & run the Django server:
 
 ```BASH
-cd app/
-python www/manage.py runserver 0.0.0.0:8000
+# Move to the proper directory
+# Execute webpack using the `webpack.config.js`
+# Execute the alias serve
+cd app/www/
+webpack
+serve
 ```
 
 6. Navigate to `localhost:8000` in a browser to interact with Watson TA

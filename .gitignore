@@ -4,6 +4,10 @@
 
 # The tester?
 
+# Remove the webpacked assets
+www/assets/bundles/*
+www/webpack-stats.json
+
 ################################################################################
 ## Python .gitignore
 ################################################################################
