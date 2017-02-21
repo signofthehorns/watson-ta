@@ -19,47 +19,9 @@ Extensions:
 
 ## Setup
 
-For local builds follow the instructions bellow. However, a docker file is also included with instructions in the [Watson TA Docker](#watson-ta-docker) section. 
+### Watson TA Docker
 
-1. Clone this repository
-2. Set ENV variables for:
-  ```BASH
-  # For the Watson natural-language-classifier NLC
-  export watson_username
-  export watson_password
-  ```
-  
-3. Navagate into the `.../watson-ta/` directory
-3. Make sure the following is installed:
-  - Python 2
-  - pip
-  - npm
-  
-4. Setup the virtual python environment:
-  ```BASH
-  source bin/activate
-  pip install -r requirements.txt
-  ```
-  
-5. Setup the npm environment:
-  ```BASH
-  npm install
-  ```
-  
-6. Run the app with:
-  ```BASH
-  python www/manage.py runserver
-  ```
-  
-7. Open the app at `localhost:8000/` the following should appear:
-
-  ![PDF Upload Page](images/pdfupload.png)
-
-## Watson TA Docker
-
-Build and run steps:
-
-1. Navigate to the `.../watson-ta/` directory with the Dockerfile
+1. Clone and cd into the `watson-ta` repository
 2. Run `docker build -t watson-ta .`
 3. Run the watson-ta container:
 
