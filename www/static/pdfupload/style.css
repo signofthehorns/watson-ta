@@ -1,0 +1,131 @@
+.upload_img {
+    width: 160px;
+    height: 200px;
+    border: solid 1px black;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.entity-positive {
+    background-color: #c2ffc0;
+    border-radius: 3px;
+    border: 1px solid #67db64;
+    margin: 2px;
+    padding: 2px;
+}
+
+.entity-neutral {
+    background-color: #fff3c0;
+    border-radius: 3px;
+    border: 1px solid #f6e07b;
+    margin: 2px;
+    padding: 2px;
+}
+
+.entity-negative {
+    background-color: #ffc3c0;
+    border-radius: 3px;
+    border: 1px solid #f6827b;
+    margin: 2px;
+    padding: 2px;
+}
+
+.nlc-spaced {
+    margin-top: 10px;
+}
+
+.alchemy {
+    color: #fff;
+    background-color: #7330cf;
+    padding: 2px;
+    border-radius: 2px;
+    margin: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.alchemy-done {
+    color: #fff;
+    background-color: #67db64;
+    padding: 2px;
+    border-radius: 2px;
+    margin: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+div.ReactTags__tags {
+    position: relative;
+}
+
+div.ReactTags__tagInput {
+    width: 200px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+div.ReactTags__tagInput input,
+div.ReactTags__tagInput input:focus {
+    height: 31px;
+    margin: 0;
+    font-size: 12px;
+    width: 100%;
+    border: 1px solid #eee;
+}
+
+div.ReactTags__selected {
+    float: left;
+}
+
+div.ReactTags__selected span.ReactTags__tag {
+    border: 1px solid #ddd;
+    background: #eee;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 5px;
+    cursor: move;
+    border-radius: 2px;
+}
+
+div.ReactTags__selected a.ReactTags__remove {
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+div.ReactTags__suggestions {
+    position: absolute;
+}
+
+div.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: .05em .01em .5em rgba(0, 0, 0, .2);
+    background: white;
+    width: 200px;
+}
+
+div.ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+div.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+}
+
+div.ReactTags__suggestions ul li.active {
+    background: #b7cfe0;
+    cursor: pointer;
+}
