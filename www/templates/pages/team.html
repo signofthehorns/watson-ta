@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<style>
+  ul {
+    list-style-type: none;
+  }
+  
+  .shrink img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  li.bottomborder {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    margin-top: 3px;
+  }
+</style>
+
+<br>
+<div class="container">
+  <div class="page-header">
+    <h1>🤘Sign of the Horns🤘</h1>
+  </div>
+  <blockquote class="blockquote">Talent wins games, but teamwork and intelligence wins championships
+    <footer class="blockquote-footer">Michael Jordan</footer>
+  </blockquote>
+
+  <p>Some current team information via <code>Github</code>.</p>
+  <ul class="media-list">
+    {% for d in data %}
+    <li class="media bottomborder">
+      <div class="media-left">
+        <a href="#">
+          <img class="shrink d-flex mr-3 media-object" src={{ d.avatar_url }} height="80" width="80">
+        </a>
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading">{{ d.name }}</h5>
+        {{ d.username }}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <br>
+  <br>
+</div>
+{% endblock %}

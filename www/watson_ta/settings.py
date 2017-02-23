@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
     'webpack_loader',
 ]
 
@@ -52,11 +51,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'watson_ta.urls'
 
+STATIC_URL = '/static/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-          os.path.join(BASE_DIR, 'pdfupload/templates')
+            os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,11 +124,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 PIPELINE_COMPILERS = (
-  'react.utils.pipeline.JSXCompiler',
+    'react.utils.pipeline.JSXCompiler',
 )
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'assets'),
-  os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'assets'),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 STATICFILES_FINDERS = [
@@ -141,4 +142,3 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     }
 }
-
