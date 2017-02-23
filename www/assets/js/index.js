@@ -69,7 +69,7 @@ var QuestionList = React.createClass({
 
 var QuestionItem = React.createClass({
   componentDidMount: function() {
-    axios.get('http://localhost:8000/pdfupload/classify/'+encodeURIComponent(this.props.task)+'/')
+    axios.get('/api/nlc/'+encodeURIComponent(this.props.task)+'/')
       .then(res => {
         this.setState({ 
           tag_loading : false,
@@ -96,7 +96,7 @@ var QuestionItem = React.createClass({
     this.setState({ 
       ent_loading : true
     });
-    axios.get('http://localhost:8000/pdfupload/alchemify/'+encodeURIComponent(this.props.task)+'/')
+    axios.get('/api/alchemy/'+encodeURIComponent(this.props.task)+'/')
       .then(res => {
         this.setState({ 
           ent_loading : false,
@@ -329,7 +329,7 @@ var PDFUploadDemo = React.createClass({
     };
 
     // upload the file to the server 
-    axios.post('/pdfupload/upload/', data, config)
+    axios.post('/api/upload/', data, config)
       .then(function (res) {
         this.setState({
           finished: res.data.success,
@@ -429,7 +429,7 @@ var RRSearch = React.createClass({
       return;
     }
     // handle submission of the query
-    axios.get('http://localhost:8000/rr_search/'+encodeURIComponent(query))
+    axios.get('/api/rr_search/'+encodeURIComponent(query))
       .then(res => {
         // TODO: do error/ null checking
         this.setState({ 

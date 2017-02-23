@@ -15,3 +15,9 @@ RUN npm install
 
 # Ports
 EXPOSE 8000
+
+# Add alias: webpack, cl, serve
+# TODO: Convert to makefile?
+RUN echo 'alias webpack="/node_modules/.bin/webpack"' >> ~/.bashrc
+RUN echo 'alias cl="clear"' >> ~/.bashrc
+RUN echo 'alias serve="python manage.py runserver 0.0.0.0:8000"' >> ~/.bashrc
