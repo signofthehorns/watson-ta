@@ -260,7 +260,6 @@ def format_result_body(body, query):
       formatted_body = '...' + formatted_body
     if end_index < len(body)-1:
       formatted_body = formatted_body + '...'
-    print >> sys.stderr, start_index, end_index
   else:
     formatted_body = body[:MAX_BODY_LENGTH]
   return highlight_query(formatted_body,query)
@@ -268,7 +267,9 @@ def format_result_body(body, query):
 # TODO: if we have time we should make sure we are safely sending through user queries
 # aka preventing sql injection, csrf... idk if django automatically does that.
 def rr_search(request,query):
-  url = 'https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sc8a9f0ce9_ff50_484d_9c5d_9e6ceafe1ccf/solr/hp_collection/select?q=' + query + '&wt=json&fl=id,title,body'
+  collection = 'hp_collection'
+  cluster_id = os.environ['watson_rr_cluster_id']
+  url = 'https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/' + cluster_id + '/solr/' + collection + '/select?q=' + query + '&wt=json&fl=id,title,body'
 
   headers = {
     'Content-Type': 'application/json',
