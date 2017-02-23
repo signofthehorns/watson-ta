@@ -479,12 +479,9 @@ var RRSearch = React.createClass({
         </span>
       );
     });
-
-    // <mark>Au. afarensis</mark>
     var search_metadata = this.state.question != null ? <h4>{'"' + this.state.question + '"'}</h4> : <span/>;
     var num_results = this.state.question != null && !this.state.loading ? <p>Displaying {this.state.results.length} top ranked results matching the query...</p> : <span/>;
     var loading = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <span/>;
-
     return (
       <div className="right-widget">
         <h2><i className="fa fa-file-text concept" aria-hidden="true"></i> Retrieve and Rank (Harry Potter)</h2>

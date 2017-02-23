@@ -255,8 +255,12 @@ def format_result_body(body, query):
   if len(res) > 0 and len(body)-len(query)>MAX_BODY_LENGTH:
     start_index = max(0,res[0].start()-MAX_BODY_LENGTH//2)
     end_index = max(res[0].start()+MAX_BODY_LENGTH//2,res[0].start()+MAX_BODY_LENGTH-start_index)
-    # print(start_index,end_index)
     formatted_body = body[start_index:end_index]
+    if start_index > 0:
+      formatted_body = '...' + formatted_body
+    if end_index < len(body)-1:
+      formatted_body = formatted_body + '...'
+    print >> sys.stderr, start_index, end_index
   else:
     formatted_body = body[:MAX_BODY_LENGTH]
   return highlight_query(formatted_body,query)
