@@ -5,94 +5,169 @@
 
 {% block content %}
 <br>
-<div class="container">
-    <div class="page-header">
-        <h1>PDF Uploader</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <div class="left-widget">
+        <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Classes</h4>
+        <ul>
+          <li><h4>Anthropology</h4></li>
+          <li><h4>Biology</h4></li>
+          <li><h4>Physics</h4></li>
+          <li><h4>Math</h4></li>
+        </ul>
+        <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Physics Lectures</h4>
+        <ul>
+          <li><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Waves I</li>
+          <li><i class="fa fa-file-word-o" aria-hidden="true"></i> Waves II</li>
+          <li><i class="fa fa-file-text-o" aria-hidden="true"></i> Uncertainty</li>
+          <li><i class="fa fa-folder-o" aria-hidden="true"></i> Relativity</li>
+        </ul>
+        <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Homeworks</h4>
+        <ul>
+          <li>HW0 <i class="fa fa-check" aria-hidden="true"></i></li>
+          <li>HW1</li>
+          <li>HW2 <i class="fa fa-check" aria-hidden="true"></i></li>
+        </ul>
+      </div>
     </div>
-
-    <section>
-        <h3>Natural Language Classifier</h3>
-        <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
-        <ol class="dl-horizontal nlc-spaced">
-            {% for c in classifications %}
-            <li>
-                </span><code>{{ c.tag }}</code>
-                
-                {% for w in c.words %}
-                    {% if w.tag %}
-                        <span class={{ w.tag }}>{{ w.fragment }}</span>
-                    {% else %}
-                        {{ w.fragment }}
-                    {% endif %}
-                {% endfor %}
-            </li>
-            {% endfor %}
-        </ol>
-        <!-- keeping for refrence, when i need to insert django template vars again (bill) -->
-        <!-- <ol class="dl-horizontal nlc-spaced">
-      	{% for c in classifications %}
-            <li><a class="glyphicon" data-toggle="collapse" href="#collapse{{ forloop.counter }}">&#x2b;</a></span><code>{{ c.tag }}</code>
-              {% for w in c.words %}
-                {% if w.tag %}
-                  <span class={{ w.tag }}>{{ w.fragment }}</span>
-                {% else %}
-                  {{ w.fragment }}
-                {% endif %}
-              {% endfor %}
-              <span class="alchemy" data-toggle="tooltip" data-placement="top" title="alchemify"><i class="fa fa-flask"></i></span>
-            </li>
-            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
-              <ul class="list-group">
-                {% if c.keywords|length > 0 %}
-                <li>
-                  <a class="glyphicon" data-toggle="collapse" href="#collapsekeyword{{ forloop.counter }}">&#x2b;</a><kbd>Keywords</kbd>
-                  <div id="collapsekeyword{{ forloop.counter }}" class="panel-collapse collapse">
-                  {% for kw in c.keywords %}
-                    <strong>{{ kw.text }}</strong>
-                    {% for item in kw.items %}
-                    <ul>
-                      <li>{{ item.0 }}, {{ item.1 }}</li>
-                    </ul>
-                    {% endfor %}
-                  {% endfor %}
-                </div>
-                </li>
-                {% endif %}
-                {% if c.concepts|length > 0 %}
-                <li>
-                  <a class="glyphicon" data-toggle="collapse" href="#collapseconcepts{{ forloop.counter }}">&#x2b;</a><kbd>Concepts</kbd>
-                  <div id="collapseconcepts{{ forloop.counter }}" class="panel-collapse collapse">
-                  {% for concept in c.concepts %}
-                    <strong>{{ concept.text }}</strong>
-                    {% for item in concept.items %}
-                    <ul>
-                      <li>{{ item.0 }}, {{ item.1 }}</li>
-                    </ul>
-                    {% endfor %}
-                  {% endfor %}
-                </div>
-                </li>
-                {% endif %}
-              </ul>
+    <div class="col-6">
+      <!-- <div class="bs-callout bs-callout-danger">
+        <h4>Type Identification Trouble</h4>
+        Some questions could not be accurately identified. Please revisit questions <strong>2</strong>,<strong>3</strong> and <strong>5</strong>.
+      </div>
+      <div class="bs-callout bs-callout-success">
+        <h4>Successful Identification</h4>
+        Watson was able to confidently classify the types of all sentences.
+      </div> -->
+      <h1 class="page-header">quiz.pdf <i class="fa fa-file-pdf-o" aria-hidden="true"></i> 
+        <div class="edit-icons" style="float:right;">
+          <i class="fa fa-eye edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="view original pdf"></i>
+          <i class="fa fa-floppy-o edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="save progress"></i>
+          <i class="fa fa-print edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip"  data-placement="bottom" title="print current copy"></i>
+          <i class="fa fa-check-square-o edit-icon" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="mark as complete"></i>  
+      </div></h1>
+      <div class="form-group">
+        <div class="pdf-question">
+          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">1 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+          <h4 class="glyphicon" style=" left: -102px">Did George Washington cut down a cherry tree and lie about it?</h4>
+          <fieldset class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                True
+              </label>
             </div>
-        {% endfor %}
-      </ol> -->
-        <h3>React Component</h3>
-        <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating
-            sentences. <strong>New!</strong> Now we can now use alchemy backend to extract information from text.</p>
-        <div id="react-comp">
-            {% render_bundle 'main' %}
+            <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                False
+              </label>
+            </div>
+          </fieldset>
         </div>
+      </div>
+        <div class="pdf-question pdf-question-selected">
+          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">2 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+          <h4 class="glyphicon" style=" left: -102px">Why is the worlds reliance on fossil fuels causing harm to our environment?</h4>
+          <div>
+            <ul id="conceptlist">
+              <li class="conceptlistitem"><a href="">fossil fuels</a></li>
+              <li class="conceptlistitem"><a href="">environment</a></li>
+              <li class="conceptlistitemlight"><a href="">global warming</a></li>
+            </ul>
+          </div>
+          <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        <br>
+        <div class="pdf-question">
+          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">3 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+          <h4 class="glyphicon" style=" left: -102px">Who is your favorite president and why?</h4>
+          <div>
+            <ul id="conceptlist">
+              <li class="conceptlistitem"><a href="">presidents</a></li>
+              <li class="conceptlistitemlight"><a href="">us history</a></li>
+            </ul>
+          </div>
+          <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        <div class="pdf-question">
+          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">4 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+          <h4 class="glyphicon" style=" left: -102px">Who is your favorite mathematician?</h4>
+          <div>
+            <ul id="conceptlist">
+              <li class="conceptlistitem"><a href="">mathematics</a></li>
+            </ul>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item active">Leonard Euler</li>
+            <li class="list-group-item list-group-item-action">Carl Friedrich Gauss</li>
+            <li class="list-group-item list-group-item-action">David Hilbert</li>
+            <li class="list-group-item list-group-item-action">Bernhard Riemann</li>
+            <li class="list-group-item list-group-item-action">Other</li>
+          </ul>
+        </div>
+        <br>
         <div id="react-pdf">
-            {% render_bundle 'main' %}
+          {% render_bundle 'main' %}
         </div>
         <br>
         <br>
-    </section>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="page-header">
+        <h1>PDF Uploader</h1>
+      </div>
+      <div >
+        <section>
+          <h3>Natural Language Classifier</h3>
+          <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
+          <ol class="dl-horizontal nlc-spaced">
+            {% for c in classifications %}
+                <li></span><code>{{ c.tag }}</code>
+                  {% for w in c.words %}
+                    {% if w.tag %}
+                      <span class={{ w.tag }}>{{ w.fragment }}</span>
+                    {% else %}
+                      {{ w.fragment }}
+                    {% endif %}
+                  {% endfor %}
+                </li>
+            {% endfor %}
+          </ol>
+          <h3>React Component</h3>
+
+          <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences. <strong>New!</strong> Now we can now use alchemy backend to extract information from text.</p>
+          <div id="react-comp">
+            {% render_bundle 'main' %}
+          </div>
+        </section>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+    <div class="col">
+      <div id="rr-search">
+        {% render_bundle 'main' %}
+      </div>
+    </div>
+  </div>
 </div>
+
 <script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 </script>
 {% endblock %}

@@ -245,6 +245,55 @@ ReactDOM.render(
 );
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Need a way for user to change question type if computer got it wrong
+// plus alchemy capabilities.
+
+// every question should have at least text + tags
+// var Question = React.createClass({
+//   render: function() {
+//   },
+// });
+
+var MuiltipleChoice = React.createClass({
+  // have a special watson suggested choice if possible
+  getInitialState: function () {
+      return {
+        question: 'Which of the following presidents, famously held the office for the least amount of time?',
+        options: ['James Monroe', 'Willia Henry Harrison', 'James Garfield', 'Chester A. Arthur'],
+        selection: 1
+      };
+  },
+  render: function () {
+    return <p>Multiple Choice!</p>;
+  },
+});
+
+var TrueFalse = React.createClass({
+  render: function () {
+    return <p>True False!</p>;
+  },
+});
+
+var ShortAnswer = React.createClass({
+  render: function () {
+    return <p>ShortAnswer!</p>;
+  },
+});
+
+
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
@@ -301,15 +350,21 @@ var PDFUploadDemo = React.createClass({
       return (
         <div>
           { header }
-          <div class="row">
-            <div class="col-sm-4">
-              <img className="upload_img" src={this.state.files[0].preview} />
-            </div>
-            <div class="col-sm-8">
-              <h4>{this.state.files[0].name}</h4>
-              <p>The following questions were extracted from the pdf</p>
-            </div>
-          </div>
+          <ul className="media-list">
+            <li className="media bottomborder">
+              <div className="media-left">
+                <a href="#">
+                  <img className="shrink d-flex mr-3 media-object upload_img" src={this.state.files[0].preview} />
+                </a>
+              </div>
+              <div className="media-body">
+                <h4>{this.state.files[0].name}</h4>
+                <p>The following questions were extracted from the pdf</p>
+              </div>
+            </li>
+          </ul>
+
+
           <ListGroup>
           { this.state.questions.map(function(object, i){
               return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
@@ -338,8 +393,127 @@ var PDFUploadDemo = React.createClass({
               </Alert>
             </Dropzone>
         }
+        <MuiltipleChoice/>
+        <TrueFalse/>
+        <ShortAnswer/>
       </div>
     );
   }
 });
 ReactDOM.render(<PDFUploadDemo />, document.getElementById('react-pdf'));
+
+
+
+/* ----------------------------------------------------*
+ *  Retrieve and Rank Component 
+ * ----------------------------------------------------*/
+
+/* 
+Will problably want to integrate this component later with the
+quiz editing component to show documents related to the currently 
+highlighted question.
+*/ 
+var RRSearch = React.createClass({
+  getInitialState: function () {
+      return {
+        question: null,
+        results: [],
+        loading: false
+      };
+  },
+
+  doSubmit: function(e) {
+    e.preventDefault();
+    var query = ReactDOM.findDOMNode(this.refs.rr_query).value.trim();
+    if (!query) {
+      return;
+    }
+    // handle submission of the query
+    axios.get('/api/rr_search/'+encodeURIComponent(query))
+      .then(res => {
+        // TODO: do error/ null checking
+        this.setState({ 
+          results : res.data.docs,
+          loading : false,
+        });
+        console.log(res);
+      });
+    this.setState({
+      question: query,
+      results: [],
+      loading: true,
+    })
+    ReactDOM.findDOMNode(this.refs.rr_query).value = '';
+    return;
+  },
+
+  tagifyBody: function(text_fragments) {
+    var frags = [];
+    Object.keys(text_fragments).forEach(function(key,index) {
+      var obj = text_fragments[key];
+      if (obj && obj.tag != null) {
+        frags.push(<mark>{ obj.fragment }</mark>);
+      } else {
+        frags.push(<span>{ obj.fragment }</span>);
+      }
+    });
+    return <span>{ frags }</span>;
+  },
+
+  render: function () {
+    var search_results = [];
+    // TODO @javascript expert: is there better way to pass in this to loop?
+    var self = this;
+    this.state.results.forEach(function(res) {
+      var format_body = self.tagifyBody(res.body);
+      search_results.push(
+        <span>
+          <li><strong>{ res.title }</strong> <i className="fa fa-file-pdf-o" aria-hidden="true"></i></li>
+            <ul>
+              <li>
+                <blockquote className="blockquote">
+                  { format_body }
+                </blockquote>
+              </li>
+            </ul>
+        </span>
+      );
+    });
+    var search_metadata = this.state.question != null ? <h4>{'"' + this.state.question + '"'}</h4> : <span/>;
+    var num_results = this.state.question != null && !this.state.loading ? <p>Displaying {this.state.results.length} top ranked results matching the query...</p> : <span/>;
+    var loading = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <span/>;
+    return (
+      <div className="right-widget">
+        <h2><i className="fa fa-file-text concept" aria-hidden="true"></i> Retrieve and Rank (Harry Potter)</h2>
+        <form className="form-horizontal" onSubmit={this.doSubmit}>
+          <div className="form-group" >
+            <i className="fa fa-search" aria-hidden="true"></i> Solr search
+            <br/>
+            <div className="input-group">
+              <input type="text" id="rr_query" ref="rr_query" className="form-control" placeholder="Tale of the Three Brothers"/>
+              <span className="input-group-btn">
+                <button className="btn btn-default btn-primary" type="submit">Search</button>
+              </span>
+            </div>
+          </div>
+        </form>
+        { search_metadata }
+        { loading }
+        { num_results }
+        <ul>
+          { search_results }
+        </ul>
+        <br/>
+        <br/>
+      </div>
+    );
+  }
+});
+ReactDOM.render(<RRSearch />, document.getElementById('rr-search'));
+
+
+
+
+
+
+
