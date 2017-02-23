@@ -2,7 +2,6 @@ appdirs==1.4.0
 cffi==1.9.1
 cryptography==1.7.2
 Django==1.10.5
-django-bootstrap3==8.1.0
 django-webpack-loader==0.4.1
 enum34==1.1.6
 github3.py==1.0.0a4
