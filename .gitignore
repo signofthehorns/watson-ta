@@ -4,6 +4,10 @@
 
 # The tester?
 
+# Management
+.keys.sh
+.vscode/
+
 # Remove the webpacked assets
 www/assets/bundles/*
 www/webpack-stats.json

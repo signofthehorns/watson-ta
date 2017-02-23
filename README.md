@@ -5,7 +5,7 @@
 
 - [What is Watson TA](#what-is-watson-ta)
 - [Setup](#setup)
-- [Watson TA Docker](#watson-ta-docker)
+    - [Watson TA Docker](#watson-ta-docker)
 - [The Team](#the-team)
 
 <!-- /TOC -->
@@ -22,8 +22,29 @@ Extensions:
 ### Watson TA Docker
 
 1. Clone and cd into the `watson-ta` repository
-2. Run `docker build -t watson-ta .`
-3. Run the watson-ta container:
+2. Add the API keys to a `.keys.sh` file (place in `watson-ta/` to avoid the multiple volumes on `docker add` below)
+
+```BASH
+## The keys required for Watson-TA
+# NLC
+export watson_username=''
+export watson_password=''
+
+# Alchemy
+export watson_alchemy_key=''
+
+# Retrieve and Rank
+export watson_rr_username=''
+export watson_rr_password=''
+export watson_rr_cluster_id=''
+
+# Github
+export github_username=''
+export github_password=''
+```
+
+3. Run `docker build -t watson-ta .`
+4. Run the watson-ta container:
 
 ```BASH
 # Mounting the watson-ta local repo & keys to enable active development
@@ -32,8 +53,8 @@ Extensions:
 docker run -it --rm -v path/to/watson-ta:/app/ -v path/to/.keys.sh:/.keys.sh -p 127.0.0.1:8000:8000 watson-ta /bin/bash
 ```
 
-4. Load the keys within the container `source .keys.sh`
-5. Build the JavaScript assets & run the Django server:
+5. Load the keys within the container `source .keys.sh`
+6. Build the JavaScript assets & run the Django server:
 
 ```BASH
 # Move to the proper directory
@@ -44,8 +65,8 @@ webpack
 serve
 ```
 
-6. Navigate to `localhost:8000` in a browser to interact with Watson TA
-7. Develop away with hot reload!
+7. Navigate to `localhost:8000` in a browser to interact with Watson TA
+8. Develop away with hot reload!
 
 ## The Team
 
