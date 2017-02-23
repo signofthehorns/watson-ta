@@ -1,6 +1,8 @@
 {# Load the tag library #}
 {% load bootstrap3 %}
 
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
 {# Load CSS and JavaScript #}
 {% bootstrap_javascript %}
 {% load static %}
@@ -12,6 +14,65 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 <style>
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+
   .upload_img {
     width: 160px;
     height: 200px;
@@ -77,6 +138,13 @@ ul {
   padding-right: 5px;
 }
 
+.q_alchemy:hover {
+  color: #fafafa;
+  background-color: #828282;
+  border-radius: 2px;
+}
+
+
 ul {
   list-style-type: none;
 }
@@ -92,6 +160,146 @@ li.bottomborder{
   margin-top: 3px;
 }
 
+.entity-math {
+  background-color: #e9e9e9;
+  border-radius: 3px;
+  border: 1px solid #e2e2e2;
+  margin: 2px;
+  padding: 2px;
+}
+
+.page-header{
+padding-bottom: 9px;
+margin: 40px 0 20px;
+border-bottom: 1px solid #eee;
+}
+
+
+.glyphicon {
+  position: relative;
+  display: inline-block;
+}
+
+.q_anchor {
+  background-color: #fdfdfd;
+  color: #f2f2f2;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
+  border: 1px solid #f2f2f2;
+}
+
+.pdf-question:hover .q_anchor {
+  background-color: #fafafa;
+  color: #bbb;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
+  border: 1px solid #e2e2e2;
+
+}
+
+.iconbarl {
+  padding-left: 2px;
+  margin-left: 1px;
+  border-left: 2px solid #e2e2e2;
+}
+
+.iconbarr {
+  padding-right: 2px;
+  margin-right: 1px;
+  border-right: 2px solid #e2e2e2;
+}
+
+.concept {
+  color: #fff;
+  padding: 5px;
+  background-color: #3b7cff;
+  border-radius: 2px;
+}
+
+#conceptlist li {
+display: inline;
+list-style-type: none;
+}
+
+.conceptlistitem {
+  color: #fff;
+  padding: 5px;
+  color: #5b9cff;
+  background-color: #abccff;
+  border: 1px solid #5b9cff;
+  border-radius: 2px;
+}
+
+.conceptlistitemlight {
+  color: #fff;
+  padding: 5px;
+  color: #5b9cff;
+  background-color: #cadcff;
+  border: 1px solid #5b9cff;
+  border-radius: 2px;
+}
+
+
+#watson-header{
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  position: sticky;
+  top: 0; // required as well.
+  background-color: #eee;
+}
+
+.edit-icons {
+  color: #eee;
+  /*border: 1px solid #eee;
+  border-radius: 5px;*/
+  padding: 3px;
+}
+
+.edit-icon-right-bar {
+  padding-right: 5px;
+  margin-right: 5px;
+  border-right: 1px solid #eee;
+  color: #eee;
+}
+
+.edit-icon:hover {
+  color: #222;
+}
+
+.left-widget {
+  padding: 5px;
+  margin: 5px;
+  float: left;
+  position: relative;
+  left: 5%;
+}
+
+.right-widget {
+  padding: 15px;
+  margin: 10px;
+}
+
+.pdf-question:hover {
+  padding-right: 10px;
+  border-right: 4px solid #222;
+  background-color: #f9f9f9;
+}
+
+.pdf-question-selected {
+  padding-right: 10px;
+  border-right: 4px solid #feea67;
+  background-color: #fcf8e2;
+}
+
+.pdf-question {
+  padding: 10px;
+}
+
 </style>
 
 {# Display django.contrib.messages as Bootstrap alerts #}
@@ -100,12 +308,12 @@ li.bottomborder{
 {# Now load React via webpack #}
 {% load render_bundle from webpack_loader %}
 
-<title>PDF</title>
+<title>Watson TA</title>
 <script src="https://fb.me/react-15.0.0.js"></script>
 <script src="https://fb.me/react-dom-15.0.0.js"></script>
-<body>
 
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<body>
+    <nav id="watson-header" class="navbar navbar-toggleable-md navbar-light bg-faded">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -130,89 +338,166 @@ li.bottomborder{
   </nav>
 
   <br>
-  <div class="container">
-    <div class="page-header">
-      <h1>PDF Uploader</h1>
-    </div>
-
-    <section>
-      <h3>Natural Language Classifier</h3>
-      <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
-      <ol class="dl-horizontal nlc-spaced">
-        {% for c in classifications %}
-            <li></span><code>{{ c.tag }}</code>
-              {% for w in c.words %}
-                {% if w.tag %}
-                  <span class={{ w.tag }}>{{ w.fragment }}</span>
-                {% else %}
-                  {{ w.fragment }}
-                {% endif %}
-              {% endfor %}
-            </li>
-        {% endfor %}
-      </ol>
-      <!-- keeping for refrence, when i need to insert django template vars again (bill) -->
-      <!-- <ol class="dl-horizontal nlc-spaced">
-      	{% for c in classifications %}
-            <li><a class="glyphicon" data-toggle="collapse" href="#collapse{{ forloop.counter }}">&#x2b;</a></span><code>{{ c.tag }}</code>
-              {% for w in c.words %}
-                {% if w.tag %}
-                  <span class={{ w.tag }}>{{ w.fragment }}</span>
-                {% else %}
-                  {{ w.fragment }}
-                {% endif %}
-              {% endfor %}
-              <span class="alchemy" data-toggle="tooltip" data-placement="top" title="alchemify"><i class="fa fa-flask"></i></span>
-            </li>
-            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
-              <ul class="list-group">
-                {% if c.keywords|length > 0 %}
-                <li>
-                  <a class="glyphicon" data-toggle="collapse" href="#collapsekeyword{{ forloop.counter }}">&#x2b;</a><kbd>Keywords</kbd>
-                  <div id="collapsekeyword{{ forloop.counter }}" class="panel-collapse collapse">
-                  {% for kw in c.keywords %}
-                    <strong>{{ kw.text }}</strong>
-                    {% for item in kw.items %}
-                    <ul>
-                      <li>{{ item.0 }}, {{ item.1 }}</li>
-                    </ul>
-                    {% endfor %}
-                  {% endfor %}
-                </div>
-                </li>
-                {% endif %}
-                {% if c.concepts|length > 0 %}
-                <li>
-                  <a class="glyphicon" data-toggle="collapse" href="#collapseconcepts{{ forloop.counter }}">&#x2b;</a><kbd>Concepts</kbd>
-                  <div id="collapseconcepts{{ forloop.counter }}" class="panel-collapse collapse">
-                  {% for concept in c.concepts %}
-                    <strong>{{ concept.text }}</strong>
-                    {% for item in concept.items %}
-                    <ul>
-                      <li>{{ item.0 }}, {{ item.1 }}</li>
-                    </ul>
-                    {% endfor %}
-                  {% endfor %}
-                </div>
-                </li>
-                {% endif %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <div class="left-widget">
+          <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Classes</h4>
+          <ul>
+            <li><h4>Anthropology</h4></li>
+            <li><h4>Biology</h4></li>
+            <li><h4>Physics</h4></li>
+            <li><h4>Math</h4></li>
+          </ul>
+          <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Physics Lectures</h4>
+          <ul>
+            <li><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Waves I</li>
+            <li><i class="fa fa-file-word-o" aria-hidden="true"></i> Waves II</li>
+            <li><i class="fa fa-file-text-o" aria-hidden="true"></i> Uncertainty</li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i> Relativity</li>
+          </ul>
+          <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Homeworks</h4>
+          <ul>
+            <li>HW0 <i class="fa fa-check" aria-hidden="true"></i></li>
+            <li>HW1</li>
+            <li>HW2 <i class="fa fa-check" aria-hidden="true"></i></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6">
+        <!-- <div class="bs-callout bs-callout-danger">
+          <h4>Type Identification Trouble</h4>
+          Some questions could not be accurately identified. Please revisit questions <strong>2</strong>,<strong>3</strong> and <strong>5</strong>.
+        </div>
+        <div class="bs-callout bs-callout-success">
+          <h4>Successful Identification</h4>
+          Watson was able to confidently classify the types of all sentences.
+        </div> -->
+        <h1 class="page-header">quiz.pdf <i class="fa fa-file-pdf-o" aria-hidden="true"></i> 
+          <div class="edit-icons" style="float:right;">
+            <i class="fa fa-eye edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="view original pdf"></i>
+            <i class="fa fa-floppy-o edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="save progress"></i>
+            <i class="fa fa-print edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip"  data-placement="bottom" title="print current copy"></i>
+            <i class="fa fa-check-square-o edit-icon" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="mark as complete"></i>  
+        </div></h1>
+        <div class="form-group">
+          <div class="pdf-question">
+            <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">1 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+            <h4 class="glyphicon" style=" left: -102px">Did George Washington cut down a cherry tree and lie about it?</h4>
+            <fieldset class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  True
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                  False
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+          <div class="pdf-question pdf-question-selected">
+            <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">2 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+            <h4 class="glyphicon" style=" left: -102px">Why is the worlds reliance on fossil fuels causing harm to our environment?</h4>
+            <div>
+              <ul id="conceptlist">
+                <li class="conceptlistitem"><a href="">fossil fuels</a></li>
+                <li class="conceptlistitem"><a href="">environment</a></li>
+                <li class="conceptlistitemlight"><a href="">global warming</a></li>
               </ul>
             </div>
-        {% endfor %}
-      </ol> -->
-      <h3>React Component</h3>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+          </div>
+          <br>
+          <div class="pdf-question">
+            <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">3 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+            <h4 class="glyphicon" style=" left: -102px">Who is your favorite president and why?</h4>
+            <div>
+              <ul id="conceptlist">
+                <li class="conceptlistitem"><a href="">presidents</a></li>
+                <li class="conceptlistitem"><a href="">us history</a></li>
+              </ul>
+            </div>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+          </div>
+          <div class="pdf-question">
+            <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">4 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+            <h4 class="glyphicon" style=" left: -102px">Which of the following is not an optimizer available in TensorFlow?</h4>
+            <div>
+              <ul id="conceptlist">
+                <li class="conceptlistitem"><a href="">tensorflow</a></li>
+                <li class="conceptlistitemlight"><a href="">machine learning</a></li>
+              </ul>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item active">Gradient Descent</li>
+              <li class="list-group-item list-group-item-action">Adam Optimizer</li>
+              <li class="list-group-item list-group-item-action">Proximal Gradient Descent</li>
+              <li class="list-group-item list-group-item-action">Adaboost</li>
+            </ul>
+          </div>
+          <br>
+          <div id="react-pdf">
+            {% render_bundle 'main' %}
+          </div>
+          <br>
+          <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="page-header">
+          <h1>PDF Uploader</h1>
+        </div>
+        <div >
+          <section>
+            <h3>Natural Language Classifier</h3>
+            <p>Here are some static sentences that have been classified by the current version of our <strong>NLC</strong>.</p>
+            <ol class="dl-horizontal nlc-spaced">
+              {% for c in classifications %}
+                  <li></span><code>{{ c.tag }}</code>
+                    {% for w in c.words %}
+                      {% if w.tag %}
+                        <span class={{ w.tag }}>{{ w.fragment }}</span>
+                      {% else %}
+                        {{ w.fragment }}
+                      {% endif %}
+                    {% endfor %}
+                  </li>
+              {% endfor %}
+            </ol>
+            <h3>React Component</h3>
 
-      <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences. <strong>New!</strong> Now we can now use alchemy backend to extract information from text.</p>
-      <div id="react-comp">
-        {% render_bundle 'main' %}
+            <p>Below is a component to demonstrate React capability, as well as test our classifier's capability at discriminating sentences. <strong>New!</strong> Now we can now use alchemy backend to extract information from text.</p>
+            <div id="react-comp">
+              {% render_bundle 'main' %}
+            </div>
+          </section>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
-      <div id="react-pdf">
-        {% render_bundle 'main' %}
+      <div class="col">
+        <div id="rr-search">
+          {% render_bundle 'main' %}
+        </div>
       </div>
-      <br>
-      <br>
-    </section>
+    </div>
   </div>
+
   <script>
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()

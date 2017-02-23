@@ -7,6 +7,7 @@ from watson_developer_cloud import NaturalLanguageClassifierV1
 from watson_developer_cloud import AlchemyLanguageV1
 import os,sys
 import json
+import requests
 
 class Classified(object):
   def __init__(self, question_, class_=None):
@@ -191,24 +192,23 @@ def home(request):
   return HttpResponse(template.render(context,request))
 
 
-
 # -----------------------------------------------------------------------------
 # Team page
 import github3
 
 def get_team_data():
-  # gh = github3.login(os.environ['github_username'],os.environ['github_password'])
-  # repo = gh.repository('signofthehorns','watson-ta')
+  gh = github3.login(os.environ['github_username'],os.environ['github_password'])
+  repo = gh.repository('signofthehorns','watson-ta')
   team_members = []
-  # for u in repo.contributors():
-  #   user = gh.user(u)
-  #   data = {
-  #     'name': user.name,
-  #     'avatar_url': user.avatar_url,
-  #     'location': user.bio,
-  #     'username': u
-  #   }
-  #   team_members.append(data)
+  for u in repo.contributors():
+    user = gh.user(u)
+    data = {
+      'name': user.name,
+      'avatar_url': user.avatar_url,
+      'location': user.bio,
+      'username': u
+    }
+    team_members.append(data)
   return team_members
 
 # Team Info Page
@@ -220,5 +220,69 @@ def team(request):
   }
   return HttpResponse(template.render(context,request))
 
+# ----------------------------------------
+# Retrieve and Rank Code
+# -----------------------------------------
 
+# This code could probably be cleaned up
+# returns a list of text chunks with their 
+# corresponding css tags.
+def highlight_query(body,query):
+  m = re.finditer(query, body, re.IGNORECASE)
+  res = [match for match in m]
+  if len(res)>0:
+    chunks = []
+    indices = []
+    lengths = []
+    for match in res:
+      indices.append(match.start())
+      lengths.append(len(match.group(0)))
+    indices,lengths = zip(*sorted(zip(indices, lengths)))
+    for i in reversed(range(len(indices))):
+      index,length = indices[i],lengths[i]
+      chunks.append({'fragment': body[index+length:], 'tag': None})
+      chunks.append({'fragment': body[index:index+length], 'tag': 'mark'})
+      body = body[:index]
+    chunks.append({'fragment': body, 'tag': None})
+    return chunks[::-1]
+  return [{'fragment': body, 'tag': None}]
+
+def format_result_body(body, query):
+  MAX_BODY_LENGTH = 500 #so the search results don't get overcrowded
+  m = re.finditer(query, body, re.IGNORECASE)
+  res = [match for match in m]
+  formatted_body = body
+  if len(res) > 0 and len(body)-len(query)>MAX_BODY_LENGTH:
+    start_index = max(0,res[0].start()-MAX_BODY_LENGTH//2)
+    end_index = max(res[0].start()+MAX_BODY_LENGTH//2,res[0].start()+MAX_BODY_LENGTH-start_index)
+    # print(start_index,end_index)
+    formatted_body = body[start_index:end_index]
+  else:
+    formatted_body = body[:MAX_BODY_LENGTH]
+  return highlight_query(formatted_body,query)
+
+# TODO: if we have time we should make sure we are safely sending through user queries
+# aka preventing sql injection, csrf... idk if django automatically does that.
+def rr_search(request,query):
+  url = 'https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sc8a9f0ce9_ff50_484d_9c5d_9e6ceafe1ccf/solr/hp_collection/select?q=' + query + '&wt=json&fl=id,title,body'
+
+  headers = {
+    'Content-Type': 'application/json',
+  }
+  username = os.environ['watson_rr_username']
+  password = os.environ['watson_rr_password']
+  res = requests.post(url, headers=headers, auth=(username, password))
+
+  search_results = {
+    'docs' : []
+  }
+  res_json = res.json()
+  for document in res_json['response']['docs']:
+    # potentially format text here
+    d = {
+      'body': format_result_body(document['body'][0], query),
+      'title': document['title'][0],
+    }
+    search_results['docs'].append(d)
+  return JsonResponse(search_results)
 

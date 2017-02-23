@@ -8503,6 +8503,59 @@ var QuestionForm = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
 
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(QuestionBox, null), document.getElementById('react-comp'));
 
+// Need a way for user to change question type if computer got it wrong
+// plus alchemy capabilities.
+
+// every question should have at least text + tags
+// var Question = React.createClass({
+//   render: function() {
+//   },
+// });
+
+var MuiltipleChoice = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
+  displayName: 'MuiltipleChoice',
+
+  // have a special watson suggested choice if possible
+  getInitialState: function () {
+    return {
+      question: 'Which of the following presidents, famously held the office for the least amount of time?',
+      options: ['James Monroe', 'Willia Henry Harrison', 'James Garfield', 'Chester A. Arthur'],
+      selection: 1
+    };
+  },
+  render: function () {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'p',
+      null,
+      'Multiple Choice!'
+    );
+  }
+});
+
+var TrueFalse = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
+  displayName: 'TrueFalse',
+
+  render: function () {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'p',
+      null,
+      'True False!'
+    );
+  }
+});
+
+var ShortAnswer = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
+  displayName: 'ShortAnswer',
+
+  render: function () {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'p',
+      null,
+      'ShortAnswer!'
+    );
+  }
+});
+
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
@@ -8571,22 +8624,22 @@ var PDFUploadDemo = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
         header,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'ul',
-          { 'class': 'media-list' },
+          { className: 'media-list' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
-            { 'class': 'media bottomborder' },
+            { className: 'media bottomborder' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
-              { 'class': 'media-left' },
+              { className: 'media-left' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'a',
                 { href: '#' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'upload_img', src: this.state.files[0].preview })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'shrink d-flex mr-3 media-object upload_img', src: this.state.files[0].preview })
               )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
-              { 'class': 'media-body' },
+              { className: 'media-body' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'h4',
                 null,
@@ -8658,11 +8711,183 @@ var PDFUploadDemo = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
           ),
           ' here to extract the text from it.'
         )
-      )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MuiltipleChoice, null),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TrueFalse, null),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ShortAnswer, null)
     );
   }
 });
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PDFUploadDemo, null), document.getElementById('react-pdf'));
+
+/* ----------------------------------------------------*
+ *  Retrieve and Rank Component 
+ * ----------------------------------------------------*/
+
+/* 
+Will problably want to integrate this component later with the
+quiz editing component to show documents related to the currently 
+highlighted question.
+*/
+var RRSearch = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
+  displayName: 'RRSearch',
+
+  getInitialState: function () {
+    return {
+      question: null,
+      results: [],
+      loading: false
+    };
+  },
+
+  doSubmit: function (e) {
+    e.preventDefault();
+    var query = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this.refs.rr_query).value.trim();
+    if (!query) {
+      return;
+    }
+    // handle submission of the query
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('http://localhost:8000/rr_search/' + encodeURIComponent(query)).then(res => {
+      // TODO: do error/ null checking
+      this.setState({
+        results: res.data.docs,
+        loading: false
+      });
+      console.log(res);
+    });
+    this.setState({
+      question: query,
+      results: [],
+      loading: true
+    });
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this.refs.rr_query).value = '';
+    return;
+  },
+
+  tagifyBody: function (text_fragments) {
+    var frags = [];
+    Object.keys(text_fragments).forEach(function (key, index) {
+      var obj = text_fragments[key];
+      if (obj && obj.tag != null) {
+        frags.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'mark',
+          null,
+          obj.fragment
+        ));
+      } else {
+        frags.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'span',
+          null,
+          obj.fragment
+        ));
+      }
+    });
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'span',
+      null,
+      frags
+    );
+  },
+
+  render: function () {
+    var search_results = [];
+    // TODO @javascript expert: is there better way to pass in this to loop?
+    var self = this;
+    this.state.results.forEach(function (res) {
+      var format_body = self.tagifyBody(res.body);
+      search_results.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'span',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'li',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'strong',
+            null,
+            res.title
+          ),
+          ' ',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-file-pdf-o', 'aria-hidden': 'true' })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'blockquote',
+              { className: 'blockquote' },
+              format_body
+            )
+          )
+        )
+      ));
+    });
+
+    // <mark>Au. afarensis</mark>
+    var search_metadata = this.state.question != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'h4',
+      null,
+      '"' + this.state.question + '"'
+    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', null);
+    var num_results = this.state.question != null && !this.state.loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'p',
+      null,
+      'Displaying ',
+      this.state.results.length,
+      ' top ranked results matching the query...'
+    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', null);
+    var loading = this.state.loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-refresh fa-spin' }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', null);
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'right-widget' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h2',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-file-text concept', 'aria-hidden': 'true' }),
+        ' Retrieve and Rank (Harry Potter)'
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'form',
+        { className: 'form-horizontal', onSubmit: this.doSubmit },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'form-group' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' }),
+          ' Solr search',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'input-group' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'rr_query', ref: 'rr_query', className: 'form-control', placeholder: 'Tale of the Three Brothers' }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'input-group-btn' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'button',
+                { className: 'btn btn-default btn-primary', type: 'submit' },
+                'Search'
+              )
+            )
+          )
+        )
+      ),
+      search_metadata,
+      loading,
+      num_results,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'ul',
+        null,
+        search_results
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
+    );
+  }
+});
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(RRSearch, null), document.getElementById('rr-search'));
 
 /***/ },
 /* 104 */
