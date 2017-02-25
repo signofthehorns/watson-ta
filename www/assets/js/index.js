@@ -8,8 +8,8 @@ import { Form } from 'react-bootstrap';
 import { Well } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import { ListGroupItem } from 'react-bootstrap';
-var Dropzone = require('react-dropzone');
 
+var Dropzone = require('react-dropzone');
 var QuestionBox = React.createClass({
   getInitialState: function () {
     return {
@@ -412,6 +412,7 @@ Will problably want to integrate this component later with the
 quiz editing component to show documents related to the currently 
 highlighted question.
 */ 
+import EditDispatcher from './EditDispatcher';
 var RRSearch = React.createClass({
   getInitialState: function () {
       return {
@@ -421,12 +422,16 @@ var RRSearch = React.createClass({
       };
   },
 
-  doSubmit: function(e) {
-    e.preventDefault();
-    var query = ReactDOM.findDOMNode(this.refs.rr_query).value.trim();
-    if (!query) {
-      return;
-    }
+  componentDidMount: function() {
+    this.token = EditDispatcher.register((payload) => {
+      switch (payload.type) {
+        case 'RR_QUERY':
+          this.get_search_results(payload.query);
+      }
+    });
+  },
+
+  get_search_results: function(query) {
     // handle submission of the query
     axios.get('/api/rr_search/'+encodeURIComponent(query))
       .then(res => {
@@ -440,7 +445,16 @@ var RRSearch = React.createClass({
       question: query,
       results: [],
       loading: true,
-    })
+    });
+  },
+
+  doSubmit: function(e) {
+    e.preventDefault();
+    var query = ReactDOM.findDOMNode(this.refs.rr_query).value.trim();
+    if (!query) {
+      return;
+    }
+    this.get_search_results(query);
     ReactDOM.findDOMNode(this.refs.rr_query).value = '';
     return;
   },
@@ -563,7 +577,6 @@ var ClusterTableInfo = React.createClass({
 
   get_formatted: function(arr) {
     var res = []
-    console.log(arr);
     arr.forEach(function(item) {
       res.push(<li>{ item }</li>)
     });
@@ -614,8 +627,18 @@ var ClusterTableInfo = React.createClass({
   }
 });
 
+var SolrInfo = React.createClass({
+  getInitialState: function () {
+    // send async request to get clusters
+    this.get_clusters();  
+    return {
+      clusters: [],
+      loading_clusters: true,
+      cluster_success: false,
+      ccr_table: false,
+    };
+  },
 
-var SolfInfo = React.createClass({
   get_clusters: function() {
     axios.get('/api/list_clusters/')
       .then(res => {
@@ -626,17 +649,6 @@ var SolfInfo = React.createClass({
           ccr_table: <ClusterTableInfo clusters={res.data.clusters}/>
         });
       });
-  },
-
-  getInitialState: function () {
-    // send async request to get clusters
-    this.get_clusters();  
-    return {
-      clusters: [],
-      loading_clusters: true,
-      cluster_success: false,
-      ccr_table: false,
-    };
   },
 
   render: function () {
@@ -690,10 +702,9 @@ var SolfInfo = React.createClass({
     );
   }
 });
-ReactDOM.render(<SolfInfo />, document.getElementById('solr-collections'));
+ReactDOM.render(<SolrInfo />, document.getElementById('solr-collections'));
 
-
-
-
-
-
+import EditActions from './EditActions';
+import EditQuizContainer from './EditQuizContainer';
+ReactDOM.render(<EditQuizContainer />, document.getElementById('edit-quiz'));
+EditActions.queryRetrieveAndRank('horcruxes');
