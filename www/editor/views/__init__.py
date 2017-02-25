@@ -1,0 +1,1 @@
+from editor.views.index import index
