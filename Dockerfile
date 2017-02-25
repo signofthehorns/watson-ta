@@ -16,8 +16,16 @@ RUN npm install
 # Ports
 EXPOSE 8000
 
-# Add alias: webpack, cl, serve
-# TODO: Convert to makefile?
+# Add alias for common opperations
+#  webpack -- executes the webpack program used to bundle the JavaScript
+#  cl      -- a consise clear
+#  serve   -- run the django serve with the desired configuration
+#  keys    -- load the keys file
+#  cdw     -- a consise directory switch to the watson-ta project
+#  up      -- fully loads the serve in a single command!:D
 RUN echo 'alias webpack="/node_modules/.bin/webpack"' >> ~/.bashrc
 RUN echo 'alias cl="clear"' >> ~/.bashrc
 RUN echo 'alias serve="python manage.py runserver 0.0.0.0:8000"' >> ~/.bashrc
+RUN echo 'alias keys="source /app/.keys.sh"' >> ~/.bashrc
+RUN echo 'alias cdw="cd /app/www/"' >> ~/.bashrc
+RUN echo 'alias up="keys && cdw && webpack && serve"' >> ~/.bashrc

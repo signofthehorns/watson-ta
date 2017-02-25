@@ -21,8 +21,8 @@ Extensions:
 
 ### Watson TA Docker
 
-1. Clone and cd into the `watson-ta` repository
-2. Add the API keys to a `.keys.sh` file (place in `watson-ta/` to avoid the multiple volumes on `docker add` below)
+1. Clone and `cd` into the `watson-ta` repository (e.g. `pwd` should end in `watson-ta/`)
+2. Add the API keys to a `.keys.sh` file (placed in `watson-ta/`)
 
 ```BASH
 ## The keys required for Watson-TA
@@ -43,29 +43,35 @@ export github_username=''
 export github_password=''
 ```
 
-3. Run `docker build -t watson-ta .`
-4. Run the watson-ta container:
+3. Build the container by running:
+
+```BASH
+# Builds a container named "watson-ta" from the Dockerfile at . (e.g. the current directory)
+docker build -t watson-ta .
+```
+
+4. Enter the container by running:
 
 ```BASH
 # Mounting the watson-ta local repo & keys to enable active development
-# Map the docker port `0.0.0.0:8000` to `127.0.0.1:8000`
+# Map the docker port `0.0.0.0:8000` to local port `127.0.0.1:8000`
 # Enter an interactive terminal session of bash on the container
-docker run -it --rm -v path/to/watson-ta:/app/ -v path/to/.keys.sh:/.keys.sh -p 127.0.0.1:8000:8000 watson-ta /bin/bash
+docker run -it --rm -v `pwd`:/app/ -p 127.0.0.1:8000:8000 watson-ta /bin/bash
 ```
 
-5. Load the keys within the container `source .keys.sh`
-6. Build the JavaScript assets & run the Django server:
+5. You should now be within the watson-ta docker container!
+6. Run the alias `up` to setup remaining configuration and boot the django server. The `up` command does the following:
 
 ```BASH
-# Move to the proper directory
-# Execute webpack using the `webpack.config.js`
-# Execute the alias serve
-cd app/www/
-webpack
-serve
+# Notice: These are bash aliases defined in the Dockerfile :)
+# What up runs for you:
+keys       # Load the keys
+cdw        # Move to the proper directory
+webpack    # Execute webpack using the `webpack.config.js`
+serve      # Execute the alias serve
 ```
 
-7. Navigate to `localhost:8000` in a browser to interact with Watson TA
+7. Navigate to `localhost:8000` in a browser to interact with Watson TA application
 8. Develop away with hot reload!
 
 ## The Team
