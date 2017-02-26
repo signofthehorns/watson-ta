@@ -47,6 +47,17 @@
           <i class="fa fa-print edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip"  data-placement="bottom" title="print current copy"></i>
           <i class="fa fa-check-square-o edit-icon" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="mark as complete"></i>  
       </div></h1>
+      <p>@david: below is the base question component (QuestionBase), which you can extend. clicking on component will load question in search via flux.</p>
+      <div id="upload-questions">
+        {% render_bundle 'main' %}
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <p>@david: reference for question edit ui.</p>
       <div class="form-group">
         <div class="pdf-question">
           <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">1 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
@@ -67,62 +78,54 @@
           </fieldset>
         </div>
       </div>
-        <div class="pdf-question pdf-question-selected">
-          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">2 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-          <h4 class="glyphicon" style=" left: -102px">Why is the worlds reliance on fossil fuels causing harm to our environment?</h4>
-          <div>
-            <ul id="conceptlist">
-              <li class="conceptlistitem"><a href="">fossil fuels</a></li>
-              <li class="conceptlistitem"><a href="">environment</a></li>
-              <li class="conceptlistitemlight"><a href="">global warming</a></li>
-            </ul>
-          </div>
-          <textarea class="form-control" rows="5" id="comment"></textarea>
-        </div>
-        <br>
-        <div class="pdf-question">
-          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">3 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-          <h4 class="glyphicon" style=" left: -102px">Who is your favorite president and why?</h4>
-          <div>
-            <ul id="conceptlist">
-              <li class="conceptlistitem"><a href="">presidents</a></li>
-              <li class="conceptlistitemlight"><a href="">us history</a></li>
-            </ul>
-          </div>
-          <textarea class="form-control" rows="5" id="comment"></textarea>
-        </div>
-        <div class="pdf-question">
-          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">4 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-          <h4 class="glyphicon" style=" left: -102px">Who is your favorite mathematician?</h4>
-          <div>
-            <ul id="conceptlist">
-              <li class="conceptlistitem"><a href="">mathematics</a></li>
-            </ul>
-          </div>
-          <ul class="list-group">
-            <li class="list-group-item active">Leonard Euler</li>
-            <li class="list-group-item list-group-item-action">Carl Friedrich Gauss</li>
-            <li class="list-group-item list-group-item-action">David Hilbert</li>
-            <li class="list-group-item list-group-item-action">Bernhard Riemann</li>
-            <li class="list-group-item list-group-item-action">Other</li>
+      <div class="pdf-question pdf-question-selected">
+        <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">2 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+        <h4 class="glyphicon" style=" left: -102px">Why is the worlds reliance on fossil fuels causing harm to our environment?</h4>
+        <div>
+          <ul id="conceptlist">
+            <li class="conceptlistitem"><a href="">fossil fuels</a></li>
+            <li class="conceptlistitem"><a href="">environment</a></li>
+            <li class="conceptlistitemlight"><a href="">global warming</a></li>
           </ul>
         </div>
-        <br>
-        <div id="react-pdf">
-          {% render_bundle 'main' %}
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+      <br>
+      <div class="pdf-question">
+        <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">3 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+        <h4 class="glyphicon" style=" left: -102px">Who is your favorite president and why?</h4>
+        <div>
+          <ul id="conceptlist">
+            <li class="conceptlistitem"><a href="">presidents</a></li>
+            <li class="conceptlistitemlight"><a href="">us history</a></li>
+          </ul>
         </div>
-        <br>
-        <br>
-      <br>
-      <br>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+      <div class="pdf-question">
+        <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">4 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
+        <h4 class="glyphicon" style=" left: -102px">Who is your favorite mathematician?</h4>
+        <div>
+          <ul id="conceptlist">
+            <li class="conceptlistitem"><a href="">mathematics</a></li>
+          </ul>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item active">Leonard Euler</li>
+          <li class="list-group-item list-group-item-action">Carl Friedrich Gauss</li>
+          <li class="list-group-item list-group-item-action">David Hilbert</li>
+          <li class="list-group-item list-group-item-action">Bernhard Riemann</li>
+          <li class="list-group-item list-group-item-action">Other</li>
+        </ul>
+      </div>
       <br>
       <br>
       <div id="edit-quiz">
         {% render_bundle 'main' %}
       </div>
-      <br>
-      <br>
-      <br>
+      <div id="react-pdf">
+        {% render_bundle 'main' %}
+      </div>
       <br>
       <br>
       <div class="page-header">

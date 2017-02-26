@@ -298,6 +298,13 @@ li.bottomborder {
     background-color: #f9f9f9;
 }
 
+.pdf-question-selected:hover {
+    padding-right: 10px;
+    border-right: 4px solid #feea67;
+    background-color: #fcf8e2;
+}
+
+
 .pdf-question-selected {
     padding-right: 10px;
     border-right: 4px solid #feea67;
