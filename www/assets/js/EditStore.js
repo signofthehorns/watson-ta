@@ -15,7 +15,6 @@ class EditStore extends ReduceStore {
   reduce(state, action) {
     switch (action.type) {
       case EditActionTypes.RR_QUERY:
-        // Do nothing for now, we will add logic here soon!
         return state;
       default:
         return state;
