@@ -29,3 +29,8 @@ RUN echo 'alias serve="python manage.py runserver 0.0.0.0:8000"' >> ~/.bashrc
 RUN echo 'alias keys="source /app/.keys.sh"' >> ~/.bashrc
 RUN echo 'alias cdw="cd /app/www/"' >> ~/.bashrc
 RUN echo 'alias up="keys && cdw && webpack && serve"' >> ~/.bashrc
+
+# Prevent Python from generating bytecode in the container for files
+# that actually reside on the host
+# (breaks pytest test suite)
+ENV PYTHONDONTWRITEBYTECODE=1
