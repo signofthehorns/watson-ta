@@ -3,4 +3,3 @@ def test_discovery_test():
 
 	# (This isn't a meaningful alchemy request, just testing the service for now)
 	alchemy.GetAlchemyRequest("hello", "world")
-
