@@ -29,3 +29,8 @@ RUN echo 'alias serve="python manage.py runserver 0.0.0.0:8000"' >> ~/.bashrc
 RUN echo 'alias keys="source /app/.keys.sh"' >> ~/.bashrc
 RUN echo 'alias cdw="cd /app/www/"' >> ~/.bashrc
 RUN echo 'alias up="keys && cdw && webpack && serve"' >> ~/.bashrc
+
+# Prevent Python from generating .pyc files on Docker while
+# source files are actually on host machine
+# (this confuses pytest)
+ENV PYTHONDONTWRITEBYTECODE=1
