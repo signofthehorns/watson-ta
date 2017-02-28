@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^api/', include('api.urls')),
     url(r'^pdfupload/', include('pdfupload.urls')),
     url(r'^editor/', include('editor.urls')),
+    url(r'^pages/', include('pages.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('pages.urls')),
+    url(r'^', include('django.contrib.auth.urls')),
 ]

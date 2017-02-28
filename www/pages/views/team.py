@@ -1,11 +1,9 @@
 import os
-
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-
 import github3
-
+from django.contrib.auth.decorators import login_required
 
 def get_team_data():
     gh = github3.login(os.environ['github_username'],
@@ -23,7 +21,7 @@ def get_team_data():
         team_members.append(data)
     return team_members
 
-
+@login_required(login_url="/login/")
 def GetTeamPage(request):
     template = loader.get_template('pages/team.html')
     team_data = get_team_data()

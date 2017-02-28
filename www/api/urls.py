@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from api.views import alchemy, nlc_classify, upload, rr_search, solr
+from api.views import alchemy, nlc_classify, upload, rr_search, solr, uauth
 
 urlpatterns = [
     url(r'^alchemy/(?P<sentence>.{0,350})/$',
@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^list_collections/(?P<cluster_id>.{0,350})$',solr.list_collections, name='List Solr Collections'),
     url(r'^list_configs/(?P<cluster_id>.{0,350})$',solr.list_configs, name='List Solr Configurations'),
     url(r'^list_rankers/(?P<cluster_id>.{0,350})$',solr.list_rankers, name='List Solr Rankers'),
+    url(r'^logout/$',uauth.logout_view, name='logout user'),
 ]

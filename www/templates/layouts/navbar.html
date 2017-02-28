@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand" href="/">💡 Watson-TA</a>
+    <a class="navbar-brand" href="/pages/home">💡 Watson-TA</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -15,8 +15,14 @@
                 <a class="nav-link" href="/pdfupload/">PDF Upload</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/team/">The Team</a>
+                <a class="nav-link" href="/pages/team/">The Team</a>
             </li>
+        <ul class="nav navbar-nav mr-auto">
+          <li class="nav-item">
+               <a class="navbar-right nav-link" href="/api/logout/">logout ({{ user.username }})</a>
+            </li>
+        </ul>
         </ul>
     </div>
 </nav>
+
