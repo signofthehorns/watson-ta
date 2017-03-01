@@ -5,7 +5,7 @@ import requests
 import re
 from django.http import JsonResponse
 
-from api.views.classified import Classified
+from classified import Classified
 
 
 # ----------------------------------------

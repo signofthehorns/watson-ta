@@ -4,8 +4,7 @@ import os
 from django.http import JsonResponse
 from watson_developer_cloud import NaturalLanguageClassifierV1
 
-from api.views.classified import Classified
-
+from classified import Classified
 
 def GetClassifyQuestion(request, sentence):
     natural_language_classifier = NaturalLanguageClassifierV1(

@@ -20,6 +20,7 @@ pyparsing==2.1.10
 PyReact==0.1.1
 pysolr==3.6.0
 pytest==3.0.6
+pytest-pythonpath==0.7.1
 requests==2.13.0
 six==1.10.0
 stevedore==1.20.0
