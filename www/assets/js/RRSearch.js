@@ -8,6 +8,44 @@ import { Form } from 'react-bootstrap';
 // react to when a user clicks a component
 import EditDispatcher from './EditDispatcher';
 
+
+
+
+/* dropdown component for listing the different collections available */
+class CollectionDropdown extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  handleClick(e,name) {
+    e.preventDefault();
+    this.props.set_collection(name);
+  }
+
+  render() {
+    var dropdown_items = [];
+    for (var key in this.props.collections) {
+      dropdown_items.push(<h6 className="dropdown-header">{key}</h6>);
+
+      this.props.collections[key].forEach((res) => {
+        var name = res;
+        dropdown_items.push(<button className="dropdown-item" type="button" onClick={(e) => this.handleClick(e,name)}>{res}</button>);
+      });
+    }
+
+    return <span className="dropdown">
+        <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          { this.props.current_collection }
+        </button>
+        <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+          {dropdown_items}
+        </div>
+      </span>;
+  }
+}
+
+
+
 /* ----------------------------------------------------*
  *  Retrieve and Rank Component 
  * ----------------------------------------------------*/
@@ -22,7 +60,8 @@ class RRSearch extends React.Component {
     this.state = {
         question: null,
         results: [],
-        loading: false
+        loading: false,
+        collection: 'hp_collection',
       };
   };
 
@@ -35,9 +74,15 @@ class RRSearch extends React.Component {
     });
   }
 
+  set_collection(name) {
+    this.setState({
+      collection: name
+    });
+  }
+
   get_search_results(query) {
     // handle submission of the query
-    axios.get('/api/rr_search/'+encodeURIComponent(query))
+    axios.get('/api/rr_search/'+encodeURIComponent(query)+'/'+encodeURIComponent(this.state.collection))
       .then(res => {
         // TODO: do error/ null checking
         this.setState({ 
@@ -99,17 +144,12 @@ class RRSearch extends React.Component {
     var num_results = this.state.question != null && !this.state.loading ? <p>Displaying {this.state.results.length} top ranked results matching the query...</p> : <span/>;
     var loading = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <span/>;
     
-    var dropdown = <span className="dropdown">
-          <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Change Collection
-          </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <h6 className="dropdown-header">Sherlock Collections</h6>
-            <button className="dropdown-item" type="button">Action</button>
-            <button className="dropdown-item" type="button">Another action</button>
-            <button className="dropdown-item" type="button">Something else here</button>
-          </div>
-        </span>;
+    // TODO: don't hardcode
+    var current_collections = {
+      'sherlock' : ['hp_collection', 'example_collection'],
+    }
+
+    var dropdown = <CollectionDropdown collections={current_collections} set_collection={(name) => this.set_collection(name)} current_collection={this.state.collection}/>;
 
     return (
       <div className="right-widget">
