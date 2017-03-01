@@ -17,8 +17,11 @@ RUN npm install
 ADD .docker-setup.sh /.bashrc
 RUN /bin/bash -c "mv /.bashrc ~/.bashrc"
 
-# Ports
+# Setup parameters
 EXPOSE 8000
-
-# Change directory
 WORKDIR /app/www/
+
+# Prevent Python from generating .pyc files on Docker while
+# source files are actually on host machine
+# (this confuses pytest)
+ENV PYTHONDONTWRITEBYTECODE=1
