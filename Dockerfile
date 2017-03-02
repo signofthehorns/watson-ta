@@ -13,9 +13,9 @@ RUN pip install -r requirements.txt
 ADD package.json /
 RUN npm install
 
-# Add alias for common opperations
+# Add alias for common opperations (tr -d '\015' removes CLRF extensions)
 ADD .docker-setup.sh /.bashrc
-RUN /bin/bash -c "mv /.bashrc ~/.bashrc"
+RUN /bin/bash -c "tr -d '\015' < /.bashrc > ~/.bashrc"
 
 # Setup parameters
 EXPOSE 8000
