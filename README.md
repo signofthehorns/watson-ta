@@ -68,9 +68,9 @@ docker run -it --rm -v `pwd`:/app/ -p 127.0.0.1:8000:8000 watson-ta /bin/bash
 # What up runs for you:
 keys       # Load the keys
 csu        # Create superusers
-           #   username:   root
-           #   email:      example@example.com
+           #   username:   admin
            #   password:   watsonta
+           #   email:      admin@example.com
 webpack    # Execute webpack using the `webpack.config.js`
 serve      # Execute the alias serve
 ```
@@ -81,7 +81,7 @@ serve      # Execute the alias serve
 ```BASH
 username = "admin"
 password = "watsonta"
-email = "admin@example.com"
+email    = "admin@example.com"
 ```
 
 9. Develop away with hot reload!
