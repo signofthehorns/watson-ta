@@ -5,7 +5,7 @@ import requests
 import re
 from django.http import JsonResponse
 
-from api.views.classified import Classified
+from classified import Classified
 
 
 # ----------------------------------------
@@ -61,8 +61,7 @@ def format_result_body(body, query):
 # aka preventing sql injection, csrf... idk if django automatically does that.
 
 
-def GetRRSearch(request, query):
-    collection = 'hp_collection'
+def GetRRSearch(request, query,collection):
     cluster_id = os.environ['watson_rr_cluster_id']
     url = 'https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/' + \
         cluster_id + '/solr/' + collection + '/select?q=' + \

@@ -15,6 +15,9 @@ www/webpack-stats.json
 # Remove potentially large or licensed content
 *.pdf
 
+# Remove database
+*.sqlite3
+
 ################################################################################
 ## Python .gitignore
 ################################################################################

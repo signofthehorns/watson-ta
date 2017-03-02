@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 
-from api.views.classified import Classified
+from classified import Classified
 
 
 def GetAlchemyRequest(request, sentence):

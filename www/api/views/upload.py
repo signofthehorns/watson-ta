@@ -10,7 +10,7 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
 
-from api.views.classified import Classified
+from classified import Classified
 
 
 def convert_pdf_to_txt(fp):
