@@ -63,16 +63,29 @@ docker run -it --rm -v `pwd`:/app/ -p 127.0.0.1:8000:8000 watson-ta /bin/bash
 6. Run the alias `up` to setup remaining configuration and boot the django server. The `up` command does the following:
 
 ```BASH
-# Notice: These are bash aliases defined in the Dockerfile :)
+# Notice: These are bash aliases defined in the .docker-setup.sh :)
+# Run all within: /app/www/
 # What up runs for you:
 keys       # Load the keys
-cdw        # Move to the proper directory
+csu        # Create superusers
+           #   username:   admin
+           #   password:   watsonta
+           #   email:      admin@example.com
 webpack    # Execute webpack using the `webpack.config.js`
 serve      # Execute the alias serve
 ```
 
 7. Navigate to `localhost:8000` in a browser to interact with Watson TA application
-8. Develop away with hot reload!
+8. The login is the following:
+
+```BASH
+username = "admin"
+password = "watsonta"
+email    = "admin@example.com"
+```
+
+9. Develop away with hot reload!
+10. If you need to recompile the JavaScript use `rb` to rebuild the JavaScript and rerun the server
 
 ## The Team
 
