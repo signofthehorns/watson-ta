@@ -9,9 +9,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
-
 from classified import Classified
-
 
 def convert_pdf_to_txt(fp):
     rsrcmgr = PDFResourceManager()
@@ -32,17 +30,15 @@ def convert_pdf_to_txt(fp):
     retstr.close()
     return text
 
-
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
 
+import sys
 def extract_questions(text):
     text = text.replace('\t', ' ')
     pattern = '[0-9]+(\)|\.)(?:(?![0-9]+(\)|\.)).)*'
-    m = re.finditer(pattern, text)
-    res = [match.group(0) for match in m]
-
+    res = [match.group(0) for match in re.finditer(pattern, text)]
     obj_res = []
     for r in res:
         rmap = {
@@ -50,10 +46,9 @@ def extract_questions(text):
             'confidence': 0.0
         }
         # todo get classified result
-        obj_res.append(Classified(r, rmap).get_map_repr())
+        obj_res.append(Classified(r[4:-1], rmap).get_map_repr())
     # order questions and classify
     return obj_res
-
 
 def handle_uploaded_file(f):
     text = convert_pdf_to_txt(f)

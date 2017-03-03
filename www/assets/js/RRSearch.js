@@ -44,8 +44,6 @@ class CollectionDropdown extends React.Component {
   }
 }
 
-
-
 /* ----------------------------------------------------*
  *  Retrieve and Rank Component 
  * ----------------------------------------------------*/
@@ -65,6 +63,12 @@ class RRSearch extends React.Component {
       };
   };
 
+  set_collection(name) {
+    this.setState({
+      collection: name
+    });
+  }
+
   componentDidMount() {
     this.token = EditDispatcher.register((payload) => {
       switch (payload.type) {
@@ -74,14 +78,9 @@ class RRSearch extends React.Component {
     });
   }
 
-  set_collection(name) {
-    this.setState({
-      collection: name
-    });
-  }
-
   get_search_results(query) {
     // handle submission of the query
+    // console.log(query);
     axios.get('/api/rr_search/'+encodeURIComponent(query)+'/'+encodeURIComponent(this.state.collection))
       .then(res => {
         // TODO: do error/ null checking
