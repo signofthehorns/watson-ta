@@ -93,17 +93,35 @@ class QuestionBase extends React.Component {
     return <span />;
   }
 
+  get_question_text() {
+    var text = <span>{this.props.question}</span>;
+    if (this.state.has_ent_data) {
+      // display text with highlighted entities
+      var sentence = [];
+      this.state.words.forEach(function(w) {
+        if (w.tag) {
+          sentence.push(<span className={ w.tag }>{ w.fragment }</span>);
+        } else {
+          sentence.push(<span>{ w.fragment }</span>);
+        }
+      });
+      text = sentence;
+    }
+    return text;
+  }
+
   render() {
   	var num_widgets = 3;
   	var offset = -32 * num_widgets;
   	var highlight_css = this.state.selected ? 'pdf-question-selected' : '';
 
     var concepts = this.get_concepts();
+    var question_text = this.get_question_text();
 
 
-    return <div className={"pdf-question "+highlight_css} >
+    return <div className={"pdf-question "+highlight_css} onClick={() => this.clicked()}>
     	<h4 className="glyphicon glyphicon-asterisk q_anchor" style={{left: offset+'px'}}>{this.props.id}<i className="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i className="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify" onClick={() => this.alchemify()}></i></h4>
-    	  <h4 className="glyphicon" style={{left: offset+'px'}} onClick={() => this.clicked()}>{ this.props.question }</h4>
+    	  <h4 className="glyphicon" style={{left: offset+'px'}} >{ question_text }</h4>
         {concepts}
     </div>
   }
