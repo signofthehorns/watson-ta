@@ -6,6 +6,8 @@ import SolrInfo from './SolrInfo';
 import EditQuizContainer from './EditQuizContainer';
 import UploadEditQuestions from './UploadEditQuestions';
 
+// The following statements check whether an element exists before attempting to render them
+// This prevents silent JS null element errors
 if (elm = document.getElementById('react-comp'))
   ReactDOM.render(<QuestionBox />, elm);
 
