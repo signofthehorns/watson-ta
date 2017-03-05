@@ -9,7 +9,8 @@ from classified import Classified
 def GetClassifyQuestion(request, sentence):
     natural_language_classifier = NaturalLanguageClassifierV1(
         username=os.environ['watson_username'],
-        password=os.environ['watson_password'])
+        password=os.environ['watson_password']
+    )
     status = natural_language_classifier.status('f5bbbcx175-nlc-1012')
     result = ""
     if status['status'] == 'Available':
