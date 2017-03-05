@@ -8,6 +8,12 @@ const Actions = {
       query,
     });
   },
+  highlightQuestion(id) {
+    EditDispatcher.dispatch({
+      type: EditActionTypes.HIGHLIGHT,
+      id,
+    });
+  }
 };
 
 export default Actions;

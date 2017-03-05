@@ -9,6 +9,7 @@ import { ListGroupItem } from 'react-bootstrap';
 var Dropzone = require('react-dropzone');
 import { ProgressBar } from 'react-bootstrap';
 import QuestionItem from './Question'
+import QuestionBase from './UploadEditQuestions'
 
 var PDFUploadDemo = React.createClass({
   getInitialState: function () {
@@ -53,7 +54,7 @@ var PDFUploadDemo = React.createClass({
   render: function () {
     var header = <div>
       <h3>Document Upload Component</h3>
-      <p>Starter React component for uploading a document and processing on the backend.</p>
+      <p>Starter React component for uploading a document and processing on the backend. Will now display questions as QuestionBase, and will load alchemy concepts.</p>
       </div>;
     if (this.state.finished) {
       return (
@@ -74,7 +75,8 @@ var PDFUploadDemo = React.createClass({
           </ul>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
+              //return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
+              return <QuestionBase question={object.text} id={i+1} key={i}/>;
           })}
           </ListGroup>
         </div>

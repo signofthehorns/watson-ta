@@ -227,9 +227,23 @@ li.bottomborder {
     list-style-type: none;
 }
 
+#conceptlist-dimmed li {
+    display: inline;
+    list-style-type: none;
+    color: #ddd;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+#conceptlist-dimmed li {
+    color: #ccc;
+}
+
 .conceptlistitem {
     color: #fff;
     padding: 5px;
+    margin: 5px;
     color: #5b9cff;
     background-color: #abccff;
     border: 1px solid #5b9cff;

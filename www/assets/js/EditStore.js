@@ -16,6 +16,8 @@ class EditStore extends ReduceStore {
     switch (action.type) {
       case EditActionTypes.RR_QUERY:
         return state;
+      case EditActionTypes.HIGHLIGHT:
+        return state;
       default:
         return state;
     }
