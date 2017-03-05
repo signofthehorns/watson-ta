@@ -9,6 +9,7 @@ import UploadEditQuestions from './UploadEditQuestions';
 
 // The following statements check whether an element exists before attempting to render them
 // This prevents silent JS null element errors
+var elm = null;
 if (elm = document.getElementById('react-comp'))
   ReactDOM.render(<QuestionBox />, elm);
 

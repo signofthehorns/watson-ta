@@ -94,6 +94,8 @@ def extract_top_levels(fp, top_levels=[]):
     return convert_pdf_to_txt(fp, pagenos=set(pagenos))
 
 #print convert_pdf_to_txt(fp)
-txt = extract_top_levels(fp, top_levels=[1,2])
-print txt
+txt = extract_top_levels(fp, top_levels=[1])
+with open('chapter1.txt', 'w') as f:
+    f.write(txt)
+    f.write('\n')
 fp.close()

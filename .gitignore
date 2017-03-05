@@ -13,7 +13,7 @@ www/assets/bundles/*
 www/webpack-stats.json
 
 # Remove potentially large or licensed content
-*.pdf
+textbook-tool/*.pdf
 
 # Remove database
 *.sqlite3
