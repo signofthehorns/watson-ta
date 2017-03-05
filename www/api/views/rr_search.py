@@ -4,6 +4,7 @@ import os
 import requests
 import re
 from django.http import JsonResponse
+from watson_developer_cloud import RetrieveAndRankV1
 
 from classified import Classified
 
@@ -61,28 +62,27 @@ def format_result_body(body, query):
 # aka preventing sql injection, csrf... idk if django automatically does that.
 
 
-def GetRRSearch(request, query,collection):
-    cluster_id = os.environ['watson_rr_cluster_id']
-    url = 'https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/' + \
-        cluster_id + '/solr/' + collection + '/select?q=' + \
-        query + '&wt=json&fl=id,title,body'
+def GetRRSearch(request, query, collection):
+    retrieve_and_rank = RetrieveAndRankV1(
+        username=os.environ['watson_rr_username'],
+        password=os.environ['watson_rr_password']
+    )
 
-    headers = {
-        'Content-Type': 'application/json',
-    }
-    username = os.environ['watson_rr_username']
-    password = os.environ['watson_rr_password']
-    res = requests.post(url, headers=headers, auth=(username, password))
+    cluster_id = os.environ['watson_rr_cluster_id']
+    pysolr_client = retrieve_and_rank.get_pysolr_client(cluster_id, collection)
+
+    results = pysolr_client.search(query)
 
     search_results = {
         'docs': []
     }
-    res_json = res.json()
-    for document in res_json['response']['docs']:
+
+    for document in results.docs:
         # potentially format text here
         d = {
             'body': format_result_body(document['body'][0], query),
             'title': document['title'][0],
         }
         search_results['docs'].append(d)
+
     return JsonResponse(search_results)
