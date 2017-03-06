@@ -127,7 +127,6 @@ class RRSearch extends React.Component {
       search_results.push(
         <span>
           <li><strong>{ res.title }</strong> <i className="fa fa-file-pdf-o" aria-hidden="true"></i></li>
-            <i className="fa fa-cogs" aria-hidden="true"></i> conf .98567
             <ul>
               <li>
                 <blockquote className="blockquote">
