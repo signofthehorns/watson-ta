@@ -15,14 +15,41 @@ import EditDispatcher from './EditDispatcher';
 class QuestionBase extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    /** 
+     * NOTE - Bill said these are all Alchemy related
+     * isSelected       -- bool       -- Is the user rr searching the  question
+     * loadedAlchemy    -- bool       -- Alchemy data loaded
+     * loadingAlchemy   -- bool       -- Alchemy data loading (request in transit)
+     * displayAlchemy   -- bool       -- Should the Alchemy data be displayed?
+     * tag_loading      -- bool       -- NLC Loading
+     * id               -- number     -- Question ID
+     * type             -- string     -- Question Type: [ "sa", "tf", "mc" ]
+     * question         -- string     -- Question Text: "Will we get an A?"
+     * choices          -- [strings]  -- Choices for the question
+     * answer           -- [strings]  -- Answer for the question
+     * alchemy          -- object     -- Alchemy data elements of the question
+     *    concepts      -- [strings]  -- Alchemy's identified concepts
+     *    keywords      --            -- Alchemy's identified keywords
+     *    words         --            -- Alchemy's format of the questions prompt
+     */
     this.state = {
-      selected: false,
+      isSelected: false,
+      loadedAlchemy: false,
+      loadingAlchemy: false,
+      displayAlchemy: false,
       tag_loading: true,
-      ent_loading : false,
-      has_ent_data: false,
-      concepts: [],
-      keywords: [],
-      words: [],
+      // ent_loading : false,
+      id: this.props.id,
+      type: "",
+      prompt: this.props.question,
+      choices: [],
+      answer: [],
+      alchemy: {
+        concepts: [],
+        keywords: [],
+        words: []
+      }
     };
   }
 
@@ -30,7 +57,7 @@ class QuestionBase extends React.Component {
     this.token = EditDispatcher.register((payload) => {
       switch (payload.type) {
         case 'HIGHLIGHT':
-          this.maybe_highlight(payload.id);
+          this.rr_search_highlight(payload.id);
       }
     });
 
@@ -45,84 +72,121 @@ class QuestionBase extends React.Component {
   }
 
   alchemify(e) {
-    this.setState({ 
-      ent_loading : true
-    });
-    axios.get('/api/alchemy/'+encodeURIComponent(this.props.question)+'/')
-      .then(res => {
-        console.log(res)
+    if (!this.state.loadedAlchemy) {
+      // TODO - If the survice is down does this or the backend retry?
+      if (!this.state.loadingAlchemy) {
         this.setState({ 
-          ent_loading : false,
-          has_ent_data: true,
-          concepts: res.data.concepts,
-          keywords: res.data.keywords,
-          words: res.data.words,
+          loadingAlchemy: true
         });
-      });
+        axios.get('/api/alchemy/'+encodeURIComponent(this.state.prompt)+'/')
+          .then(res => {
+            console.log(res)
+            this.setState({
+              loadedAlchemy: true,
+              loadingAlchemy: false,
+              displayAlchemy: true,
+              alchemy: {
+                concepts: res.data.concepts,
+                keywords: res.data.keywords,
+                words: res.data.words,
+              }
+            });
+          });
+        }
+    } else {
+      this.setState({
+        displayAlchemy: !this.state.displayAlchemy
+      })
+    }
     return;
   }
 
-  maybe_highlight(id) {
+  rr_search_highlight(id) {
     this.setState({
-      selected: id==this.props.id
+      isSelected: id==this.state.id
     });
   }
 
-  clicked() {
-  	if (!this.state.selected) {
-      EditActions.highlightQuestion(this.props.id);
-  	  EditActions.queryRetrieveAndRank(this.props.question);
-  	} else {
-      EditActions.highlightQuestion(-1);
-    }
+  rr_search() {
+    EditActions.highlightQuestion(this.state.id);
+    EditActions.queryRetrieveAndRank(this.state.prompt);
   }
 
-  get_concepts() {
-    if (this.state.concepts && this.state.concepts.length > 0) {
-      var concepts = []
-      this.state.concepts.forEach(function(concept) {
-        concepts.push(<li className="conceptlistitem"><a href="">{concept.text}</a></li>);
-      });
-      var div_id = this.state.selected ? 'conceptlist': 'conceptlist-dimmed';
-      return <div>
-          <ul id={div_id}>
-            { concepts }
-          </ul>
-        </div>;
+  display_concepts() {
+    var concepts = <span />;
+    if (this.state.displayAlchemy && this.state.loadedAlchemy) {
+      if (this.state.alchemy.concepts.length > 0) {
+        var conceptParts = []
+        this.state.alchemy.concepts.forEach(function(concept) {
+          conceptParts.push(<li className="conceptlistitem">
+            <a href="">{concept.text}</a>
+          </li>);
+        });
+        var style = this.state.isSelected ? 'conceptlist': 'conceptlist-dimmed';
+        concepts = <ul id={ style }>
+              { conceptParts }
+            </ul>;
+      }
     }
-    return <span />;
+    return concepts;
   }
 
-  get_question_text() {
-    var text = <span>{this.props.question}</span>;
-    if (this.state.has_ent_data) {
-      // display text with highlighted entities
-      var sentence = [];
-      this.state.words.forEach(function(w) {
+  display_prompt() {
+    var prompt = <span>{ this.state.prompt }</span>;
+    if (this.state.displayAlchemy && this.state.loadedAlchemy) {
+      // display prompt with highlighted entities
+      var promptParts = [];
+      this.state.alchemy.words.forEach(function(w) {
         if (w.tag) {
-          sentence.push(<span className={ w.tag }>{ w.fragment }</span>);
+          promptParts.push(<span className={ w.tag }>{ w.fragment }</span>);
         } else {
-          sentence.push(<span>{ w.fragment }</span>);
+          promptParts.push(<span>{ w.fragment }</span>);
         }
       });
-      text = sentence;
+      promptParts.push("?");
+      prompt = promptParts;
     }
-    return text;
+    return prompt;
   }
 
   render() {
-  	var num_widgets = 3;
-  	var offset = -32 * num_widgets;
-  	var highlight_css = this.state.selected ? 'pdf-question-selected' : '';
+  	var rr_search_highlight = this.state.isSelected ? " question-rr" : "";
 
-    var concepts = this.get_concepts();
-    var question_text = this.get_question_text();
+    var prompt = this.display_prompt();
+    var concepts = this.display_concepts();
 
-
-    return <div className={"pdf-question "+highlight_css} onClick={() => this.clicked()}>
-    	<h4 className="glyphicon glyphicon-asterisk q_anchor" style={{left: offset+'px'}}>{this.props.id}<i className="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i className="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify" onClick={() => this.alchemify()}></i></h4>
-    	  <h4 className="glyphicon" style={{left: offset+'px'}} >{ question_text }</h4>
-        {concepts}
+    // TODO David - 3/4 - Switch to bootstrap card
+    return <div className = { "card question" + rr_search_highlight }>
+        { /* Question options -- id, edit, alchemy, etc. */ }
+        <div className="card-header">
+          <ul className="nav nav-pills card-header-pills question-options">
+            <li className="nav-item question-id">
+              Question { this.state.id }
+            </li>
+            <li className="nav-item">
+              |<i className="fa fa-pencil" title="Edit Question" data-toggle="tooltip" data-placement="bottom"></i>
+            </li>
+            <li className="nav-item">
+              |<i className="fa fa-flask" title="Alchemify" onClick={ () => this.alchemify() } data-toggle="tooltip" data-placement="bottom"></i >
+            </li>
+            <li className="nav-item">
+              |<i className="fa fa-search" title="Retrieve and Rank" onClick={ () => this.rr_search() } data-toggle="tooltip" data-placement="bottom"></i >
+            </li>
+          </ul>
+        </div>
+        <div className="card-block">
+          { /* Question itself */ }
+          <h4 className="card-title">{ prompt }</h4>
+          <div className="card-text">
+            { /* TODO - Render question choices based on type */ }
+          </div>
+          <div>
+            { /* Question content */ }
+            <div>
+              { concepts }
+            </div>
+          </div>
+        </div>
     </div>
   }
 };
