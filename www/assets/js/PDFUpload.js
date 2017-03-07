@@ -52,10 +52,7 @@ var PDFUploadDemo = React.createClass({
   },
 
   render: function () {
-    var header = <div>
-      <h3>Document Upload Component</h3>
-      <p>Starter React component for uploading a document and processing on the backend. Will now display questions as QuestionBase, and will load alchemy concepts.</p>
-      </div>;
+    var header = <div></div>;
     if (this.state.finished) {
       return (
         <div>
@@ -75,7 +72,6 @@ var PDFUploadDemo = React.createClass({
           </ul>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              //return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
               return <QuestionBase question={object.text} id={i+1} key={i}/>;
           })}
           </ListGroup>
@@ -96,7 +92,7 @@ var PDFUploadDemo = React.createClass({
                 </div>}
               </div>
             </div> 
-          : <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop}>
+          : <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop} rejectStyle='true'>
               <Alert bsStyle="warning">
                 Drag a <strong>PDF</strong> here to extract the text from it.
               </Alert>

@@ -151,7 +151,6 @@ class ClusterTableInfo extends React.Component {
     var configs = this.state.configs;
     var collections = this.state.collections;
     var self = this;
-    //var rankers = this.state.rankers;
     clusters.forEach( function(cluster, i) {
       var name = cluster.cluster_name + ' ( ' + cluster.solr_cluster_id + ' )';
       var loading_icon = <i className="fa fa-refresh fa-spin" />;

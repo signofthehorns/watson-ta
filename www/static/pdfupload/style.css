@@ -426,3 +426,7 @@ div.ReactTags__suggestions ul li.active {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.pad-left {
+    padding-left: 5px;
+}

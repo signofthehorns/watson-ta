@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^nlc/(?P<sentence>.{0,350})/$',
         nlc_classify.GetClassifyQuestion, name='Get NLC Classify'),
     url(r'^upload/$', upload.upload_file, name='Upload'),
+    url(r'^rr_search/(?P<query>.{0,350})/(?P<collection>.{0,350})/(?P<ranker_id>.{0,350})/$',
+        rr_search.GetRRSearchWithRanking, name='Get RR Search with Ranking'),
     url(r'^rr_search/(?P<query>.{0,350})/(?P<collection>.{0,350})/$',
         rr_search.GetRRSearch, name='Get RR Search'),
     url(r'^list_clusters/$',solr.list_clusters, name='List Solr Clusters'),
