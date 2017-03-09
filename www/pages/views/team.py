@@ -21,7 +21,6 @@ def get_team_data():
         team_members.append(data)
     return team_members
 
-@login_required(login_url="/login/")
 def GetTeamPage(request):
     template = loader.get_template('pages/team.html')
     team_data = get_team_data()
