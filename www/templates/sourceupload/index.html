@@ -4,16 +4,22 @@
 {% load render_bundle from webpack_loader %}
 
 {% block content %}
+<!--TO DO: link in another file -->
+<script type="text/jsx" src="sidenavbarLink.jsx"></script>
+<script type="text/jsx" src="sidenavbarItem.jsx"></script>
+<script type="text/jsx" src="sidenavbar.jsx"></script>
+<script type="text/javascript" src="data.js"></script>
+
 <br>
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
-      <nav class="navbar-default navbar-fixed-side">
+      <nav class="navbar navbar-default navbar-fixed-side">
 		<div class="container">
 			<div class="navbar-header"><a class="navbar-brand" href="./">Classes</a></div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Biology<b class="caret"></b></a>
+			<div class="collapse navbar-collapse" id="dynamic-navbar-side">
+				<!--<ul class="nav navbar-nav">
+					<li class="dropdown dropdown-class"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Biology<b class="caret"></b></a>
 						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Homeworks<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a class="fa fa-file-word o"href="#">HW 1</a></li>
@@ -22,9 +28,9 @@
 						</li>
 						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Quizzes<b class="caret"></b></a></li>
 					</li>		
-					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Physics<b class="caret"></b></a>
+					<li class="dropdown dropdown-class"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Physics<b class="caret"></b></a>
 					</li>
-				</ul>
+				</ul>-->
 			</div>
 		</div>
       </nav>
@@ -47,4 +53,11 @@
     </div>
   </div>
 </div>
+<script type="text/jsx">
+  /** @jsx React.DOM */
+  window.onload = React.renderComponent(
+    <SideNavBar items={data} />,
+    document.querySelector('#dynamic-navbar-side')
+  );
+</script>
 {% endblock %}
