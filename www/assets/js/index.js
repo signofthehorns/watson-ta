@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import RRSearch from './RRSearch';
 import SolrInfo from './SolrInfo';
 import UploadEditQuestions from './UploadEditQuestions';
+import SideUserMenu from './SideUserMenu';
 
 // The following statements check whether an element exists before attempting to render them
 // This prevents silent JS null element errors
@@ -27,6 +28,9 @@ if (elm = document.getElementById('edit-quiz'))
 
 if (elm = document.getElementById('upload-questions'))
   ReactDOM.render(<UploadEditQuestions question={'What are the Deathly Hallows?'} id={0}/>, elm);
+
+if (elm = document.getElementById('side-user-menu'))
+  ReactDOM.render(<SideUserMenu />, elm);
 
 // Example of dispatching an action via flux in order to set the retrieve and rank question
 import EditActions from './EditActions';

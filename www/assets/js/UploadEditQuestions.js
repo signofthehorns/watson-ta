@@ -98,7 +98,6 @@ class QuestionBase extends React.Component {
         displayAlchemy: !this.state.displayAlchemy
       })
     }
-    return;
   }
 
   rr_search_highlight(id) {
