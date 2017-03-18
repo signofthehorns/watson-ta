@@ -14,18 +14,18 @@ PASS = "watsonta"
 
 #open home page
 browser = webdriver.Firefox()
-browser.get("http://localhost:8000/pages/home")
+browser.get("http://localhost:8000/")
+#navigate to pdf upload page
+browser.find_element_by_link_text("PDF Upload").click()
+sleep(5.0)
 #log in
 browser.find_element_by_id("id_username").send_keys(USER)
 browser.find_element_by_id("id_password").send_keys(PASS)
 browser.find_element_by_tag_name("input").submit()
 sleep(7.0)
-#navigate to pdf upload page
-browser.find_element_by_link_text("PDF Upload").click();
-sleep(5.0)
 
 #navigate to editor page
-browser.find_element_by_link_text("Editor").click();
+browser.find_element_by_link_text("Editor").click()
 sleep(5.0)
 
 #navigate to team page - TEAM PAGE NOT SET UP YET
@@ -33,5 +33,5 @@ sleep(5.0)
 #sleep(1000)
 
 #navigate to home page
-browser.find_element_by_link_text("💡 Watson-TA").click();
+browser.find_element_by_link_text("💡 Watson-TA").click()
 
