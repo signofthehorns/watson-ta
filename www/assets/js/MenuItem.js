@@ -3,9 +3,15 @@ import UserMenu from './UserMenu';
 
 export default class MenuItem extends React.Component {
   generateLink() {
-    return <a className="dropdown-toggle" data-toggle="dropdown" href={this.props.url}>
+	if(this.props.doc == "True"){
+		return (<a href={this.props.url}>
+      {this.props.text}
+    </a>)
+	}else{
+    return (<a className="dropdown-toggle" data-toggle="dropdown" href={this.props.url}>
       {this.props.text}<b className="caret"></b>
-    </a>
+    </a>)
+	}
   }
 
   generateSubmenu() {
@@ -14,9 +20,16 @@ export default class MenuItem extends React.Component {
   }
 
   render() {
-    return <li className = "dropdown dropdown-class">
+	if(this.props.classcategory == "True"){
+		return (<li className = "dropdown dropdown-menu dropdown-header">
       { this.generateLink() }
       { this.generateSubmenu() }
-    </li>
+    </li>)
+	}else{
+    return (<li className = "dropdown dropdown-class">
+      { this.generateLink() }
+      { this.generateSubmenu() }
+    </li>)
+	}
   }
 };

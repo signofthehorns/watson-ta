@@ -16,21 +16,24 @@ def GetUserMenuRequest(request):
                     "submenu": None
                 },
                 {
-                    "text": "Chemistry",
+                    "text": "CSE",
                     "url": "#",
                     "submenu": [
                         {
                             "text": "Homeworks",
                             "url": "#",
+							"classcategory": "True",
                             "submenu": [
                                 {
                                     "text": "HW1",
                                     "url": "#",
+									"doc": "True",
                                     "submenu": None
                                 },
                                 {
                                     "text": "HW2",
                                     "url": "#",
+									"doc": "True",
                                     "submenu": None
                                 }
                             ]
@@ -38,6 +41,7 @@ def GetUserMenuRequest(request):
                         {
                             "text": "Quizzes",
                             "url": "#",
+							"classcategory": "True",
                             "submenu": None
                         }
                     ]

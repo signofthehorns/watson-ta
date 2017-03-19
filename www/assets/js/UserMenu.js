@@ -8,14 +8,14 @@ export default class UserMenu extends React.Component {
   }
 
   _generateMenu(item, i) {
-    return <MenuItem text={item.text} url={item.url} submenu={item.submenu} subitem={item.subitem} key={i+1} />
+    return <MenuItem text={item.text} url={item.url} submenu={item.submenu} classcategory={item.classcategory} doc={item.doc} key={i+1} />
   }
 
   render() {
     var menu = this.props.menu.map(this._generateMenu);
 
     return <ul className="nav navbar-nav" key={0} >
-      { menu }
+      	{ menu }
     </ul>
   }
 };
