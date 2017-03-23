@@ -132,7 +132,7 @@ def extract_top_levels_pdf(fp, top_levels=[]):
     return split_pdf(fp, pagenos=pagenos)
 
 pdf_writer = extract_top_levels_pdf(fp, top_levels=[1])
-with open('chatper1.pdf', 'wb') as f:
+with open('chapter1.pdf', 'wb') as f:
     # Note the receiver and argument order
     pdf_writer.write(f)
 
