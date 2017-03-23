@@ -11,6 +11,7 @@ ndg-httpsclient==0.4.2
 packaging==16.8
 pbr==1.10.0
 pdfminer==20140328
+PyPDF2==1.26.0
 py==1.4.32
 pyasn1==0.2.2
 pycparser==2.17
