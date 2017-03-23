@@ -99,3 +99,4 @@ email    = "admin@example.com"
 
 ![Tyler...](images/bitmoji-lol.png)
 ![The Dab](images/bitmoji-dab.png)
+![Dalton](images/dalton.jpg)
