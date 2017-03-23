@@ -98,4 +98,5 @@ email    = "admin@example.com"
   - David Soller
 
 ![Tyler...](images/bitmoji-lol.png)
-![The Dab](images/bitmoji-dab.png)
+![Bill](images/bill.png)
+![Dalton](images/dalton.jpg)
