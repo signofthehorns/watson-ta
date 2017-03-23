@@ -87,30 +87,6 @@ ul {
     list-style-type: none;
 }
 
-.entity-positive {
-    background-color: #c2ffc0;
-    border-radius: 3px;
-    border: 1px solid #67db64;
-    margin: 2px;
-    padding: 2px;
-}
-
-.entity-neutral {
-    background-color: #fff3c0;
-    border-radius: 3px;
-    border: 1px solid #f6e07b;
-    margin: 2px;
-    padding: 2px;
-}
-
-.entity-negative {
-    background-color: #ffc3c0;
-    border-radius: 3px;
-    border: 1px solid #f6827b;
-    margin: 2px;
-    padding: 2px;
-}
-
 .nlc-spaced {
     margin-top: 10px;
 }
@@ -133,12 +109,6 @@ ul {
     margin: 2px;
     padding-left: 5px;
     padding-right: 5px;
-}
-
-.q_alchemy:hover {
-    color: #fafafa;
-    background-color: #828282;
-    border-radius: 2px;
 }
 
 ul {
@@ -192,15 +162,6 @@ li.bottomborder {
     padding-right: 5px;
     border-radius: 2px;
     border: 1px solid #f2f2f2;
-}
-
-.pdf-question:hover .q_anchor {
-    background-color: #fafafa;
-    color: #bbb;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 2px;
-    border: 1px solid #e2e2e2;
 }
 
 .iconbarl {
@@ -304,29 +265,6 @@ li.bottomborder {
 .right-widget-shaded {
     background-color: #f9f9f9;
     border-radius: 5px;
-}
-
-.pdf-question:hover {
-    padding-right: 10px;
-    border-right: 4px solid #222;
-    background-color: #f9f9f9;
-}
-
-.pdf-question-selected:hover {
-    padding-right: 10px;
-    border-right: 4px solid #feea67;
-    background-color: #fcf8e2;
-}
-
-
-.pdf-question-selected {
-    padding-right: 10px;
-    border-right: 4px solid #feea67;
-    background-color: #fcf8e2;
-}
-
-.pdf-question {
-    padding: 10px;
 }
 
 div.ReactTags__tags {

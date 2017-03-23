@@ -1,3 +1,52 @@
 /*
  * Main .css file for the Watson TA project.
  */
+
+.question {
+    margin: 0em 0em 1em;
+}
+
+.question-options i {
+    margin: 0em 0.25em;
+    padding: .20em;
+}
+
+.question-options i:hover {
+    color: #fafafa;
+    background-color: #828282;
+    border-radius: 2px;
+}
+
+.question-id {
+    margin-right: 0.5em;
+}
+
+.question-rr {
+    background-color: #fcf8e2;
+}
+
+
+/* Alchemy */
+.entity-positive {
+    background-color: #c2ffc0;
+    border-radius: 3px;
+    border: 1px solid #67db64;
+    margin: 2px;
+    padding: 2px;
+}
+
+.entity-neutral {
+    background-color: #fff3c0;
+    border-radius: 3px;
+    border: 1px solid #f6e07b;
+    margin: 2px;
+    padding: 2px;
+}
+
+.entity-negative {
+    background-color: #ffc3c0;
+    border-radius: 3px;
+    border: 1px solid #f6827b;
+    margin: 2px;
+    padding: 2px;
+}

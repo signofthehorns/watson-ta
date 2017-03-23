@@ -38,6 +38,10 @@ export watson_rr_username=''
 export watson_rr_password=''
 export watson_rr_cluster_id=''
 
+# Document Conversion
+export watson_dc_username=''
+export watson_dc_password=''
+
 # Github
 export github_username=''
 export github_password=''
@@ -98,4 +102,5 @@ email    = "admin@example.com"
   - David Soller
 
 ![Tyler...](images/bitmoji-lol.png)
-![The Dab](images/bitmoji-dab.png)
+![Bill](images/bill.png)
+![Dalton](images/dalton.jpg)
