@@ -9,8 +9,6 @@ import { Form } from 'react-bootstrap';
 import EditDispatcher from './EditDispatcher';
 
 
-
-
 /* dropdown component for listing the different collections available */
 class CollectionDropdown extends React.Component {
   constructor(props, context) {
@@ -145,7 +143,7 @@ class RRSearch extends React.Component {
     
     // TODO: don't hardcode
     var current_collections = {
-      'sherlock' : ['hp_collection', 'example_collection'],
+      'sherlock' : ['hp_collection', 'example_collection', 'history_collection_with_rank', 'history_collection'],
     }
 
     var dropdown = <CollectionDropdown collections={current_collections} set_collection={(name) => this.set_collection(name)} current_collection={this.state.collection}/>;

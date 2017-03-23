@@ -4,7 +4,7 @@ from django.template import loader
 from api.views.nlc_classify import GetClassifyQuestion
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url="/login/")
+@login_required(login_url="/accounts/login/")
 def index(request):
     template = loader.get_template('pdfupload/index.html')
     test_questions = [
