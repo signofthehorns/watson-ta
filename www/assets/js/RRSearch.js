@@ -15,29 +15,51 @@ class CollectionDropdown extends React.Component {
     super(props, context);
   }
 
-  handleClick(e,name) {
+  handleCollection(e,collection) {
     e.preventDefault();
-    this.props.set_collection(name);
+    this.props.set_collection(collection);
+  }
+
+  handleRanker(e,r) {
+    e.preventDefault();
+    this.props.set_ranker(r);
   }
 
   render() {
-    var dropdown_items = [];
+    var collection_dropdown = [];
     for (var key in this.props.collections) {
-      dropdown_items.push(<h6 className="dropdown-header">{key}</h6>);
-
+      collection_dropdown.push(<h6 className="dropdown-header">{key}</h6>);
       this.props.collections[key].forEach((res) => {
-        var name = res;
-        dropdown_items.push(<button className="dropdown-item" type="button" onClick={(e) => this.handleClick(e,name)}>{res}</button>);
+        collection_dropdown.push(<button className="dropdown-item" type="button" onClick={(e) => this.handleCollection(e,res)}>{res}</button>);
       });
     }
 
-    return <span className="dropdown">
-        <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          { this.props.current_collection }
-        </button>
-        <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-          {dropdown_items}
-        </div>
+    var rankers_dropdown = [];
+    for (var key in this.props.rankers) {
+      rankers_dropdown.push(<h6 className="dropdown-header">{key}</h6>);
+      this.props.rankers[key].forEach((r) => {
+        rankers_dropdown.push(<button className="dropdown-item" type="button" onClick={(e) => this.handleRanker(e,r)}>{r.name}</button>);
+      });
+    }
+    var curr_rank = this.props.current_ranker != null ? this.props.current_ranker : 'None';
+
+    return <span> 
+        <span className="dropdown">
+          <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            { this.props.current_collection }
+          </button>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+            {collection_dropdown}
+          </div>
+        </span>
+        <span className="dropdown pad-left">
+          <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            { curr_rank }
+          </button>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenu3">
+            {rankers_dropdown}
+          </div>
+        </span>
       </span>;
   }
 }
@@ -58,12 +80,21 @@ class RRSearch extends React.Component {
         results: [],
         loading: false,
         collection: 'hp_collection',
+        ranker: null,
+        ranker_id: null,
       };
   };
 
-  set_collection(name) {
+  set_collection(coll) {
     this.setState({
-      collection: name
+      collection: coll
+    });
+  }
+
+  set_ranker(r) {
+    this.setState({
+      ranker: r.name,
+      ranker_id: r.ranker_id
     });
   }
 
@@ -78,8 +109,11 @@ class RRSearch extends React.Component {
 
   get_search_results(query) {
     // handle submission of the query
-    // console.log(query);
-    axios.get('/api/rr_search/'+encodeURIComponent(query)+'/'+encodeURIComponent(this.state.collection))
+    var url = '/api/rr_search/'+encodeURIComponent(query)+'/'+encodeURIComponent(this.state.collection);
+    if (this.state.ranker_id != null) {
+      url = '/api/rr_search/'+encodeURIComponent(query)+'/'+encodeURIComponent(this.state.collection)+'/'+encodeURIComponent(this.state.ranker_id);
+    }
+    axios.get(url)
       .then(res => {
         // TODO: do error/ null checking
         this.setState({ 
@@ -124,9 +158,14 @@ class RRSearch extends React.Component {
     var self = this;
     this.state.results.forEach(function(res) {
       var format_body = self.tagifyBody(res.body);
+      // var confidence = this
+      var confidence = <span/>;
+      if ('confidence' in res) {
+        confidence = <div><i className="fa fa-cogs" aria-hidden="true"></i> conf {res['confidence']}</div>;
+      }
       search_results.push(
         <span>
-          <li><strong>{ res.title }</strong> <i className="fa fa-file-pdf-o" aria-hidden="true"></i></li>
+          <li><strong>{ res.title }</strong>{confidence}</li>
             <ul>
               <li>
                 <blockquote className="blockquote">
@@ -141,12 +180,21 @@ class RRSearch extends React.Component {
     var num_results = this.state.question != null && !this.state.loading ? <p>Displaying {this.state.results.length} top ranked results matching the query...</p> : <span/>;
     var loading = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <span/>;
     
-    // TODO: don't hardcode
+    // TODO(bill): don't hardcode
     var current_collections = {
-      'sherlock' : ['hp_collection', 'example_collection', 'history_collection_with_rank', 'history_collection'],
+      'sherlock' : ['hp_collection', 'example_collection', 'history_collection','history_collection_with_rank'],
+    }
+    var current_rankers = {
+      'sherlock' : [{'name': 'History Ranker', 'ranker_id' : '1eec7cx29-rank-1955'}]
     }
 
-    var dropdown = <CollectionDropdown collections={current_collections} set_collection={(name) => this.set_collection(name)} current_collection={this.state.collection}/>;
+    var dropdown = <CollectionDropdown 
+      collections={current_collections} 
+      rankers={current_rankers} 
+      set_collection={(c) => this.set_collection(c)} 
+      set_ranker={(r) => this.set_ranker(r)} 
+      current_collection={this.state.collection}
+      current_ranker={this.state.ranker}/>;
 
     return (
       <div className="right-widget">

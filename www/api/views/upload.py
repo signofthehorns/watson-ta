@@ -58,8 +58,6 @@ def handle_uploaded_file(f):
 # LOL, using this decorator because of laziness right
 # now. in the future we will want to securely send
 # files
-
-
 @csrf_exempt
 def upload_file(request):
     if request.method == 'POST':
