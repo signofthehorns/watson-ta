@@ -41,7 +41,7 @@ class QuestionBase extends React.Component {
       tag_loading: true,
       // ent_loading : false,
       id: this.props.id,
-      type: "",
+      type: this.props.type,
       prompt: this.props.question,
       choices: [],
       answer: [],
@@ -179,6 +179,7 @@ class QuestionBase extends React.Component {
           <h4 className="card-title">{ prompt }</h4>
           <div className="card-text">
             { /* TODO - Render question choices based on type */ }
+            { this.state.type.class_name }
           </div>
           <div>
             { /* Question content */ }
