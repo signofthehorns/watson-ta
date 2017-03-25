@@ -112,17 +112,24 @@ class QuestionBase extends React.Component {
     EditActions.queryRetrieveAndRank(this.state.prompt);
   }
 
+  rr_search(id, query) {
+    EditActions.highlightQuestion(id);
+    EditActions.queryRetrieveAndRank(query);
+  }
+
   display_concepts() {
     var concepts = <span />;
     if (this.state.displayAlchemy && this.state.loadedAlchemy) {
       if (this.state.alchemy.concepts.length > 0) {
         var conceptParts = []
+		var alchemythis = this;
         this.state.alchemy.concepts.forEach(function(concept) {
-          conceptParts.push(<li className="conceptlistitem">
-            <a href="">{concept.text}</a>
+          conceptParts.push(<li className="conceptlistitem" onClick={ () => alchemythis.rr_search(alchemythis.state.id,concept.text) }>
+            <a>{concept.text}</a>
           </li>);
         });
-        var style = this.state.isSelected ? 'conceptlist': 'conceptlist-dimmed';
+        //var style = this.state.isSelected ? 'conceptlist': 'conceptlist-dimmed';
+		var style = 'conceptlist';
         concepts = <ul id={ style }>
               { conceptParts }
             </ul>;
