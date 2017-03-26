@@ -8,22 +8,6 @@ from doc_conversion import get_doc_coversion
 from nlc_classify import get_question_type
 
 
-def extract_questions(text):
-    text = text.replace('\t', ' ')
-    pattern = '[0-9]+(\)|\.)(?:(?![0-9]+(\)|\.)).)*'
-    res = [match.group(0) for match in re.finditer(pattern, text)]
-    obj_res = []
-    for r in res:
-        rmap = {
-            'class_name': 'TF',
-            'confidence': 0.0
-        }
-        # todo get classified result
-        obj_res.append(Classified(r[4:-1], rmap).get_map_repr())
-    # order questions and classify
-    return obj_res
-
-
 @csrf_exempt
 def upload_questions_file(request):
     if request.method == 'POST':
