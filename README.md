@@ -97,5 +97,5 @@ Team: **Sign of the Horns (aka |..|,)**
 
 Dalton Flanagan | Liv Stanley | Bill Varcho | Tyler Zeller | David Soller
 ---             | ---         | ---         | ---          | ---
-[github.com/dltn](github.com/dltn) | [github.com/livstanley29](github.com/livstanley29) | [github.com/Varcho](github.com/Varcho) | [github.com/dltn](github.com/dltn) | [github.com/3ygun](github.com/3ygun)
+[github.com/dltn](github.com/dltn) | [github.com/livstanley29](github.com/livstanley29) | [github.com/Varcho](github.com/Varcho) | [github.com/tylermzeller](github.com/tylermzeller) | [github.com/3ygun](github.com/3ygun)
 ![Dalton](images/dalton.jpg) | ![Leb](images/leb.jpg) | ![Bill](images/bill.png) | ![Tyler...](images/tyler.png) | ![David](images/david.png)
