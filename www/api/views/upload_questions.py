@@ -32,7 +32,7 @@ def upload_questions_file(request):
             questions = []
             for question in questions_raw.split('\n'):
                 question = question.strip()
-                if question != '':
+                if question != '' and question != 'no title':
                     questions.append({
                         'type': get_question_type(question),
                         'prompt': question,

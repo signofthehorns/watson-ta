@@ -44,13 +44,18 @@ class QuestionBase extends React.Component {
       type: this.props.type,
       prompt: this.props.question,
       choices: [],
-      answer: [],
+      answer: this.props.type.class_name,
       alchemy: {
         concepts: [],
         keywords: [],
         words: []
       }
     };
+
+    this.save_answer = this.save_answer.bind(this);
+    this.handle_change_sa_question = this.handle_change_sa_question.bind(this);
+    this.display_sa_question = this.display_sa_question.bind(this);
+    this.display_question = this.display_question.bind(this);
   }
 
   componentDidMount() {
@@ -112,6 +117,14 @@ class QuestionBase extends React.Component {
     EditActions.queryRetrieveAndRank(this.state.prompt);
   }
 
+  save_answer() {
+    $("questionAnswer"+this.state.id).submit();
+  }
+
+  handle_change_sa_question(event) {
+    this.setState({ answer: event.target.value });
+  }
+
   display_concepts() {
     var concepts = <span />;
     if (this.state.displayAlchemy && this.state.loadedAlchemy) {
@@ -149,11 +162,29 @@ class QuestionBase extends React.Component {
     return prompt;
   }
 
+  display_sa_question() {
+    return <form id={ "questionAnswer"+this.state.id }>
+      <textarea value={this.state.answer} onChange={this.handle_change_sa_question}></textarea>
+    </form>
+  }
+
+  display_question() {
+    // if (this.state.type === 'SA') {
+    //   return this.display_sa_question();
+    // } else if (this.state.type === 'TF') {
+    //   return this.display_tf_question();
+    // } else {
+    //   return this.display_mc_question();
+    // }
+    return this.display_sa_question();
+  }
+
   render() {
   	var rr_search_highlight = this.state.isSelected ? " question-rr" : "";
 
     var prompt = this.display_prompt();
     var concepts = this.display_concepts();
+    var answer_section = this.display_question(); 
 
     // TODO David - 3/4 - Switch to bootstrap card
     return <div className = { "card question" + rr_search_highlight }>
@@ -165,6 +196,9 @@ class QuestionBase extends React.Component {
             </li>
             <li className="nav-item">
               |<i className="fa fa-pencil" title="Edit Question" data-toggle="tooltip" data-placement="bottom"></i>
+            </li>
+            <li className="nav-item">
+              |<i class="fa fa-floppy-o" title="save progress" data-toggle="tooltip" data-placement="bottom" onClick={ () => this.save_answer() }></i>
             </li>
             <li className="nav-item">
               |<i className="fa fa-flask" title="Alchemify" onClick={ () => this.alchemify() } data-toggle="tooltip" data-placement="bottom"></i >
@@ -179,7 +213,7 @@ class QuestionBase extends React.Component {
           <h4 className="card-title">{ prompt }</h4>
           <div className="card-text">
             { /* TODO - Render question choices based on type */ }
-            { this.state.type.class_name }
+            { answer_section }
           </div>
           <div>
             { /* Question content */ }
