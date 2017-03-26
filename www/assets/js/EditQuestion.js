@@ -24,7 +24,9 @@ class QuestionBase extends React.Component {
      * displayAlchemy   -- bool       -- Should the Alchemy data be displayed?
      * tag_loading      -- bool       -- NLC Loading
      * id               -- number     -- Question ID
-     * type             -- string     -- Question Type: [ "sa", "tf", "mc" ]
+     * type             -- object     -- Question Type
+     *    class_name    -- string     -- Question Type: [ "sa", "tf", "mc" ]
+     *    confidence    -- float      -- Question Type's confidence from Watson NLC
      * question         -- string     -- Question Text: "Will we get an A?"
      * choices          -- [strings]  -- Choices for the question
      * answer           -- [strings]  -- Answer for the question
