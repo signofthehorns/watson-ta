@@ -53,8 +53,10 @@ class QuestionBase extends React.Component {
     };
 
     this.save_answer = this.save_answer.bind(this);
-    this.handle_change_sa_question = this.handle_change_sa_question.bind(this);
+    this.handle_answer_change = this.handle_answer_change.bind(this);
     this.display_sa_question = this.display_sa_question.bind(this);
+    this.display_tf_question = this.display_tf_question.bind(this);
+    this.display_mc_question = this.display_mc_question.bind(this);
     this.display_question = this.display_question.bind(this);
   }
 
@@ -121,7 +123,7 @@ class QuestionBase extends React.Component {
     $("questionAnswer"+this.state.id).submit();
   }
 
-  handle_change_sa_question(event) {
+  handle_answer_change(event) {
     this.setState({ answer: event.target.value });
   }
 
@@ -164,19 +166,36 @@ class QuestionBase extends React.Component {
 
   display_sa_question() {
     return <form id={ "questionAnswer"+this.state.id }>
-      <textarea value={this.state.answer} onChange={this.handle_change_sa_question}></textarea>
+      <textarea value={this.state.answer} onChange={this.handle_answer_change}></textarea>
+    </form>
+  }
+
+  display_tf_question() {
+    return <form id={ "questionAnswer"+this.state.id } onChange={this.handle_answer_change} >
+      <input type="radio" value="True" name="tf"/>True
+      <input type="radio" value="False" name="tf"/>False
+    </form>
+  }
+
+  display_mc_question() {
+    return <form id={ "questionAnswer"+this.state.id } onChange={this.handle_answer_change} >
+      <input type="radio" value="a" name="mc"/>a.
+      <input type="radio" value="b" name="mc"/>b.
+      <input type="radio" value="c" name="mc"/>c.
+      <input type="radio" value="d" name="mc"/>d.
     </form>
   }
 
   display_question() {
-    // if (this.state.type === 'SA') {
-    //   return this.display_sa_question();
-    // } else if (this.state.type === 'TF') {
-    //   return this.display_tf_question();
-    // } else {
-    //   return this.display_mc_question();
-    // }
-    return this.display_sa_question();
+    var type = this.state.type.class_name;
+    { /* React Docs have great ReactForm help: https://facebook.github.io/react/docs/forms.html */}
+    if (type === 'MC') {
+      return this.display_mc_question();
+    } else if (type === 'TF') {
+      return this.display_tf_question();
+    } else { // 'SA'
+      return this.display_sa_question();
+    }
   }
 
   render() {
@@ -198,7 +217,7 @@ class QuestionBase extends React.Component {
               |<i className="fa fa-pencil" title="Edit Question" data-toggle="tooltip" data-placement="bottom"></i>
             </li>
             <li className="nav-item">
-              |<i class="fa fa-floppy-o" title="save progress" data-toggle="tooltip" data-placement="bottom" onClick={ () => this.save_answer() }></i>
+              |<i className="fa fa-floppy-o" title="Save Answer" onClick={ () => this.save_answer() } data-toggle="tooltip" data-placement="bottom"></i>
             </li>
             <li className="nav-item">
               |<i className="fa fa-flask" title="Alchemify" onClick={ () => this.alchemify() } data-toggle="tooltip" data-placement="bottom"></i >
