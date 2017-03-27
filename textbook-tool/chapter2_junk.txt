@@ -1,0 +1,141 @@
+no title
+2 | THE CHEMICAL FOUNDATION OF LIFE
+Figure 2.1 Atoms are the building blocks of molecules found in the universe-air, soil, water, rocks . . . and also the cells of all living organisms. In this model of an organic molecule, the atoms of carbon (black), hydrogen (white), nitrogen (blue), oxygen (red), and sulfur (yellow) are shown in proportional atomic size. The silver rods indicate chemical bonds. (credit: modification of work by Christian Guthier)
+Chapter Outline
+2.1: Atoms, Isotopes, Ions, and Molecules: The Building Blocks
+2.2: Water
+2.3: Carbon
+Introduction
+2.1 | Atoms, Isotopes, Ions, and Molecules: The Building Blocks
+By the end of this section, you will be able to: • Define matter and elements • Describe the interrelationship between protons, neutrons, and electrons • Compare the ways in which electrons can be donated or shared between atoms • Explain the ways in which naturally occurring elements combine to create molecules, cells, tissues, organ systems, and organisms
+Approximate Percentage of Elements in Living Organisms (Humans) Compared to the Non-living World
+Element Life (Humans) Atmosphere Earth's Crust
+Oxygen (O) 65% 21% 46%
+Carbon (C) 18% trace trace
+Hydrogen (H) 10% trace 0.1%
+Nitrogen (N) 3% 78% trace
+Table 2.1
+The Structure of the Atom
+Protons, Neutrons, and Electrons
+Charge Mass (amu) Location
+Proton +1 1 nucleus
+Neutron 0 1 nucleus
+Electron -1 0 orbitals
+Table 2.2
+Atomic Number and Mass
+Figure 2.3 Carbon has an atomic number of six, and two stable isotopes with mass numbers of twelve and thirteen, respectively. Its relative atomic mass is 12.011 How many neutrons do carbon-12 and carbon-13 have, respectively?
+Isotopes
+Carbon Dating
+After approximately 5,730 years, half of the starting concentration of 14C will have been converted back to 14N. The time it takes for half of the original concentration of an isotope to decay back to its more stable
+Figure 2.4 The age of carbon-containing remains less than about 50,000 years old, such as this pygmy mammoth, can be determined using carbon dating. (credit: Bill Faulkner, NPS)
+To learn more about atoms, isotopes, and how to tell one isotope from another, visit this site (http://openstaxcollege.org/ l/atoms_isotopes) and run the simulation.
+The Periodic Table
+Figure 2.5 The periodic table shows the atomic mass and atomic number of each element. The atomic number appears above the symbol for the element and the approximate atomic mass appears below it.
+Electron Shells and the Bohr Model
+Electron Orbitals
+Figure 2.8 The s subshells are shaped like spheres. Both the 1n and 2n principal shells have an s orbital, but the size of the sphere is larger in the 2n orbital. Each sphere is a single orbital. p subshells are made up of three dumbbell-shaped orbitals. Principal shell 2n has a p subshell, but shell 1 does not.
+Watch this visual animation (http://openstaxcollege.org/l/orbitals) to see the spatial arrangement of the p and s orbitals.
+Chemical Reactions and Molecules
+Figure 2.9 Two or more atoms may bond with each other to form a molecule. When two hydrogens and an oxygen share electrons via covalent bonds, a water molecule is formed.
+2H + O → H2 O
+2H2 O2 (hydrogen peroxide) → 2H2 O (water) + O2 (oxygen)
+Figure 2.10 The oxygen atoms in an O2 molecule are joined by a double bond.
+HCO3− + H+ ↔ H2 CO3
+HCO3− + H+ ↔ H2 CO3 ↔ CO2 + H2 O
+Ions and Ionic Bonds
+Figure 2.11 In the formation of an ionic compound, metals lose electrons and nonmetals gain electrons to achieve an octet.
+Covalent Bonds and Other Bonds and Interactions
+View this short video (http://openstaxcollege.org/l/ionic_covalent) to see an animation of ionic and covalent bonding.
+Polar Covalent Bonds
+Nonpolar Covalent Bonds
+Hydrogen Bonds and Van Der Waals Interactions
+Pharmaceutical Chemist
+2.2 | Water
+By the end of this section, you will be able to: • Describe the properties of water that are critical to maintaining life • Explain why water is an excellent solvent • Provide examples of water's cohesive and adhesive properties • Discuss the role of acids, bases, and buffers in homeostasis
+Water's Polarity
+Figure 2.13 Oil and water do not mix. As this macro image of oil and water shows, oil does not dissolve in water but forms droplets instead. This is due to it being a nonpolar compound. (credit: Gautam Dogra).
+Water's States: Gas, Liquid, and Solid
+Figure 2.14 Hydrogen bonding makes ice less dense than liquid water. The (a) lattice structure of ice makes it less dense than the freely flowing molecules of liquid water, enabling it to (b) float on water. (credit a: modification of work
+by Jane Whitney, image created using Visual Molecular Dynamics (VMD) software [1]
+; credit b: modification of work by Carlos Ponte)
+Click here (http://openstaxcollege.org/l/ice_lattice2) to see a 3-D animation of the structure of an ice lattice. (Image
+credit: Jane Whitney. Image created using Visual Molecular Dynamics VMD software. [2]
+)
+Water's High Heat Capacity
+Water's Heat of Vaporization
+1. W. Humphrey W., A. Dalke, and K. Schulten, "VMD-Visual Molecular Dynamics," Journal of Molecular Graphics 14 (1996): 33-38. 2. W. Humphrey W., A. Dalke, and K. Schulten, "VMD-Visual Molecular Dynamics," Journal of Molecular Graphics 14 (1996): 33-38.
+Water's Solvent Properties
+Water's Cohesive and Adhesive Properties
+Figure 2.16 The weight of the needle is pulling the surface downward; at the same time, the surface tension is pulling it up, suspending it on the surface of the water and keeping it from sinking. Notice the indentation in the water around the needle. (credit: Cory Zanker)
+Figure 2.17 Capillary action in a glass tube is caused by the adhesive forces exerted by the internal surface of the glass exceeding the cohesive forces between the water molecules themselves. (credit: modification of work by Pearson-Scott Foresman, donated to the Wikimedia Foundation)
+Figure 2.18 Water's cohesive and adhesive properties allow this water strider (Gerris sp.) to stay afloat. (credit: Tim Vickers)
+pH, Buffers, Acids, and Bases
+H2 O13I46 ↔ H+ 13aq46+ OH- 13aq46
+to 6.02 x 1023 particles of the substance. Therefore, 1 mole of water is equal to 6.02 x 1023 water molecules. The pH is
+Figure 2.19 The pH scale measures the concentration of hydrogen ions (H+) in a solution. (credit: modification of work by Edward Stevens)
+Watch this video (http://openstaxcollege.org/l/pH_scale) for a straightforward explanation of pH and its logarithmic scale.
+So how can organisms whose bodies require a near-neutral pH ingest acidic and basic substances (a human drinking orange
+Figure 2.20 This diagram shows the body's buffering of blood pH levels. The blue arrows show the process of raising pH as more CO2 is made. The purple arrows indicate the reverse process: the lowering of pH as more bicarbonate is
+To learn more about water. Visit the U.S. Geological Survey Water Science for Schools (http://openstaxcollege.org/l/ all_about_water) All About Water! website.
+2.3 | Carbon
+By the end of this section, you will be able to: • Explain why carbon is important for life • Describe the role of functional groups in biological molecules
+Hydrocarbons
+Figure 2.21 Methane has a tetrahedral geometry, with each of the four hydrogen atoms spaced 109.5° apart.
+Hydrocarbon Chains
+Hydrocarbon Rings
+Figure 2.23 Carbon can form five-and six membered rings. Single or double bonds may connect the carbons in the ring, and nitrogen may be substituted for carbon.
+Isomers
+ Saturated fats are a solid at room temperature and usually of animal origin.
+Figure 2.25 These space-filling models show a cis (oleic acid) and a trans (eliadic acid) fatty acid. Notice the bend in the molecule cause by the cis configuration.
+Enantiomers
+Figure 2.26 D-alanine and L-alanine are examples of enantiomers or mirror images. Only the L-forms of amino acids are used to make proteins.
+Functional Groups
+phospholipids. This carboxyl group ionizes to release hydrogen ions (H+) from the COOH group resulting in the negatively
+Figure 2.27 The functional groups shown here are found in many different biological molecules.
+Figure 2.28 Hydrogen bonds connect two strands of DNA together to create the double-helix structure.
+acid adhesion aliphatic hydrocarbon anion aromatic hydrocarbon atom atomic mass atomic number balanced chemical equation
+base
+buffer calorie capillary action
+cation chemical bond chemical reaction chemical reactivity cohesion
+compound covalent bond
+dissociation
+electrolyte electron
+electron configuration
+electron orbital
+electron transfer
+KEY TERMS
+molecule that donates hydrogen ions and increases the concentration of hydrogen ions in a solution attraction between water molecules and other molecules hydrocarbon consisting of a linear chain of carbon atoms negative ion that is formed by an atom gaining one or more electrons hydrocarbon consisting of closed rings of carbon atoms the smallest unit of matter that retains all of the chemical properties of an element calculated mean of the mass number for an element's isotopes total number of protons in an atom statement of a chemical reaction with the number of each type of atom equalized for both the products and reactants molecule that donates hydroxide ions or otherwise binds excess hydrogen ions and decreases the concentration of hydrogen ions in a solution
+substance composed of molecules consisting of atoms of at least two different elements type of strong bond formed between two of the same or different elements; forms when electrons are shared between atoms
+release of an ion from a molecule such that the original molecule now consists of an ion and the charged remains of the original, such as when water dissociates into H+ and OH-ion necessary for nerve impulse conduction, muscle contractions and water balance negatively charged subatomic particle that resides outside of the nucleus in the electron orbital; lacks functional mass and has a negative charge of -1 unit
+movement of electrons from one element to another; important in creation of ionic bonds electronegativity
+element
+enantiomers
+equilibrium evaporation
+functional group geometric isomer
+heat of vaporization of water hydrocarbon hydrogen bond
+hydrophilic hydrophobic inert gas ion ionic bond irreversible chemical reaction isomers isotope law of mass action
+litmus paper
+mass number matter molecule neutron noble gas nonpolar covalent bond
+group of atoms that provides or imparts a specific function to a carbon skeleton isomer with similar bonding patterns differing in the placement of atoms alongside a double covalent bond
+high amount of energy required for liquid water to turn into water vapor molecule that consists only of carbon and hydrogen weak bond between slightly positively charged hydrogen atoms to slightly negatively charged atoms in other molecules
+type of covalent bond that forms between atoms when electrons are shared equally between them
+core of an atom; contains protons and neutrons octet rule orbital organic molecule periodic table
+pH paper pH scale polar covalent bond
+product proton radioisotope reactant reversible chemical reaction
+solvent specific heat capacity
+sphere of hydration
+structural isomers substituted hydrocarbon
+surface tension
+reaction that functions bi-directionally, where products may turn into reactants if their concentration is great enough substance capable of dissolving another substance the amount of heat one gram of a substance must absorb or lose to change its temperature by one degree Celsius
+when a polar water molecule surrounds charged or polar molecules thus keeping them dissolved and in solution
+molecules that share a chemical formula but differ in the placement of their chemical bonds hydrocarbon chain or ring containing an atom of another element in place of one of the backbone carbons
+tension at the surface of a body of liquid that prevents the molecules from separating; created by the attractive cohesive forces between the molecules of the liquid outermost shell of an atom very weak interaction between molecules due to temporary charges attracting atoms that are very close together
+CHAPTER SUMMARY
+2.3 Carbon
+ART CONNECTION QUESTIONS
+1. Figure 2.3 How many neutrons do carbon-12 and carbon-13 have, respectively?
+2. Figure 2.7 An atom may give, take, or share electrons with another atom to achieve a full valence shell, the most stable electron configuration. Looking at this figure, how many electrons do elements in group 1 need to lose in order to achieve a stable electron configuration? How many electrons do elements in groups 14 and 17 need to gain to achieve a stable configuration?
+REVIEW QUESTIONS
+a. shells 1 and 2 are full, and shell 3 has nine electrons
+b. shells 1, 2 and 3 are full and shell 4 has three electrons
+CRITICAL THINKING QUESTIONS
