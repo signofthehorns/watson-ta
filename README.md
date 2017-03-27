@@ -93,7 +93,7 @@ email    = "admin@example.com"
 
 ## The Team
 
-Team: **Sign of the Horns (aka |..|,)**
+Team: **Sign of the Horns (aka 🤘)**
 
 Dalton Flanagan | Liv Stanley | Bill Varcho | Tyler Zeller | David Soller
 ---             | ---         | ---         | ---          | ---
