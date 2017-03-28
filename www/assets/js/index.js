@@ -1,7 +1,6 @@
 import EditQuizContainer from './EditQuizContainer';
 import PDFUploadDemo from './PDFUpload';
 import PDFView from './PDFView';
-import {QuestionBox} from './Question';
 import ReactDOM from 'react-dom';
 import RRSearch from './RRSearch';
 import SolrInfo from './SolrInfo';
@@ -10,9 +9,6 @@ import EditQuestion from './EditQuestion';
 // The following statements check whether an element exists before attempting to render them
 // This prevents silent JS null element errors
 var elm = null;
-if (elm = document.getElementById('react-comp'))
-  ReactDOM.render(<QuestionBox />, elm);
-
 if (elm = document.getElementById('react-pdf'))
   ReactDOM.render(<PDFUploadDemo />, elm);
 
