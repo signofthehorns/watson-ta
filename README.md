@@ -93,14 +93,9 @@ email    = "admin@example.com"
 
 ## The Team
 
-- Team: **Sign of the Horns (aka |..|,)**
-- Members:
-  - Dalton Flanagan
-  - Liv Stanley
-  - Bill Varcho
-  - Tyler Zeller
-  - David Soller
+Team: **Sign of the Horns (aka 🤘)**
 
-![Tyler...](images/bitmoji-lol.png)
-![Bill](images/bill.png)
-![Dalton](images/dalton.jpg)
+Dalton Flanagan | Liv Stanley | Bill Varcho | Tyler Zeller | David Soller
+---             | ---         | ---         | ---          | ---
+[github.com/dltn](https://github.com/dltn) | [github.com/livstanley29](https://github.com/livstanley29) | [github.com/Varcho](https://github.com/Varcho) | [github.com/tylermzeller](https://github.com/tylermzeller) | [github.com/3ygun](https://github.com/3ygun)
+![Dalton](images/dalton.jpg) | ![Leb](images/leb.jpg) | ![Bill](images/bill.png) | ![Tyler...](images/tyler.png) | ![David](images/david.png)

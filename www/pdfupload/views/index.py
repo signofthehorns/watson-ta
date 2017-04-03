@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-from api.views.nlc_classify import GetClassifyQuestion
+from api.views.nlc_classify import classify_questions
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/accounts/login/")
@@ -14,7 +14,7 @@ def index(request):
     ]
     results = []
     for question in test_questions:
-        results.append(GetClassifyQuestion(request, question))
+        results.append(classify_questions(request, question))
     context = {
         'classifications': results,
     }
