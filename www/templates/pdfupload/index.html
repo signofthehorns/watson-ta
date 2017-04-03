@@ -49,18 +49,15 @@
         </div>
       </h1>
       <div id="react-pdf">
-        {% render_bundle 'main' %}
-      </div>
-      <div id="pdf-view">
-        {% render_bundle 'main' %}
+        <!-- The Editing App -->
       </div>
     </div>
     <div class="col">
       <div id="rr-search">
-        {% render_bundle 'main' %}
+        <!-- Knowledge Base -->
       </div>
       <div id="solr-collections">
-        {% render_bundle 'main' %}
+        <!-- Command Center -->
       </div>
     </div>
   </div>
@@ -70,4 +67,5 @@
     $('[data-toggle="tooltip"]').tooltip()
   })
 </script>
+{% render_bundle 'main' %}
 {% endblock %}
