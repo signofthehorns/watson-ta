@@ -9,7 +9,7 @@ import { ListGroupItem } from 'react-bootstrap';
 var Dropzone = require('react-dropzone');
 import { ProgressBar } from 'react-bootstrap';
 import QuestionItem from './Question'
-import QuestionBase from './UploadEditQuestions'
+import QuestionBase from './EditQuestion'
 
 var PDFUploadDemo = React.createClass({
   getInitialState: function () {
@@ -41,12 +41,12 @@ var PDFUploadDemo = React.createClass({
 
     var self = this;
     // upload the file to the server 
-    axios.post('/api/upload/', data, config)
+    axios.post('/api/upload/questions/', data, config)
       .then(function (res) {
         self.setState({
           files: acceptedFiles,
           finished: res.data.success,
-          questions: res.data.text
+          questions: res.data.questions
         })
       }.bind(this));
   },
@@ -72,7 +72,8 @@ var PDFUploadDemo = React.createClass({
           </ul>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              return <QuestionBase question={object.text} id={i+1} key={i}/>;
+              //return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
+              return <QuestionBase question={object.prompt} type={object.type} id={i+1} key={i}/>;
           })}
           </ListGroup>
         </div>
