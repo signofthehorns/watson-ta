@@ -60,6 +60,9 @@ class QuestionBase extends React.Component {
     this.display_tf_question = this.display_tf_question.bind(this);
     this.display_mc_question = this.display_mc_question.bind(this);
     this.display_question = this.display_question.bind(this);
+    this.rr_search = this.rr_search.bind(this);
+    this.display_concepts = this.display_concepts.bind(this);
+    this.display_prompt = this.display_prompt.bind(this);
   }
 
   componentDidMount() {
@@ -116,9 +119,9 @@ class QuestionBase extends React.Component {
     });
   }
 
-  rr_search() {
+  rr_search(query) {
     EditActions.highlightQuestion(this.state.id);
-    EditActions.queryRetrieveAndRank(this.state.prompt);
+    EditActions.queryRetrieveAndRank(query);
   }
 
   save_answer() {
@@ -134,12 +137,13 @@ class QuestionBase extends React.Component {
     if (this.state.displayAlchemy && this.state.loadedAlchemy) {
       if (this.state.alchemy.concepts.length > 0) {
         var conceptParts = []
-        this.state.alchemy.concepts.forEach(function(concept) {
-          conceptParts.push(<li className="conceptlistitem">
-            <a href="">{concept.text}</a>
+        this.state.alchemy.concepts.forEach((concept) => {
+          conceptParts.push(<li className="conceptlistitem" onClick={ () => this.rr_search(concept.text) }>
+            { concept.text }
           </li>);
         });
-        var style = this.state.isSelected ? 'conceptlist': 'conceptlist-dimmed';
+        //var style = this.state.isSelected ? 'conceptlist': 'conceptlist-dimmed';
+		var style = 'conceptlist';
         concepts = <ul id={ style }>
               { conceptParts }
             </ul>;
@@ -153,11 +157,11 @@ class QuestionBase extends React.Component {
     if (this.state.displayAlchemy && this.state.loadedAlchemy) {
       // display prompt with highlighted entities
       var promptParts = [];
-      this.state.alchemy.words.forEach(function(w) {
-        if (w.tag) {
-          promptParts.push(<span className={ w.tag }>{ w.fragment }</span>);
+      this.state.alchemy.words.forEach((word) => {
+        if (word.tag) {
+          promptParts.push(<span className={ word.tag } onClick={ () => this.rr_search(word.fragment) }>{ word.fragment }</span>);
         } else {
-          promptParts.push(<span>{ w.fragment }</span>);
+          promptParts.push(<span>{ word.fragment }</span>);
         }
       });
       promptParts.push("?");
@@ -225,7 +229,7 @@ class QuestionBase extends React.Component {
               |<i className="fa fa-flask" title="Alchemify" onClick={ () => this.alchemify() } data-toggle="tooltip" data-placement="bottom"></i >
             </li>
             <li className="nav-item">
-              |<i className="fa fa-search" title="Retrieve and Rank" onClick={ () => this.rr_search() } data-toggle="tooltip" data-placement="bottom"></i >
+              |<i className="fa fa-search" title="Retrieve and Rank" onClick={ () => this.rr_search(this.state.prompt) } data-toggle="tooltip" data-placement="bottom"></i >
             </li>
           </ul>
         </div>
