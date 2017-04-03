@@ -8,46 +8,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
-      <div class="left-widget">
-        <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Classes</h4>
-        <ul>
-          <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Biology I</h4>
-          <ul>
-            <h5><i class="fa fa-caret-down" aria-hidden="true"></i> Lectures</h5>
-            <ul>
-              <li><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Intro</li>
-              <li><i class="fa fa-file-word-o" aria-hidden="true"></i> Chapter 1</li>
-              <li><i class="fa fa-file-text-o" aria-hidden="true"></i> Chapter 2</li>
-              <li><i class="fa fa-folder-o" aria-hidden="true"></i> Chapter 3</li>
-            </ul>
-            <h5><i class="fa fa-caret-down" aria-hidden="true"></i> Homeworks</h5>
-            <ul>
-              <li><i class="fa fa-file-pdf-o" aria-hidden="true"></i> HW0</li>
-              <li><i class="fa fa-file-word-o" aria-hidden="true"></i> HW1</li>
-              <li><i class="fa fa-file-text-o" aria-hidden="true"></i> HW2</li>
-            </ul>
-          </ul>
-
-          <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Biology II</h4>
-          <ul>
-            <h5><i class="fa fa-caret-down" aria-hidden="true"></i> Lectures</h5>
-            <ul>
-              <li><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Intro</li>
-              <li><i class="fa fa-file-word-o" aria-hidden="true"></i> Chapter 1</li>
-              <li><i class="fa fa-file-text-o" aria-hidden="true"></i> Chapter 2</li>
-              <li><i class="fa fa-folder-o" aria-hidden="true"></i> Chapter 3</li>
-            </ul>
-            <h5><i class="fa fa-caret-down" aria-hidden="true"></i> Homeworks</h5>
-            <ul>
-              <li><i class="fa fa-file-pdf-o" aria-hidden="true"></i> HW0</li>
-              <li><i class="fa fa-file-word-o" aria-hidden="true"></i> HW1</li>
-              <li><i class="fa fa-file-text-o" aria-hidden="true"></i> HW2</li>
-            </ul>
-          </ul>
-          </ul>
-      </div>
+      <nav class="navbar navbar-default navbar-fixed-side">
+        <div class="container">
+          <div class="navbar-header"><a class="navbar-brand" href="./">Classes</a></div>
+          <div class="collapse navbar-collapse" id="side-user-menu">
+            {% render_bundle 'main' %}
+          </div>
+        </div>
+      </nav>
     </div>
-    <div class="col-6">
+    <div class="col-10">
       <h1 class="page-header">Register New Class<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         <div class="edit-icons" style="float:right;">
           <i class="fa fa-eye edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="view original pdf"></i>
@@ -59,15 +29,6 @@
       <br>
       <br>
       <div id="react-pdf">
-        {% render_bundle 'main' %}
-      </div>
-
-    </div>
-    <div class="col">
-      <div id="rr-search">
-        {% render_bundle 'main' %}
-      </div>
-      <div id="solr-collections">
         {% render_bundle 'main' %}
       </div>
     </div>
