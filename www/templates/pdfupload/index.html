@@ -4,17 +4,24 @@
 {% load render_bundle from webpack_loader %}
 
 {% block content %}
-<br>
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
       <div class="left-widget">
         <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Classes</h4>
         <ul>
-          <li><h4>Anthropology</h4></li>
-          <li><h4>Biology</h4></li>
-          <li><h4>Physics</h4></li>
-          <li><h4>Math</h4></li>
+          <li>
+            <h4>Anthropology</h4>
+          </li>
+          <li>
+            <h4>Biology</h4>
+          </li>
+          <li>
+            <h4>Physics</h4>
+          </li>
+          <li>
+            <h4>Math</h4>
+          </li>
         </ul>
         <h4><i class="fa fa-caret-down" aria-hidden="true"></i> Physics Lectures</h4>
         <ul>
@@ -32,181 +39,21 @@
       </div>
     </div>
     <div class="col-6">
-      <!-- <div class="bs-callout bs-callout-danger">
-        <h4>Type Identification Trouble</h4>
-        Some questions could not be accurately identified. Please revisit questions <strong>2</strong>,<strong>3</strong> and <strong>5</strong>.
-      </div>
-      <div class="bs-callout bs-callout-success">
-        <h4>Successful Identification</h4>
-        Watson was able to confidently classify the types of all sentences.
-      </div> -->
       <h1 class="page-header">Quiz Uploader <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         <div class="edit-icons" style="float:right;">
           <i class="fa fa-eye edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="view original pdf"></i>
-          <i class="fa fa-floppy-o edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="save progress"></i>
-          <i class="fa fa-print edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip"  data-placement="bottom" title="print current copy"></i>
-          <i class="fa fa-check-square-o edit-icon" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="mark as complete"></i>  
-      </div></h1>
-      <!-- <div id="upload-questions">
-        {% render_bundle 'main' %}
-      </div> -->
+          <i class="fa fa-floppy-o edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom"
+            title="save progress"></i>
+          <i class="fa fa-print edit-icon edit-icon-right-bar" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="print current copy"></i>
+          <i class="fa fa-check-square-o edit-icon" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="mark as complete"></i>
+        </div>
+      </h1>
       <div id="react-pdf">
         {% render_bundle 'main' %}
       </div>
       <div id="pdf-view">
         {% render_bundle 'main' %}
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <p>@david: reference for question edit ui.</p>
-      <div class="form-group">
-        <div class="pdf-question">
-          <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">1 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-          <h4 class="glyphicon" style=" left: -102px">Did George Washington cut down a cherry tree and lie about it?</h4>
-          <fieldset class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                True
-              </label>
-            </div>
-            <div class="form-check">
-            <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                False
-              </label>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-      <div class="pdf-question pdf-question-selected">
-        <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">2 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-        <h4 class="glyphicon" style=" left: -102px">Why is the worlds reliance on fossil fuels causing harm to our environment?</h4>
-        <div>
-          <ul id="conceptlist">
-            <li class="conceptlistitem"><a href="">fossil fuels</a></li>
-            <li class="conceptlistitem"><a href="">environment</a></li>
-            <li class="conceptlistitemlight"><a href="">global warming</a></li>
-          </ul>
-        </div>
-        <textarea class="form-control" rows="5" id="comment"></textarea>
-      </div>
-      <br>
-      <div class="pdf-question">
-        <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">3 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-        <h4 class="glyphicon" style=" left: -102px">Who is your favorite president and why?</h4>
-        <div>
-          <ul id="conceptlist">
-            <li class="conceptlistitem"><a href="">presidents</a></li>
-            <li class="conceptlistitemlight"><a href="">us history</a></li>
-          </ul>
-        </div>
-        <textarea class="form-control" rows="5" id="comment"></textarea>
-      </div>
-      <div class="pdf-question">
-        <h4 class="glyphicon glyphicon-asterisk q_anchor" style=" left: -102px">4 <i class="fa fa-pencil iconbarl iconbarr" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="edit question type"></i> <i class="fa fa-flask q_alchemy" data-toggle="tooltip" data-placement="bottom" title="alchemify"></i></h4>
-        <h4 class="glyphicon" style=" left: -102px">Who is your favorite mathematician?</h4>
-        <div>
-          <ul id="conceptlist">
-            <li class="conceptlistitem"><a href="">mathematics</a></li>
-          </ul>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item active">Leonard Euler</li>
-          <li class="list-group-item list-group-item-action">Carl Friedrich Gauss</li>
-          <li class="list-group-item list-group-item-action">David Hilbert</li>
-          <li class="list-group-item list-group-item-action">Bernhard Riemann</li>
-          <li class="list-group-item list-group-item-action">Other</li>
-        </ul>
-      </div>
-      <br>
-      <br>
-      <div id="edit-quiz">
-        {% render_bundle 'main' %}
-      </div>
-      
-      <br>
-      <br>
-      <div class="page-header">
-        <h1>PDF Uploader</h1>
-      </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
     </div>
     <div class="col">
       <div id="rr-search">

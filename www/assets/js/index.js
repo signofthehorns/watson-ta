@@ -1,4 +1,3 @@
-import EditQuizContainer from './EditQuizContainer';
 import PDFUploadDemo from './PDFUpload';
 import PDFView from './PDFView';
 import ReactDOM from 'react-dom';
@@ -17,9 +16,6 @@ if (elm = document.getElementById('rr-search'))
 
 if (elm = document.getElementById('solr-collections'))
   ReactDOM.render(<SolrInfo />, elm);
-
-if (elm = document.getElementById('edit-quiz'))
-  ReactDOM.render(<EditQuizContainer />, elm);
 
 if (elm = document.getElementById('upload-questions'))
   ReactDOM.render(<EditQuestion question={'What are the Deathly Hallows?'} id={0}/>, elm);
