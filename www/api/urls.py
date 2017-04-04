@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from views import alchemy, nlc_classify, upload_questions, rr_search, solr
+from views import alchemy, nlc_classify, upload_questions, rr_search, solr, user_menu
 
 urlpatterns = [
     url(r'^alchemy/(?P<sentence>.{0,350})/$',
@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^list_collections/(?P<cluster_id>.{0,350})$',solr.list_collections, name='List Solr Collections'),
     url(r'^list_configs/(?P<cluster_id>.{0,350})$',solr.list_configs, name='List Solr Configurations'),
     url(r'^list_rankers/(?P<cluster_id>.{0,350})$',solr.list_rankers, name='List Solr Rankers'),
+    url(r'^user_menu/$', user_menu.GetUserMenuRequest, name="Get User Menu Data"),
 ]

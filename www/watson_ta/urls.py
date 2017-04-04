@@ -22,8 +22,6 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^pdfupload/', include('pdfupload.urls')),
-    url(r'^editor/', include('editor.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^sourceupload/', include('sourceupload.urls')),
     url(r'^', include('pages.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
