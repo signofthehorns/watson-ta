@@ -178,16 +178,16 @@ class QuestionBase extends React.Component {
 
   display_tf_question() {
     return <form id={ "questionAnswer"+this.state.id } onChange={this.handle_answer_change} >
-      <input type="radio" value="True" name="tf"/>True
+      <input type="radio" value="True" name="tf"/>True<br/>
       <input type="radio" value="False" name="tf"/>False
     </form>
   }
 
   display_mc_question() {
     return <form id={ "questionAnswer"+this.state.id } onChange={this.handle_answer_change} >
-      <input type="radio" value="a" name="mc"/>a.
-      <input type="radio" value="b" name="mc"/>b.
-      <input type="radio" value="c" name="mc"/>c.
+      <input type="radio" value="a" name="mc"/>a.<br/>
+      <input type="radio" value="b" name="mc"/>b.<br/>
+      <input type="radio" value="c" name="mc"/>c.<br/>
       <input type="radio" value="d" name="mc"/>d.
     </form>
   }
