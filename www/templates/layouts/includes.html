@@ -20,6 +20,23 @@
 <link rel="stylesheet" href="{% static "navbar-fixed-side.css" %}">
 
 {# Load React #}
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "1804020893258037",
+      xfbml: true,
+      version: "v2.6"
+    });
+
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) { return; }
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 <script src="https://fb.me/react-15.0.0.js"></script>
 <script src="https://fb.me/react-dom-15.0.0.js"></script>
 <script src="https://fb.me/JSXTransformer-0.12.2.js"></script>
