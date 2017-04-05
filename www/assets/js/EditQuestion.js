@@ -1,7 +1,6 @@
 import React from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 
 // We want to send actions from the dispatcher in order to update
@@ -219,9 +218,9 @@ class QuestionBase extends React.Component {
             <li className="nav-item question-id">
               Question { this.state.id }
             </li>
-            <li className="nav-item">
+            {/*<li className="nav-item">
               |<i className="fa fa-pencil" title="Edit Question" data-toggle="tooltip" data-placement="bottom"></i>
-            </li>
+            </li>*/}
             <li className="nav-item">
               |<i className="fa fa-floppy-o" title="Save Answer" onClick={ () => this.save_answer() } data-toggle="tooltip" data-placement="bottom"></i>
             </li>
@@ -229,7 +228,7 @@ class QuestionBase extends React.Component {
               |<i className="fa fa-flask" title="Alchemify" onClick={ () => this.alchemify() } data-toggle="tooltip" data-placement="bottom"></i >
             </li>
             <li className="nav-item">
-              |<i className="fa fa-search" title="Retrieve and Rank" onClick={ () => this.rr_search(this.state.prompt) } data-toggle="tooltip" data-placement="bottom"></i >
+              |<i className="fa fa-search" title="Search Knowledge Base" onClick={ () => this.rr_search(this.state.prompt) } data-toggle="tooltip" data-placement="bottom"></i >
             </li>
           </ul>
         </div>

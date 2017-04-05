@@ -55,3 +55,12 @@ input[type="radio"] {
     margin: 2px;
     padding: 2px;
 }
+
+.help-information {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.help-information li {
+    margin-bottom: 10px;
+}

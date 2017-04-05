@@ -5,6 +5,7 @@ import RRSearch from './RRSearch';
 import SolrInfo from './SolrInfo';
 import EditQuestion from './EditQuestion';
 import SideUserMenu from './SideUserMenu';
+import HelpInformation from './HelpInformation';
 
 // The following statements check whether an element exists before attempting to render them
 // This prevents silent JS null element errors
@@ -24,6 +25,7 @@ if (elm = document.getElementById('upload-questions'))
 if (elm = document.getElementById('side-user-menu'))
   ReactDOM.render(<SideUserMenu />, elm);
 
-// Example of dispatching an action via flux in order to set the retrieve and rank question
+if (elm = document.getElementById('help-information'))
+  ReactDOM.render(<HelpInformation />, elm);
+
 import EditActions from './EditActions';
-// EditActions.queryRetrieveAndRank('horcruxes');
