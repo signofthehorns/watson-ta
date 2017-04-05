@@ -81,9 +81,12 @@ const RRSearchSource = {
   },
   
   endDrag(props, monitor, component) {
-    const startIndex = props.rowId;
-    const targetIndex = monitor.getDropResult().rowId;
-    SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+    var result = monitor.getDropResult();
+    if (result && 'rowId' in result) {
+      const startIndex = props.rowId;
+      const targetIndex = result.rowId;
+      SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+    }
     return {};
   }
 };

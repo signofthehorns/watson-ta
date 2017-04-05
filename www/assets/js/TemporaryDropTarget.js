@@ -3,10 +3,6 @@ import { DropTarget } from 'react-dnd';
 
 const TempDropTarget = {
   drop(props, monitor, component) {
-  	// console.log(props);
-  	// console.log(monitor);
-  	// console.log(component);
-  	// console.log()
   	return props;
   }
 };
