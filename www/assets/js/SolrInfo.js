@@ -1,8 +1,30 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
+import { DragSource } from 'react-dnd';
+import SideMenuActions from './SideMenuActions';
+
+const SolrInfoSource = {
+  beginDrag(props) {
+    return {};
+  },
+  
+  endDrag(props, monitor, component) {
+    const startIndex = props.rowId;
+    const targetIndex = monitor.getDropResult().rowId;
+    SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+    return {};
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
 
 /* ----------------------------------------------------*
  *  Solr Info Components
@@ -35,6 +57,10 @@ class SolrInfo extends React.Component {
   }
 
   render() {
+    // get props for dragging
+    const connectDragSource = this.props.connectDragSource;
+    const isDragging = this.props.isDragging;
+
     var loading_cluster = this.state.loading_clusters ? <span><i className="fa fa-refresh fa-spin"></i> Loading Solr Clusters</span> : <span>current clusters and statuses</span>;
     var clusters = [];
     this.state.clusters.forEach(function(res) {
@@ -71,8 +97,11 @@ class SolrInfo extends React.Component {
       </div>
       : <span/>
 
-    return (
-      <div className="right-widget right-widget-shaded">
+    return connectDragSource(
+      <div className="right-widget right-widget-shaded" style={{
+            opacity: isDragging ? 0.5 : 1,
+            cursor: 'move'
+          }}>
         <h2 className="top-divider"><i className="fa fa-globe" aria-hidden="true"></i> Solr Info</h2>
         <h4>Clusters</h4>
         { loading_cluster }
@@ -183,4 +212,9 @@ class ClusterTableInfo extends React.Component {
   }
 };
 
-export default SolrInfo;
+SolrInfo.propTypes = {
+  connectDragSource: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool.isRequired
+};
+
+export default DragSource('SIDE_MENU', SolrInfoSource, collect)(SolrInfo);
