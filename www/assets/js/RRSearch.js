@@ -198,11 +198,9 @@ class RRSearch extends React.Component {
 
     return (
       <div className="right-widget">
-        <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Retrieve and Rank { dropdown }</h2>
+        <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Knowledge Base { dropdown }</h2>
         <form className="form-horizontal" onSubmit={(e) => this.doSubmit(e)}>
           <div className="form-group" >
-            <i className="fa fa-search" aria-hidden="true"></i> Solr search
-            <br/>
             <div className="input-group">
               <input type="text" id="rr_query" ref="rr_query" className="form-control" placeholder="Search collection"/>
               <span className="input-group-btn">

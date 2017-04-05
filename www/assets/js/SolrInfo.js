@@ -73,8 +73,8 @@ class SolrInfo extends React.Component {
 
     return (
       <div className="right-widget right-widget-shaded">
-        <h2 className="top-divider"><i className="fa fa-globe" aria-hidden="true"></i> Solr Info</h2>
-        <h4>Clusters</h4>
+        <h2 className="top-divider"><i className="fa fa-globe" aria-hidden="true"></i> Management Info</h2>
+        <h4>Solr Clusters</h4>
         { loading_cluster }
         <ul>
         </ul>
