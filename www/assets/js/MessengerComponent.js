@@ -3,12 +3,12 @@ import MessengerPlugin from 'react-messenger-plugin';
 
 export default class MessengerLink extends React.Component {
   render() {
-  	console.log(`${PATH}`)
-	return <div className="right-widget right-widget-shaded">
+  	// console.log(`${PATH}`)
+    return <div className="right-widget right-widget-shaded">
         <div className ="container-fluid">
           <div className ="row">
             <div className ="col-md-2 col-sm-2">
-                <img src="http://localhost:8000/media/watson.jpg" alt="" style={{width:'100px', height:'100px', 'borderRadius':'50%'}}/>
+                <img src="/static/img/watson.jpg" alt="Watson?" style={{width:'100px', height:'100px', 'borderRadius':'50%'}}/>
             </div>
             <div className ="col-md-10 col-sm-10">
                 <h3><i className="fa fa-comments-o" aria-hidden="true"></i> Need Help? <MessengerPlugin
