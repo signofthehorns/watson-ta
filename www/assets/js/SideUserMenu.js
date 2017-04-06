@@ -14,7 +14,6 @@ export default class SideUserMenu extends React.Component {
   componentWillMount() {
     axios.get('/api/user_menu/')
     .then(res => {
-      console.log(res)
       this.setState({
         menu: res.data.menu,
       })
