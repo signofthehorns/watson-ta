@@ -45,7 +45,7 @@ class QuestionBase extends React.Component {
       type: this.props.type,
       prompt: this.props.question,
       choices: [],
-      answer: this.props.type.class_name,
+      answer: '',
       alchemy: {
         concepts: [],
         keywords: [],
@@ -128,7 +128,15 @@ class QuestionBase extends React.Component {
   }
 
   handle_answer_change(event) {
+    var question = {
+      id: this.state.id,
+      type: this.state.type,
+      prompt: this.state.prompt,
+      choices: [],
+      answer: event.target.value,
+    };
     this.setState({ answer: event.target.value });
+    EditActions.questionAnswerUpdate(question);
   }
 
   display_concepts() {

@@ -13,6 +13,12 @@ const Actions = {
       type: EditActionTypes.HIGHLIGHT,
       id,
     });
+  },
+  questionAnswerUpdate(question) {
+    EditDispatcher.dispatch({
+      type: EditActionTypes.EDITOR__QUESTION_ANSWER_UPDATED,
+      question,
+    });
   }
 };
 
