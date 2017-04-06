@@ -100,13 +100,15 @@ class SolrInfo extends React.Component {
       </div>
       : <span/>
 
+
     return connectDragSource(
       <div className="right-widget right-widget-shaded" style={{
             opacity: isDragging ? 0.5 : 1,
             cursor: 'move'
           }}>
-        <h2 className="top-divider"><i className="fa fa-globe" aria-hidden="true"></i> Solr Info</h2>
-        <h4>Clusters</h4>
+        <h2 className="top-divider"><i className="fa fa-globe" aria-hidden="true"></i> Management Info</h2>
+        <h4>Solr Clusters</h4>
+
         { loading_cluster }
         <ul>
         </ul>

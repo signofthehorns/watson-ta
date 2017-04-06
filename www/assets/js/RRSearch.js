@@ -222,6 +222,7 @@ class RRSearch extends React.Component {
       current_collection={this.state.collection}
       current_ranker={this.state.ranker}/>;
 
+
     const connectDragSource = this.props.connectDragSource;
     const isDragging = this.props.isDragging;
 
@@ -230,11 +231,9 @@ class RRSearch extends React.Component {
             opacity: isDragging ? 0.5 : 1,
             cursor: 'move'
           }}>
-        <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Retrieve and Rank { dropdown }</h2>
+        <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Knowledge Base { dropdown }</h2>
         <form className="form-horizontal" onSubmit={(e) => this.doSubmit(e)}>
           <div className="form-group" >
-            <i className="fa fa-search" aria-hidden="true"></i> Solr search
-            <br/>
             <div className="input-group">
               <input type="text" id="rr_query" ref="rr_query" className="form-control" placeholder="Search collection"/>
               <span className="input-group-btn">

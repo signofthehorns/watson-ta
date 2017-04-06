@@ -2,6 +2,11 @@
  * Main .css file for the Watson TA project.
  */
 
+input[type="radio"] {
+  margin-top: -1px;
+  vertical-align: middle;
+}
+
 .question {
     margin: 0em 0em 1em;
 }
@@ -49,4 +54,13 @@
     border: 1px solid #f6827b;
     margin: 2px;
     padding: 2px;
+}
+
+.help-information {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.help-information li {
+    margin-bottom: 10px;
 }
