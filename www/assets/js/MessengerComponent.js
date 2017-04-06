@@ -1,10 +1,43 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import MessengerPlugin from 'react-messenger-plugin';
+import { DragSource } from 'react-dnd';
+import SideMenuActions from './SideMenuActions';
 
-export default class MessengerLink extends React.Component {
+const MessengerLinkSource = {
+  beginDrag(props) {
+    return {};
+  },
+
+  endDrag(props, monitor, component) {
+    var result = monitor.getDropResult();
+    if (result && 'rowId' in result) {
+      const startIndex = props.rowId;
+      const targetIndex = result.rowId;
+      SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+    }
+    return {};
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+class MessengerLink extends React.Component {
   render() {
-  	// console.log(`${PATH}`)
-    return <div className="right-widget right-widget-shaded">
+  	const { connectDragSource, isDragging } = this.props;
+
+	return connectDragSource(
+		<div 
+		  className="right-widget right-widget-shaded" 
+		  style={{
+            opacity: isDragging ? 0.5 : 1,
+            cursor: 'move'
+          }}>
+
         <div className ="container-fluid">
           <div className ="row">
             <div className ="col-md-2 col-sm-2">
@@ -19,7 +52,14 @@ export default class MessengerLink extends React.Component {
              </div>
           </div>
         </div>
-      </div>;
+      </div>
+    );
   }
 };
 
+MessengerLink.propTypes = {
+  connectDragSource: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool.isRequired
+};
+
+export default DragSource('SIDE_MENU', MessengerLinkSource, collect)(MessengerLink);
