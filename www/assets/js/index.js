@@ -1,10 +1,11 @@
+import EditQuestion from './EditQuestion';
+import MessengerLink from './MessengerComponent';
 import PDFUploadDemo from './PDFUpload';
 import PDFView from './PDFView';
 import ReactDOM from 'react-dom';
 import RRSearch from './RRSearch';
-import SolrInfo from './SolrInfo';
-import EditQuestion from './EditQuestion';
 import SideUserMenu from './SideUserMenu';
+import SolrInfo from './SolrInfo';
 import HelpInformation from './HelpInformation';
 
 // The following statements check whether an element exists before attempting to render them
@@ -24,6 +25,9 @@ if (elm = document.getElementById('upload-questions'))
 
 if (elm = document.getElementById('side-user-menu'))
   ReactDOM.render(<SideUserMenu />, elm);
+
+if (elm = document.getElementById('messenger-link'))
+  ReactDOM.render(<MessengerLink/>, elm);
 
 if (elm = document.getElementById('help-information'))
   ReactDOM.render(<HelpInformation />, elm);

@@ -197,7 +197,7 @@ class RRSearch extends React.Component {
       current_ranker={this.state.ranker}/>;
 
     return (
-      <div className="right-widget">
+      <div className="right-widget right-widget-shaded">
         <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Knowledge Base { dropdown }</h2>
         <form className="form-horizontal" onSubmit={(e) => this.doSubmit(e)}>
           <div className="form-group" >
