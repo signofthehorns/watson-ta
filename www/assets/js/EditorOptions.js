@@ -59,25 +59,42 @@ class EditorOptions extends React.Component {
             } else {
                 renderedContent.push({text: '\n\n' + question.prompt, style: 'header'});
             }
-            if (question.type === 'MC') {
+            if (question.type.class_name === 'MC') {
                 renderedContent.push({
-                    ul: [
-                        {text: 'A' (question.answer === 'a' ? ',style: selected' : '')},
-                        {text: 'B' (question.answer === 'b' ? ',style: selected' : '')},
-                        {text: 'C' (question.answer === 'c' ? ',style: selected' : '')},
-                        {text: 'D' (question.answer === 'd' ? ',style: selected' : '')}
-                    ]
-                })
-            } else if (question.type === 'TF') {
-                var [tStyle, fStyle] = question.answer === 'True' ? ['selected', 'norm'] : ['norm', 'selected'];
+                    columns: [
+                        {
+                            type: 'none',
+                            ul: [
+                                // TODO: Change to question.choices once that is parsed
+                                {text: ' A ', style: (question.answer[0] === 'a' ? 'selected' : 'normal')},
+                                {text: ' B ', style: (question.answer[0] === 'b' ? 'selected' : 'normal')}
+                            ]
+                        },
+                        {
+                            type: 'none',
+                            ul: [
+                                {text: ' C ', style: (question.answer[0] === 'c' ? 'selected' : 'normal')},
+                                {text: ' D ', style: (question.answer[0] === 'd' ? 'selected' : 'normal')}
+                            ]
+                        }
+                    ],
+                    style: 'answer'
+                });
+            } else if (question.type.class_name === 'TF') {
+                var [tStyle, fStyle] = question.answer === 'True' ? ['selected', 'normal'] : ['normal', 'selected'];
                 renderedContent.push({
+                    type: 'none',
                     ul: [
-                        {text: 'True', style: tStyle},
-                        {text: 'False', style: fStyle}
-                    ]
-                })
+                        {text: ' True ', style: tStyle},
+                        {text: ' False ', style: fStyle}
+                    ],
+                    style: 'answer'
+                });
             } else { // 'SA'
-                renderedContent.push({text: question.answer})
+                renderedContent.push({
+                    text: (question.answer),
+                    style: 'answer'
+                });
             }
         });
 
@@ -86,10 +103,18 @@ class EditorOptions extends React.Component {
             styles: {
                 header: {
                     bold: true,
-                    fontSize: 15
+                    fontSize: 18
                 },
                 selected: {
-                    bold: true
+                    bold: true,
+                    background: '#bbb',
+                    margin: 5
+                },
+                normal: {
+                    margin: 5
+                },
+                answer: {
+                    marginLeft: 30,
                 }
             },
             defaultStyle: {
