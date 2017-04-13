@@ -9,7 +9,7 @@ import { Form } from 'react-bootstrap';
 // react to when a user clicks a component
 import EditDispatcher from './EditDispatcher';
 
-import SideMenuActions from './SideMenuActions';
+import RightMenuActions from './RightMenuActions';
 
 /* dropdown component for listing the different collections available */
 class CollectionDropdown extends React.Component {
@@ -85,7 +85,7 @@ const RRSearchSource = {
     if (result && 'rowId' in result) {
       const startIndex = props.rowId;
       const targetIndex = result.rowId;
-      SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+      RightMenuActions.permuteMenuItems(startIndex,targetIndex);
     }
     return {};
   }
@@ -258,4 +258,4 @@ RRSearch.propTypes = {
   isDragging: PropTypes.bool.isRequired
 };
 
-export default DragSource('SIDE_MENU', RRSearchSource, collect)(RRSearch);
+export default DragSource('RIGHT_MENU', RRSearchSource, collect)(RRSearch);

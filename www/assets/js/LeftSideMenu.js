@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import UserMenu from './UserMenu';
+import ClassMenu from './ClassMenu';
 
-export default class SideUserMenu extends React.Component {
+export default class LeftSideMenu extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -21,6 +21,6 @@ export default class SideUserMenu extends React.Component {
   }
 
   render() {
-    return <UserMenu menu={ this.state.menu } key={0} />
+    return <ClassMenu menu={ this.state.menu } key={0} />
   }
 };

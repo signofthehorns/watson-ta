@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import MessengerPlugin from 'react-messenger-plugin';
 import { DragSource } from 'react-dnd';
-import SideMenuActions from './SideMenuActions';
+import RightMenuActions from './RightMenuActions';
 
 const MessengerLinkSource = {
   beginDrag(props) {
@@ -13,7 +13,7 @@ const MessengerLinkSource = {
     if (result && 'rowId' in result) {
       const startIndex = props.rowId;
       const targetIndex = result.rowId;
-      SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+      RightMenuActions.permuteMenuItems(startIndex,targetIndex);
     }
     return {};
   }
@@ -62,4 +62,4 @@ MessengerLink.propTypes = {
   isDragging: PropTypes.bool.isRequired
 };
 
-export default DragSource('SIDE_MENU', MessengerLinkSource, collect)(MessengerLink);
+export default DragSource('RIGHT_MENU', MessengerLinkSource, collect)(MessengerLink);
