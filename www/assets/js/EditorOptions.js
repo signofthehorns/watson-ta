@@ -1,5 +1,4 @@
 import React from 'react';
-import update from 'immutability-helper';
 import pdfMake from 'pdfmake/build/pdfmake.min.js';
 import vfsFonts from 'pdfmake/build/vfs_fonts.js';
 import EditActions from './EditActions';
