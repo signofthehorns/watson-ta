@@ -72,7 +72,7 @@ var PDFUploadDemo = React.createClass({
           <ListGroup>
           { this.state.questions.map(function(object, i){
               //return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
-              return <QuestionBase question={object.prompt} type={object.type} id={i+1} key={i}/>;
+              return <QuestionBase question={object.prompt} type={object.type} choices={object.choices} id={i+1} key={i}/>;
           })}
           </ListGroup>
         </div>
