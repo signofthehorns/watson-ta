@@ -82,7 +82,7 @@ def upload_questions_file(request):
                     })
                 i = i + 1
 
-            print questions, '\n'
+            print '\n', questions, '\n'
             return JsonResponse({
                 'success': True,
                 'questions': questions
