@@ -65,15 +65,15 @@ class EditorOptions extends React.Component {
                             type: 'none',
                             ul: [
                                 // TODO: Change to question.choices once that is parsed
-                                {text: ' A ', style: (question.answer[0] === 'a' ? 'selected' : 'normal')},
-                                {text: ' B ', style: (question.answer[0] === 'b' ? 'selected' : 'normal')}
+                                {text: (question.choices[0]), style: (question.answer[0] === 'a' ? 'selected' : 'normal')},
+                                {text: (question.choices[1]), style: (question.answer[0] === 'b' ? 'selected' : 'normal')}
                             ]
                         },
                         {
                             type: 'none',
                             ul: [
-                                {text: ' C ', style: (question.answer[0] === 'c' ? 'selected' : 'normal')},
-                                {text: ' D ', style: (question.answer[0] === 'd' ? 'selected' : 'normal')}
+                                {text: (question.choices[2]), style: (question.answer[0] === 'c' ? 'selected' : 'normal')},
+                                {text: (question.choices[3]), style: (question.answer[0] === 'd' ? 'selected' : 'normal')}
                             ]
                         }
                     ],
@@ -113,7 +113,7 @@ class EditorOptions extends React.Component {
                     margin: 5
                 },
                 answer: {
-                    marginLeft: 30,
+                    marginLeft: 30
                 }
             },
             defaultStyle: {

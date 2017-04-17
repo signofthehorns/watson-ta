@@ -44,7 +44,7 @@ class QuestionBase extends React.Component {
       id: this.props.id,
       type: this.props.type,
       prompt: this.props.question,
-      choices: [],
+      choices: this.props.choices,
       answer: '',
       alchemy: {
         concepts: [],
@@ -119,15 +119,15 @@ class QuestionBase extends React.Component {
   }
 
   handle_answer_change(event) {
-    var question = {
-      id: this.state.id,
-      type: this.state.type,
-      prompt: this.state.prompt,
-      choices: [],
-      answer: event.target.value,
-    };
-    this.setState({ answer: event.target.value });
+    // Why remake the question state?
+    // this.setState() is async so to ensure
+    //   EditActions.questionAnswerUpdate() gets
+    //   the updated state, we make it here!
+    var question = this.state;
+    question.answer = event.target.value;
     EditActions.questionAnswerUpdate(question);
+
+    this.setState({ answer: event.target.value });
   }
 
   display_concepts() {
@@ -183,10 +183,10 @@ class QuestionBase extends React.Component {
 
   display_mc_question() {
     return <form id={ "questionAnswer"+this.state.id } onChange={this.handle_answer_change} >
-      <input type="radio" value="a" name="mc"/>a.<br/>
-      <input type="radio" value="b" name="mc"/>b.<br/>
-      <input type="radio" value="c" name="mc"/>c.<br/>
-      <input type="radio" value="d" name="mc"/>d.
+      <input type="radio" value={this.state.choices[0]} name="mc"/>{this.state.choices[0]}<br/>
+      <input type="radio" value={this.state.choices[1]} name="mc"/>{this.state.choices[1]}<br/>
+      <input type="radio" value={this.state.choices[2]} name="mc"/>{this.state.choices[2]}<br/>
+      <input type="radio" value={this.state.choices[3]} name="mc"/>{this.state.choices[3]}
     </form>
   }
 

@@ -82,7 +82,7 @@ class PDFUploadDemo extends React.Component {
           </ul>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              return <QuestionBase question={object.prompt} type={object.type} id={i+1} key={i}/>;
+              return <QuestionBase question={object.prompt} type={object.type} choices={object.choices} id={i+1} key={i}/>;
           })}
           </ListGroup>
         </div>
