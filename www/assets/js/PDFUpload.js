@@ -19,10 +19,11 @@ class PDFUploadDemo extends React.Component {
       progresses: [],
       finished: false,
       questions: [],
-      classifierId: ""
+      classifierId: "90e7b4x199-nlc-32429"
     };
 
     this.onFileDrop = this.onFileDrop.bind(this);
+    this.handleClassifierChange = this.handleClassifierChange.bind(this);
     this.renderEditor = this.renderEditor.bind(this);
     this.renderLoadingBar = this.renderLoadingBar.bind(this);
     this.renderDropzone = this.renderDropzone.bind(this);
@@ -49,7 +50,7 @@ class PDFUploadDemo extends React.Component {
 
     var self = this;
     // upload the file to the server 
-    axios.post('/api/upload/questions/', data, config)
+    axios.post('/api/upload/questions/'+encodeURIComponent(this.state.classifierId)+'/', data, config)
       .then(function (res) {
         self.setState({
           files: acceptedFiles,
@@ -57,6 +58,10 @@ class PDFUploadDemo extends React.Component {
           questions: res.data.questions
         })
       }.bind(this));
+  }
+
+  handleClassifierChange(event) {
+    this.setState({ classifierId: event.target.value });
   }
 
   renderEditor() {
@@ -98,11 +103,17 @@ class PDFUploadDemo extends React.Component {
   }
 
   renderDropzone() {
-    return <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop} rejectStyle='true'>
-      <Alert bsStyle="warning">
-        Drag a <strong>PDF</strong> here to extract the text from it.
-      </Alert>
-    </Dropzone>
+    return (<div>
+      <select onChange={this.handleClassifierChange} value={this.state.classifierId}>
+        <option value="f5bbbcx175-nlc-1012">Classifier -- Old</option>
+        <option value="90e7b4x199-nlc-32429">Classifier -- New</option>
+      </select>
+      <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop} rejectStyle='true'>
+        <Alert bsStyle="warning">
+          Drag a <strong>PDF</strong> here to extract the text from it.
+        </Alert>
+      </Dropzone>
+    </div>);
   }
 
   renderUpload() {
