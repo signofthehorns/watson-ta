@@ -26,7 +26,7 @@ def extract_choices(text):
     return choices
 
 @csrf_exempt
-def upload_questions_file(request):
+def upload_questions_file(request, classifier_id):
     if request.method == 'POST':
         if forms.Form(request.POST, request.FILES).is_valid():
             questions_raw = get_doc_coversion(request.FILES['file'])
@@ -46,7 +46,7 @@ def upload_questions_file(request):
                 # - Title (i = 1 drops)
                 # - Any lines that don't start numbered
                 if prompt[0].isdigit():
-                    question_type = get_question_type(prompt)
+                    question_type = get_question_type(prompt, classifier_id)
                     choices = extract_choices(prompt)
                     prompt = choices[0]
                     question_choices = choices[1:]
