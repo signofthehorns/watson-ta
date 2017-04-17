@@ -71,15 +71,6 @@ class QuestionBase extends React.Component {
           this.rr_search_highlight(payload.id);
       }
     });
-
-    // getting tag
-    // axios.get('/api/nlc/'+encodeURIComponent(this.props.task)+'/')
-    // .then(res => {
-    //   this.setState({ 
-    //     tag_loading : false,
-    //     tag : res.data.tag
-    //   });
-    // });
   }
 
   alchemify(e) {

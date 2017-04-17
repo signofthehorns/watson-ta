@@ -6,21 +6,31 @@ import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import { ListGroupItem } from 'react-bootstrap';
-var Dropzone = require('react-dropzone');
+import Dropzone from 'react-dropzone';
 import { ProgressBar } from 'react-bootstrap';
 import QuestionBase from './EditQuestion'
 
-var PDFUploadDemo = React.createClass({
-  getInitialState: function () {
-      return {
-        files: [],
-        progresses: [],
-        finished: false,
-        questions: []
-      };
-  },
+class PDFUploadDemo extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  onFileDrop: function (acceptedFiles) {
+    this.state = {
+      files: [],
+      progresses: [],
+      finished: false,
+      questions: [],
+      classifierId: "90e7b4x199-nlc-32429"
+    };
+
+    this.onFileDrop = this.onFileDrop.bind(this);
+    this.handleClassifierChange = this.handleClassifierChange.bind(this);
+    this.renderEditor = this.renderEditor.bind(this);
+    this.renderLoadingBar = this.renderLoadingBar.bind(this);
+    this.renderDropzone = this.renderDropzone.bind(this);
+    this.renderUpload = this.renderUpload.bind(this);
+  }
+
+  onFileDrop(acceptedFiles) {
     this.setState({
       files: acceptedFiles
     });
@@ -40,7 +50,7 @@ var PDFUploadDemo = React.createClass({
 
     var self = this;
     // upload the file to the server 
-    axios.post('/api/upload/questions/', data, config)
+    axios.post('/api/upload/questions/'+encodeURIComponent(this.state.classifierId)+'/', data, config)
       .then(function (res) {
         self.setState({
           files: acceptedFiles,
@@ -48,14 +58,15 @@ var PDFUploadDemo = React.createClass({
           questions: res.data.questions
         })
       }.bind(this));
-  },
+  }
 
-  render: function () {
-    var header = <div></div>;
-    if (this.state.finished) {
-      return (
+  handleClassifierChange(event) {
+    this.setState({ classifierId: event.target.value });
+  }
+
+  renderEditor() {
+    return (
         <div>
-          { header }
           <ul className="media-list">
             <li className="media bottomborder">
               <div className="media-left">
@@ -71,36 +82,51 @@ var PDFUploadDemo = React.createClass({
           </ul>
           <ListGroup>
           { this.state.questions.map(function(object, i){
-              //return <ListGroupItem><QuestionItem key={i} nodeId={i} task={object.text}/></ListGroupItem>;
               return <QuestionBase question={object.prompt} type={object.type} id={i+1} key={i}/>;
           })}
           </ListGroup>
         </div>
       )
-    }
+  }
+
+  renderLoadingBar() {
+    return <div>
+      <h4>Analyzing {this.state.files.length} files...</h4>
+      <div>{
+        <div>
+          <p>{this.state.files[0].name}</p>
+          <ProgressBar active now={this.state.progress} bsStyle="success"/>
+          <img className="upload_img" src={this.state.files[0].preview} />
+        </div>}
+      </div>
+    </div>
+  }
+
+  renderDropzone() {
+    return (<div>
+      <select onChange={this.handleClassifierChange} value={this.state.classifierId}>
+        <option value="f5bbbcx175-nlc-1012">Classifier -- Old</option>
+        <option value="90e7b4x199-nlc-32429">Classifier -- New</option>
+      </select>
+      <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop} rejectStyle='true'>
+        <Alert bsStyle="warning">
+          Drag a <strong>PDF</strong> here to extract the text from it.
+        </Alert>
+      </Dropzone>
+    </div>);
+  }
+
+  renderUpload() {
     return (
       <div>
-        { header }
-        { this.state.files.length > 0 
-          ? <div>
-              <h4>Analyzing {this.state.files.length} files...</h4>
-              <div>{
-                <div>
-                  <p>{this.state.files[0].name}</p>
-                  <ProgressBar active now={this.state.progress} bsStyle="success"/>
-                  <img className="upload_img" src={this.state.files[0].preview} />
-                </div>}
-              </div>
-            </div> 
-          : <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop} rejectStyle='true'>
-              <Alert bsStyle="warning">
-                Drag a <strong>PDF</strong> here to extract the text from it.
-              </Alert>
-            </Dropzone>
-        }
+        { this.state.files.length > 0 ? this.renderLoadingBar() : this.renderDropzone() }
       </div>
     );
   }
-});
+
+  render() {
+    return this.state.finished ? this.renderEditor() : this.renderUpload();
+  }
+};
 
 export default PDFUploadDemo;

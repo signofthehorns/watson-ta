@@ -9,7 +9,7 @@ from nlc_classify import get_question_type
 
 
 @csrf_exempt
-def upload_questions_file(request):
+def upload_questions_file(request, classifier_id):
     if request.method == 'POST':
         if forms.Form(request.POST, request.FILES).is_valid():
             questions_raw = get_doc_coversion(request.FILES['file'])
@@ -29,7 +29,7 @@ def upload_questions_file(request):
 						nextIsAlpha = False
                 if question != '' and question != 'no title':
                     questions.append({
-                        'type': get_question_type(question),
+                        'type': get_question_type(question, classifier_id),
                         'prompt': question,
                     })
                     # TODO: Parse out choices for MC
