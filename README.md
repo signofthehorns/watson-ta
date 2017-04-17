@@ -91,6 +91,19 @@ email    = "admin@example.com"
 9. Develop away with hot reload!
 10. If you need to recompile the JavaScript use `rb` to rebuild the JavaScript and rerun the server
 
+### Testing
+
+Run unit tests with `pytest` in the root `/app` directory within Docker:
+
+```
+root@d8f3d21c1533:/app# pytest
+================================================ test session starts =================================================
+[ . . . ]
+============================================== n passed in 1.23 seconds ==============================================
+```
+
+Travis Continuous Integration will also [run the testing suite on all commits and pull requests](https://travis-ci.org/signofthehorns/watson-ta)!
+
 ## The Team
 
 Team: **Sign of the Horns (aka 🤘)**
