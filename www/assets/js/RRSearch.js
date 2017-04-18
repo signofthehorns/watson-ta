@@ -7,7 +7,7 @@ import { Form } from 'react-bootstrap';
 import $ from 'jquery';
 import 'jquery-ui';
 
-// We want to receive actions from this dispatcher in order to 
+// We want to receive actions from this dispatcher in order to
 // react to when a user clicks a component
 import EditDispatcher from './EditDispatcher';
 
@@ -47,7 +47,7 @@ class CollectionDropdown extends React.Component {
     }
     var curr_rank = this.props.current_ranker != null ? this.props.current_ranker : 'None';
 
-    return <span> 
+    return <span>
         <span className="dropdown">
           <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             { this.props.current_collection }
@@ -69,19 +69,19 @@ class CollectionDropdown extends React.Component {
 }
 
 /* ----------------------------------------------------*
- *  Retrieve and Rank Component 
+ *  Retrieve and Rank Component
  * ----------------------------------------------------*/
-/* 
+/*
 Will problably want to integrate this component later with the
-quiz editing component to show documents related to the currently 
+quiz editing component to show documents related to the currently
 highlighted question.
-*/ 
+*/
 
 const RRSearchSource = {
   beginDrag(props) {
     return {};
   },
-  
+
   endDrag(props, monitor, component) {
     var result = monitor.getDropResult();
     if (result && 'rowId' in result) {
@@ -148,7 +148,7 @@ class RRSearch extends React.Component {
     axios.get(url)
       .then(res => {
         // TODO: do error/ null checking
-        this.setState({ 
+        this.setState({
           results : res.data.docs,
           loading : false,
         });
@@ -207,20 +207,20 @@ class RRSearch extends React.Component {
     var search_metadata = this.state.question != null ? <h4>{'"' + this.state.question + '"'}</h4> : <span/>;
     var num_results = this.state.question != null && !this.state.loading ? <p>Displaying {this.state.results.length} top ranked results matching the query...</p> : <span/>;
     var loading = this.state.loading ? <i className="fa fa-refresh fa-spin"></i> : <span/>;
-    
+
     // TODO(bill): don't hardcode
     var current_collections = {
-      'sherlock' : ['hp_collection', 'example_collection', 'history_collection','history_collection_with_rank'],
+      'sherlock' : ['hp_collection', 'example_collection', 'history_collection','history_collection_with_rank', 'bio-collection'],
     }
     var current_rankers = {
-      'sherlock' : [{'name': 'History Ranker', 'ranker_id' : '1eec7cx29-rank-1955'}]
+      'sherlock' : [{'name': 'History Ranker', 'ranker_id' : '1eec7cx29-rank-1955'}, {'name': 'bio-ranker', 'ranker_id': '1eec7cx29-rank-5478'}]
     }
 
-    var dropdown = <CollectionDropdown 
-      collections={current_collections} 
-      rankers={current_rankers} 
-      set_collection={(c) => this.set_collection(c)} 
-      set_ranker={(r) => this.set_ranker(r)} 
+    var dropdown = <CollectionDropdown
+      collections={current_collections}
+      rankers={current_rankers}
+      set_collection={(c) => this.set_collection(c)}
+      set_ranker={(r) => this.set_ranker(r)}
       current_collection={this.state.collection}
       current_ranker={this.state.ranker}/>;
 

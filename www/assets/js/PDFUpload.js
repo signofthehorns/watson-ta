@@ -19,7 +19,7 @@ class PDFUploadDemo extends React.Component {
       progresses: [],
       finished: false,
       questions: [],
-      classifierId: "90e7b4x199-nlc-32429"
+      classifierId: "90e7b4x199-nlc-39319"
     };
 
     this.onFileDrop = this.onFileDrop.bind(this);
@@ -107,6 +107,7 @@ class PDFUploadDemo extends React.Component {
       <select onChange={this.handleClassifierChange} value={this.state.classifierId}>
         <option value="f5bbbcx175-nlc-1012">Classifier -- Old</option>
         <option value="90e7b4x199-nlc-32429">Classifier -- New</option>
+        <option value="90e7b4x199-nlc-39319">Classifier -- HORNS_CID</option>
       </select>
       <Dropzone className="" ref={(node) => { this.dropzone = node; }} onDrop={this.onFileDrop} rejectStyle='true'>
         <Alert bsStyle="warning">

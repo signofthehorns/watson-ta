@@ -7,7 +7,7 @@ from doc_conversion import get_doc_coversion
 from nlc_classify import get_question_type
 
 
-MATCH_QUESTION_CHOICES = r'(?P<choice>(?:.(?![abcdABCD][\.\:]))*)'
+MATCH_QUESTION_CHOICES = r'(?P<choice>(?:.(?!\b[abcdABCD][\.\:]))*)'
 MATCH_NUMERATED_QUESTION = r'(\d+\..+?(?:(?=(?:\d+\.))|(\n|\r)))'
 
 """
