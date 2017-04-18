@@ -4,6 +4,8 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
+import $ from 'jquery';
+import 'jquery-ui';
 
 // We want to receive actions from this dispatcher in order to 
 // react to when a user clicks a component
@@ -88,7 +90,11 @@ const RRSearchSource = {
       RightMenuActions.permuteMenuItems(startIndex,targetIndex);
     }
     return {};
-  }
+  },
+
+  canDrag: function(props, monitor) {
+    return props.canDrag;
+  },
 };
 
 function collect(connect, monitor) {
@@ -192,13 +198,9 @@ class RRSearch extends React.Component {
       search_results.push(
         <span>
           <li><strong>{ res.title }</strong>{confidence}</li>
-            <ul>
-              <li>
-                <blockquote className="blockquote">
-                  { format_body }
-                </blockquote>
-              </li>
-            </ul>
+            <div className="blockquote draggable">
+              { format_body }
+            </div>
         </span>
       );
     });
@@ -225,6 +227,19 @@ class RRSearch extends React.Component {
 
     const connectDragSource = this.props.connectDragSource;
     const isDragging = this.props.isDragging;
+
+    // Drag & Down Textbox Hack
+    $( document ).ready(function() {
+      $('.draggable').draggable({
+          revert: true,
+          helper: 'clone'
+      });
+      $("#textbox").droppable({
+          drop: function (event, ui) {
+              this.value = this.value + " " + $(ui.draggable).text();
+          }
+      });
+    });
 
     return connectDragSource(
       <div className="right-widget right-widget-shaded" style={{
@@ -255,7 +270,8 @@ class RRSearch extends React.Component {
 
 RRSearch.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool.isRequired
+  isDragging: PropTypes.bool.isRequired,
+  canDrag: PropTypes.bool.isRequired
 };
 
 export default DragSource('RIGHT_MENU', RRSearchSource, collect)(RRSearch);
