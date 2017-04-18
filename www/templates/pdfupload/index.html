@@ -8,14 +8,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
-      <nav class="navbar navbar-default navbar-fixed-side">
+      <!-- TODO(David) - Once this actually displays real information re-include it -->
+      <!-- <nav class="navbar navbar-default navbar-fixed-side">
         <div class="container">
           <div class="navbar-header"><a class="navbar-brand" href="./">Classes</a></div>
-          <div class="collapse navbar-collapse" id="side-user-menu">
-            <!-- User Menu -->
+          <div class="collapse navbar-collapse" id="left-side-menu">
+            <!-- User Menu --
           </div>
         </div>
-      </nav>
+      </nav> -->
       <div id="help-information">
         <!-- Information -->
       </div>
@@ -30,27 +31,13 @@
         <!-- The Editing App -->
       </div>
     </div>
-    <div class="col">
+    <div class="col-4 fixed-right">
       <div id="right-side-menu">
         <!-- Knowledge Base -->
       </div>
-      <!-- <div id="rr-search">
-      </div>
-      <div id="solr-collections">
-      </div>
-      <div id="messenger-link">
-      </div>
-      <div id="drag-drop-1">
-      </div>
-      <div id="drag-drop-2">
-      </div> -->
     </div>
   </div>
 </div>
-<script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-</script>
+
 {% render_bundle 'main' %}
 {% endblock %}

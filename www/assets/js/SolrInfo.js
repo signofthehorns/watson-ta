@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { DragSource } from 'react-dnd';
-import SideMenuActions from './SideMenuActions';
+import RightMenuActions from './RightMenuActions';
 
 const SolrInfoSource = {
   beginDrag(props) {
@@ -16,7 +16,7 @@ const SolrInfoSource = {
     if (result && 'rowId' in result) {
       const startIndex = props.rowId;
       const targetIndex = result.rowId;
-      SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+      RightMenuActions.permuteMenuItems(startIndex,targetIndex);
     }
     return {};
   }
@@ -222,4 +222,4 @@ SolrInfo.propTypes = {
   isDragging: PropTypes.bool.isRequired
 };
 
-export default DragSource('SIDE_MENU', SolrInfoSource, collect)(SolrInfo);
+export default DragSource('RIGHT_MENU', SolrInfoSource, collect)(SolrInfo);

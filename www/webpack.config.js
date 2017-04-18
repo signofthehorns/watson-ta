@@ -20,7 +20,9 @@ module.exports = {
 
     plugins: [
         //tells webpack where to store data about your bundles.
-        new BundleTracker({ filename: './webpack-stats.json' }),
+        new BundleTracker({
+            filename: './webpack-stats.json'
+        }),
         //makes jQuery available in every module
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -50,6 +52,9 @@ module.exports = {
 
     resolve: {
         //extensions that should be used to resolve modules
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
+        },
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
 
-const TempDropTarget = {
+const RightDropTarget = {
   drop(props, monitor, component) {
   	return props;
   }
@@ -15,7 +15,7 @@ function collect(connect, monitor) {
   };
 }
 
-class TemporaryDragComponent extends React.Component {
+class RightMenuDropTarget extends React.Component {
   render() {
   	const { connectDropTarget, isOver, canDrop } = this.props;
 	return connectDropTarget(
@@ -32,9 +32,10 @@ class TemporaryDragComponent extends React.Component {
     );
   }
 };
-TemporaryDragComponent.propTypes = {
+
+RightMenuDropTarget.propTypes = {
   isOver: PropTypes.bool.isRequired,
   canDrop: PropTypes.bool.isRequired
 };
 
-export default DropTarget('SIDE_MENU', TempDropTarget, collect)(TemporaryDragComponent);
+export default DropTarget('RIGHT_MENU', RightDropTarget, collect)(RightMenuDropTarget);

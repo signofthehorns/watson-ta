@@ -5,21 +5,21 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import MessengerLink from './MessengerComponent';
 import RRSearch from './RRSearch';
 import SolrInfo from './SolrInfo';
-import TemporaryDropTarget from './TemporaryDropTarget';
+import RightMenuDropTarget from './RightMenuDropTarget';
 
-import SideMenuDispatcher from './SideMenuDispatcher';
-import SideMenuActionTypes from './SideMenuActionTypes';
+import RightMenuDispatcher from './RightMenuDispatcher';
+import RightMenuActionTypes from './RightMenuActionTypes';
 
-class TemporaryDragComponent extends React.Component {
+class RightMenu extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       items: []
     };
 
-    this.token = SideMenuDispatcher.register((payload) => {
+    this.token = RightMenuDispatcher.register((payload) => {
       switch (payload.type) {
-        case SideMenuActionTypes.PERMUTE:
+        case RightMenuActionTypes.PERMUTE:
           this.permute_items(payload.startIndex, payload.targetIndex);
       }
     });
@@ -29,14 +29,14 @@ class TemporaryDragComponent extends React.Component {
     this.setState({
       items: [
         this.get_search.bind(this),
-        this.get_solr.bind(this),
-        this.get_messenger.bind(this),
+        // this.get_solr.bind(this),
+        // this.get_messenger.bind(this),
       ]
     });
   }
 
   get_search(rowId) {
-    return  <RRSearch rowId={rowId}/>;
+    return  <RRSearch canDrag={false} rowId={rowId}/>;
   }
 
   get_solr(rowId) {
@@ -46,7 +46,6 @@ class TemporaryDragComponent extends React.Component {
   get_messenger(rowId) {
     return  <MessengerLink rowId={rowId}/>;
   }
-
 
   permute_items(start,target) {
     var curr = this.state.items;
@@ -62,7 +61,7 @@ class TemporaryDragComponent extends React.Component {
   render() {
     var elems = []
     this.state.items.forEach( function(row, i) {
-      elems.push(<TemporaryDropTarget rowId={i}/>);
+      elems.push(<RightMenuDropTarget rowId={i}/>);
       var comp = row(i);
       elems.push(comp);
     });
@@ -76,4 +75,4 @@ class TemporaryDragComponent extends React.Component {
   }
 };
 
-export default DragDropContext(HTML5Backend)(TemporaryDragComponent);
+export default DragDropContext(HTML5Backend)(RightMenu);

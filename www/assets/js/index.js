@@ -4,9 +4,9 @@ import PDFUploadDemo from './PDFUpload';
 import PDFView from './PDFView';
 import ReactDOM from 'react-dom';
 import RRSearch from './RRSearch';
-import SideUserMenu from './SideUserMenu';
+import LeftSideMenu from './LeftSideMenu';
 import SolrInfo from './SolrInfo';
-import TemporaryDragComponent from './TemporaryDragComponent';
+import RightMenu from './RightMenu';
 import HelpInformation from './HelpInformation';
 import EditorOptions from './EditorOptions';
 
@@ -20,11 +20,11 @@ if (elm = document.getElementById('react-pdf'))
 if (elm = document.getElementById('upload-questions'))
   ReactDOM.render(<EditQuestion question={'What are the Deathly Hallows?'} id={0}/>, elm);
 
-if (elm = document.getElementById('side-user-menu'))
-  ReactDOM.render(<SideUserMenu />, elm);
+if (elm = document.getElementById('left-side-menu'))
+  ReactDOM.render(<LeftSideMenu />, elm);
 
 if (elm = document.getElementById('right-side-menu'))
-  ReactDOM.render(<TemporaryDragComponent />, elm);
+  ReactDOM.render(<RightMenu />, elm);
 
 if (elm = document.getElementById('help-information'))
   ReactDOM.render(<HelpInformation />, elm);

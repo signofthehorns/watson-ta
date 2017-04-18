@@ -1,7 +1,7 @@
 import React from 'react';
-import UserMenu from './UserMenu';
+import ClassMenu from './ClassMenu';
 
-export default class MenuItem extends React.Component {
+export default class LeftMenuItem extends React.Component {
   generateLink() {
 	if(this.props.doc == "True"){
 		return (<a href={this.props.url}>
@@ -16,7 +16,7 @@ export default class MenuItem extends React.Component {
 
   generateSubmenu() {
     if (this.props.submenu !== null)
-      return <UserMenu menu = {this.props.submenu} />
+      return <ClassMenu menu = {this.props.submenu} />
   }
 
   render() {
