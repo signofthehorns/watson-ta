@@ -25,8 +25,12 @@
     "axios": "^0.15.3",
     "flux": "^3.1.2",
     "immutable": "^3.8.1",
+    "pdfmake": "^0.1.27",
     "react-dropzone": "^3.9.2",
+    "react-messenger-plugin": "^1.0.2",
     "react-pdf-js": "^1.0.33",
-    "react-tag-input": "^4.6.2"
+    "react-tag-input": "^4.6.2",
+    "react-dnd": "^2.3.0",
+    "react-dnd-html5-backend": "^2.3.0"
   }
 }

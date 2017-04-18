@@ -8,7 +8,6 @@ import { ListGroup } from 'react-bootstrap';
 import { ListGroupItem } from 'react-bootstrap';
 var Dropzone = require('react-dropzone');
 import { ProgressBar } from 'react-bootstrap';
-import QuestionItem from './Question'
 import QuestionBase from './EditQuestion'
 
 var PDFUploadDemo = React.createClass({

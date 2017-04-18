@@ -58,6 +58,24 @@ def truncate_lines(filename, out_filename):
                     line = line[idx + 1:]
                 fos.write(line) # write to output
 
+# This attempts to parse questions and matching answers from a mal-formed file
+# containing questions and answers.
+# TODO(tylermzeller) relax assumptions
+# Assumes:
+#   1. Questions start with a #. label (1., 2., etc.)
+#   2. for MC questions, there are 4 answers, labeled a. b. c. or d.
+#   3. questions are followed immediately by their answers. If there aren't any
+#      answers, the question is assumed to be a SA.
+#   4. there are no TF questions (there aren't any in the Biology textbook)
+def parse_qa(filename, out_filename):
+    q_start_re = r'/\d+\. /g'
+    a_mc_re = r'/\b[abcd]\./g'
+    data = ''
+    with open('data.txt', 'r') as myfile:
+        data = myfile.read().replace('\n', '')
+
+    reiter = re.finditer(q_start_re, String)
+    indices = [m.start(0) for m in reiter]
 #threshold_with_continuity(filename='chapter1-thresh-cont.txt', terminators=['.', ')'])
 #remove_commas(filename='chapter1-doc-conv.txt', out_filename='chapter1-no-commas.txt')
 #append_content(filename='chapter1-no-commas.txt', out_filename='chapter1-nlc-train.csv')

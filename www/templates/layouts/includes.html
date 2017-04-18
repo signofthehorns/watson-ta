@@ -6,6 +6,7 @@
 
 {# Load JQuery #}
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="{% static "js/vfs_fonts.js" %}"></script>
 
 {# Load Tether.io #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
@@ -17,7 +18,29 @@
 {# Load our .css #}
 <link rel="stylesheet" href="{% static "pdfupload/style.css" %}">
 <link rel="stylesheet" href="{% static "watson-ta.css" %}">
+<link rel="stylesheet" href="{% static "navbar-fixed-side.css" %}">
+
+{# Fav Icon #}
+<link  rel="shortcut icon" type="image/x-icon" href="{% static "img/watsonta.ico" %}">
 
 {# Load React #}
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "1804020893258037",
+      xfbml: true,
+      version: "v2.6"
+    });
+
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) { return; }
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 <script src="https://fb.me/react-15.0.0.js"></script>
 <script src="https://fb.me/react-dom-15.0.0.js"></script>
+<script src="https://fb.me/JSXTransformer-0.12.2.js"></script>

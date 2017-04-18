@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+import { DragSource } from 'react-dnd';
 import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
@@ -8,6 +9,7 @@ import { Form } from 'react-bootstrap';
 // react to when a user clicks a component
 import EditDispatcher from './EditDispatcher';
 
+import SideMenuActions from './SideMenuActions';
 
 /* dropdown component for listing the different collections available */
 class CollectionDropdown extends React.Component {
@@ -72,6 +74,30 @@ Will problably want to integrate this component later with the
 quiz editing component to show documents related to the currently 
 highlighted question.
 */ 
+
+const RRSearchSource = {
+  beginDrag(props) {
+    return {};
+  },
+  
+  endDrag(props, monitor, component) {
+    var result = monitor.getDropResult();
+    if (result && 'rowId' in result) {
+      const startIndex = props.rowId;
+      const targetIndex = result.rowId;
+      SideMenuActions.permuteMenuItems(startIndex,targetIndex);
+    }
+    return {};
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
 class RRSearch extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -196,13 +222,18 @@ class RRSearch extends React.Component {
       current_collection={this.state.collection}
       current_ranker={this.state.ranker}/>;
 
-    return (
-      <div className="right-widget">
-        <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Retrieve and Rank { dropdown }</h2>
+
+    const connectDragSource = this.props.connectDragSource;
+    const isDragging = this.props.isDragging;
+
+    return connectDragSource(
+      <div className="right-widget right-widget-shaded" style={{
+            opacity: isDragging ? 0.5 : 1,
+            cursor: 'move'
+          }}>
+        <h2 style={{'display': 'inline-block'}}><i className="fa fa-file-text" aria-hidden="true" ></i> Knowledge Base { dropdown }</h2>
         <form className="form-horizontal" onSubmit={(e) => this.doSubmit(e)}>
           <div className="form-group" >
-            <i className="fa fa-search" aria-hidden="true"></i> Solr search
-            <br/>
             <div className="input-group">
               <input type="text" id="rr_query" ref="rr_query" className="form-control" placeholder="Search collection"/>
               <span className="input-group-btn">
@@ -222,4 +253,9 @@ class RRSearch extends React.Component {
   }
 };
 
-export default RRSearch;
+RRSearch.propTypes = {
+  connectDragSource: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool.isRequired
+};
+
+export default DragSource('SIDE_MENU', RRSearchSource, collect)(RRSearch);
