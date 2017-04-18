@@ -1,4 +1,3 @@
-from nlc_classify import classify_questions
 from alchemy import GetAlchemyRequest
 from upload_questions import upload_questions_file
 from rr_search import GetRRSearch
