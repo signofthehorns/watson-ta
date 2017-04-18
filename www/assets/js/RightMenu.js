@@ -29,8 +29,8 @@ class RightMenu extends React.Component {
     this.setState({
       items: [
         this.get_search.bind(this),
-        this.get_solr.bind(this),
-        this.get_messenger.bind(this),
+        // this.get_solr.bind(this),
+        // this.get_messenger.bind(this),
       ]
     });
   }
