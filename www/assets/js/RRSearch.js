@@ -211,7 +211,7 @@ class RRSearch extends React.Component {
       'sherlock' : ['hp_collection', 'example_collection', 'history_collection','history_collection_with_rank', 'bio-collection'],
     }
     var current_rankers = {
-      'sherlock' : [{'name': 'History Ranker', 'ranker_id' : '1eec7cx29-rank-1955'}, {'name': 'bio-ranker', 'ranker_id': '1eec7cx29-rank-5474'}]
+      'sherlock' : [{'name': 'History Ranker', 'ranker_id' : '1eec7cx29-rank-1955'}, {'name': 'bio-ranker', 'ranker_id': '1eec7cx29-rank-5478'}]
     }
 
     var dropdown = <CollectionDropdown
