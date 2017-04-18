@@ -34,23 +34,16 @@
       <div id="right-side-menu">
         <!-- Knowledge Base -->
       </div>
-      <!-- <div id="rr-search">
-      </div>
-      <div id="solr-collections">
-      </div>
-      <div id="messenger-link">
-      </div>
-      <div id="drag-drop-1">
-      </div>
-      <div id="drag-drop-2">
-      </div> -->
     </div>
   </div>
 </div>
-<script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-</script>
+
+<!-- Text drag and drop -->
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<p class="draggable" id="1">This is a test.</p>
+<textarea id="textbox"></textarea>
+
 {% render_bundle 'main' %}
 {% endblock %}

@@ -36,7 +36,7 @@ class RightMenu extends React.Component {
   }
 
   get_search(rowId) {
-    return  <RRSearch rowId={rowId}/>;
+    return  <RRSearch canDrag={false} rowId={rowId}/>;
   }
 
   get_solr(rowId) {

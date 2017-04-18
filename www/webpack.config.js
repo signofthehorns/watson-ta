@@ -50,6 +50,9 @@ module.exports = {
 
     resolve: {
         //extensions that should be used to resolve modules
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+  	alias: {
+    	  'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
+  	},
     }
 }

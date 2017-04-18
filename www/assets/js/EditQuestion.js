@@ -170,7 +170,7 @@ class QuestionBase extends React.Component {
 
   display_sa_question() {
     return <form id={ "questionAnswer"+this.state.id }>
-      <textarea value={this.state.answer} onChange={this.handle_answer_change}></textarea>
+      <textarea id="textbox" style={{"width": "100%", "height": "300px"}} value={this.state.answer} onChange={this.handle_answer_change}></textarea>
     </form>
   }
 
