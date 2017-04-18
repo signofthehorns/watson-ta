@@ -234,7 +234,7 @@ class RRSearch extends React.Component {
           revert: true,
           helper: 'clone'
       });
-      $("#textbox").droppable({
+      $(".textbox").droppable({
           drop: function (event, ui) {
               this.value = this.value + " " + $(ui.draggable).text();
           }
