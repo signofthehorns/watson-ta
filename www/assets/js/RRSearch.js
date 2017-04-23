@@ -237,6 +237,9 @@ class RRSearch extends React.Component {
       $(".textbox").droppable({
           drop: function (event, ui) {
               this.value = this.value + " " + $(ui.draggable).text();
+              // @TODO This is not the proper way to do this - future: refactor into react-dnd
+              var event = new Event('input', { bubbles: true });
+              this.dispatchEvent(event);
           }
       });
     });
