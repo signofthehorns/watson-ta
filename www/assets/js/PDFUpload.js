@@ -69,11 +69,11 @@ class PDFUploadDemo extends React.Component {
         <div>
           <ul className="media-list">
             <li className="media bottomborder">
-              <div className="media-left">
+              {/*<div className="media-left">
                 <a href="#">
                   <img className="shrink d-flex mr-3 media-object upload_img" src={this.state.files[0].preview} />
                 </a>
-              </div>
+              </div>*/}
               <div className="media-body">
                 <h4>{this.state.files[0].name}</h4>
                 <p>The following questions were extracted from the pdf</p>
@@ -96,7 +96,7 @@ class PDFUploadDemo extends React.Component {
         <div>
           <p>{this.state.files[0].name}</p>
           <ProgressBar active now={this.state.progress} bsStyle="success"/>
-          <img className="upload_img" src={this.state.files[0].preview} />
+          {/*<img className="upload_img" src={this.state.files[0].preview} />*/}
         </div>}
       </div>
     </div>
