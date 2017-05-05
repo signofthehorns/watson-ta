@@ -12,10 +12,9 @@
 
 ## What is Watson TA
 
-We plan on making the Watson TA. It will be a web app where students can upload a school assignment (homework, quiz, test, etc.) and Watson will tell the student if his/her answer is correct or not, give its own top 2 or 3 answers, and allow the student to drag and drop his/her favorite answer if the student wishes to take one of the suggested ones.
+We plan on making the Watson TA. It will be a web app where students can upload a school assignment (homework, quiz, test, etc.) and help the student complete the assignment. The app will provide a structured interface for answer exploration and completion providing structured parsing, drag and drop answer composition, etc. Culminating in the students ability to export the finished assignment for submission.
 
-Extensions:
-- Add 24/7 office hour TA so students can ask questions if they don't understand the suggested answers.
+Don't want to download the app? View the final UI and feature documentation [here in slide form](https://docs.google.com/presentation/d/1zbeSMArr314hX9Jr65Vh4aR6w3C_a08mJxHOwJIIwEw/edit?usp=sharing).
 
 ## Setup
 
